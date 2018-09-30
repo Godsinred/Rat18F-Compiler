@@ -4,6 +4,7 @@
 
 using namespace std;
 
+// gets the column of the FSM based off of the input
 int number_to_col(char c)
 {
     if (isdigit(c))
@@ -14,6 +15,7 @@ int number_to_col(char c)
         return 2;
 }
 
+// determines if the input is a integer or real
 int is_number_DFSM(string lexeme)
 {
     const int STATES = 5, INPUT = 3;
@@ -40,6 +42,7 @@ int is_number_DFSM(string lexeme)
     return 0;
 }
 
+// helper function to print out results of test cases
 void number_result_print(string lexeme, int result)
 {
     if(result == 1)
@@ -52,6 +55,7 @@ void number_result_print(string lexeme, int result)
     }
 }
 
+// helper function of test cases
 void integer_real_test_cases()
 {
     // testing
@@ -106,7 +110,7 @@ void integer_real_test_cases()
     lexeme = ".num";
     result = is_number_DFSM(lexeme);
     number_result_print(lexeme, result);
- 
+    
     lexeme = "num.";
     result = is_number_DFSM(lexeme);
     number_result_print(lexeme, result);
@@ -128,9 +132,9 @@ void integer_real_test_cases()
     number_result_print(lexeme, result);
 }
 
-int main(int argc, const char * argv[]) {
-
-    integer_real_test_cases();
-    
-    return 0;
-}
+//int main(int argc, const char * argv[]) {
+//    
+//    integer_real_test_cases();
+//    
+//    return 0;
+//}

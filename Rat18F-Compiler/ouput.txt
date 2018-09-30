@@ -1,0 +1,20 @@
+token               lexeme              
+----------------------------------------
+no token yet        can                 
+no token yet        this                
+no token yet        file                
+no token yet        be                  
+no token yet        read                
+no token yet        correctly?          
+no token yet        we                  
+no token yet        may                 
+no token yet        never               
+no token yet        know.               
+no token yet        what                
+no token yet        about               
+no token yet        this                
+no token yet        fake                
+no token yet        c[o*]mment?         
+no token yet        never               
+no token yet        end                 
+no token yet        comment?            
