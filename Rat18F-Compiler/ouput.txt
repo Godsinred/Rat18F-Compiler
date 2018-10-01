@@ -1,20 +1,46 @@
 token               lexeme              
 ----------------------------------------
-no token yet        can                 
-no token yet        this                
-no token yet        file                
-no token yet        be                  
-no token yet        read                
-no token yet        correctly?          
-no token yet        we                  
-no token yet        may                 
-no token yet        never               
-no token yet        know.               
-no token yet        what                
-no token yet        about               
-no token yet        this                
-no token yet        fake                
-no token yet        c[o*]mment?         
-no token yet        never               
-no token yet        end                 
-no token yet        comment?            
+$$                  Separator           
+while               Keyword             
+(                   Separator           
+i                   Identifier          
+<                   Operator            
+lower               Identifier          
+)                   Separator           
+int                 Keyword             
+lower               Identifier          
+=                   Operator            
+i                   Identifier          
+;                   Separator           
+if                  Keyword             
+(                   Separator           
+lower               Identifier          
+=>                  Operator            
+22.003              Real                
+)                   Separator           
+upper               Identifier          
+=                   Operator            
+100;                Integer             
+whileend            Keyword             
+if                  Keyword             
+{                   Separator           
+a                   Identifier          
++                   Operator            
+c                   Identifier          
+==                  Operator            
+123}ifend           Integer             
+silvia              Identifier          
+=                   Operator            
+true                Keyword             
+23                  Integer             
+,                   Separator           
+4885                Integer             
+bool                Keyword             
+false               Keyword             
+function            Keyword             
+/                   Operator            
+*                   Operator            
+^=                  Operator            
+^
+                  invalid Token       
+                    invalid Token       

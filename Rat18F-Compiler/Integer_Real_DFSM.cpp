@@ -16,7 +16,7 @@ int number_to_col(char c)
 }
 
 // determines if the input is a integer or real
-int is_number_DFSM(string lexeme)
+bool is_number_DFSM(string lexeme)
 {
     const int STATES = 5, INPUT = 3;
     int dfsmTable [STATES][INPUT] = {
@@ -37,11 +37,11 @@ int is_number_DFSM(string lexeme)
     
     if(state == 2 || state == 5)
     {
-        return 1;
+        return true;
     }
-    return 0;
+    return false;
 }
-
+/*
 // helper function to print out results of test cases
 void number_result_print(string lexeme, int result)
 {
@@ -54,7 +54,7 @@ void number_result_print(string lexeme, int result)
         cout << setw(10) << left << lexeme << ": is NOT integer or real." << endl;
     }
 }
-
+/*
 // helper function of test cases
 void integer_real_test_cases()
 {
@@ -131,10 +131,4 @@ void integer_real_test_cases()
     result = is_number_DFSM(lexeme);
     number_result_print(lexeme, result);
 }
-
-//int main(int argc, const char * argv[]) {
-//    
-//    integer_real_test_cases();
-//    
-//    return 0;
-//}
+*/
