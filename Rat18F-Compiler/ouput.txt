@@ -1,46 +1,46 @@
 token               lexeme              
 ----------------------------------------
-$$                  Separator           
-while               Keyword             
-(                   Separator           
-i                   Identifier          
-<                   Operator            
-lower               Identifier          
-)                   Separator           
-int                 Keyword             
-lower               Identifier          
-=                   Operator            
-i                   Identifier          
-;                   Separator           
-if                  Keyword             
-(                   Separator           
-lower               Identifier          
-=>                  Operator            
-22.003              Real                
-)                   Separator           
-upper               Identifier          
-=                   Operator            
-100;                Integer             
-whileend            Keyword             
-if                  Keyword             
-{                   Separator           
-a                   Identifier          
-+                   Operator            
-c                   Identifier          
-==                  Operator            
-123}ifend           Integer             
-silvia              Identifier          
-=                   Operator            
-true                Keyword             
-23                  Integer             
-,                   Separator           
-4885                Integer             
-bool                Keyword             
-false               Keyword             
-function            Keyword             
-/                   Operator            
+can                 Identifier          
+this                Identifier          
+file                Identifier          
+be                  Invalid Token       
+read                Identifier          
+correctly           Identifier          
+?                   Invalid Token       
+we                  Invalid Token       
 *                   Operator            
-^=                  Operator            
-^
-                  invalid Token       
-                    invalid Token       
+this                Identifier          
+is                  Invalid Token       
+a                   Identifier          
+comment             Identifier          
+to                  Invalid Token       
+try                 Identifier          
+and                 Identifier          
+throw               Invalid Token       
+things              Identifier          
+off                 Identifier          
+*                   Operator            
+]                   Invalid Token       
+may                 Identifier          
+never               Invalid Token       
+know                Identifier          
+.                   Invalid Token       
+what                Identifier          
+about               Invalid Token       
+this                Identifier          
+fake                Identifier          
+c                   Identifier          
+o                   Identifier          
+*                   Operator            
+]                   Invalid Token       
+mment               Invalid Token       
+never               Invalid Token       
+end                 Identifier          
+comment             Identifier          
+?                   Invalid Token       
+jfjjkdlf1232jjklj   Identifier          
+jklkjjkl12323       Invalid Token       
+*                   Operator            
+work                Identifier          
+?                   Invalid Token       
+                    Invalid Token       

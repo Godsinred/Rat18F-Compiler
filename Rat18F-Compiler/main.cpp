@@ -170,22 +170,36 @@ tuple<string, string> lexer(ifstream &inFile)
                 if (isspace(c)) //checks to see if character is a space
                 {
                     // checks to see if the lexeme is a keyword
-                    if (isKeyword(lexeme))
+                    if (identifier_DFSM(lexeme))
                     {
-                        return make_tuple(lexeme, "Keyword");
+                        if (isKeyword(lexeme))
+                        {
+                            return make_tuple(lexeme, "Keyword");
+                        }
+                        return make_tuple(lexeme, "Identifier");
                     }
-                    return make_tuple(lexeme, "Identifier");
+                    else
+                    {
+                        return make_tuple(lexeme, "Invalid Token");
+                    }
                 }
                 //check to see if the character is not an letter or number and if infile is at the end of the file.
                 if(!isalnum(c) || inFile.eof())
                 {
-                    if (isKeyword(lexeme))
+                    if (identifier_DFSM(lexeme))
                     {
-                        return make_tuple(lexeme, "Keyword");
+                        if (isKeyword(lexeme))
+                        {
+                            return make_tuple(lexeme, "Keyword");
+                        }
+                        //if c is not a space, letter, or digit returns c to inFile.
+                        inFile.putback(c);
+                        return make_tuple(lexeme, "Identifier");
                     }
-                    //if c is not a space, letter, or digit returns c to inFile.
-                    inFile.putback(c);
-                    return make_tuple(lexeme, "Identifier");
+                    else
+                    {
+                        return make_tuple(lexeme, "Invalid Token");
+                    }
                 }
                 lexeme += c;
             }
@@ -219,13 +233,13 @@ tuple<string, string> lexer(ifstream &inFile)
             }
         }
     }
-    return make_tuple(lexeme, "invalid Token");
+    return make_tuple(lexeme, "Invalid Token");
 }
 
 int main() {
     
     // filepath to code
-    string filepath = "TestCase1.txt";
+    string filepath = "example.txt";
     
     // opening the input file
     ifstream inFile;

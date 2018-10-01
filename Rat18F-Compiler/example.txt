@@ -1,1 +1,6 @@
-while  (fahr < upper)   a = 23.00 whileend
+        can this   file
+be read  correctly?
+we[* this is a comment to try and throw things off*]
+        may never know.
+what about this fake c[o*]mment?
+never end comment? jfjjkdlf1232jjklj jklkjjkl12323[*   work?
