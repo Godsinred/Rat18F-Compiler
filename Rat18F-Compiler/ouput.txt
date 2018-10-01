@@ -8,19 +8,6 @@ read                Identifier
 correctly           Identifier          
 ?                   Invalid Token       
 we                  Invalid Token       
-*                   Operator            
-this                Identifier          
-is                  Invalid Token       
-a                   Identifier          
-comment             Identifier          
-to                  Invalid Token       
-try                 Identifier          
-and                 Identifier          
-throw               Invalid Token       
-things              Identifier          
-off                 Identifier          
-*                   Operator            
-]                   Invalid Token       
 may                 Identifier          
 never               Invalid Token       
 know                Identifier          
@@ -34,12 +21,14 @@ o                   Identifier
 *                   Operator            
 ]                   Invalid Token       
 mment               Invalid Token       
+?                   Invalid Token       
 never               Invalid Token       
 end                 Identifier          
 comment             Identifier          
 ?                   Invalid Token       
 jfjjkdlf1232jjklj   Identifier          
 jklkjjkl12323       Invalid Token       
+12321jjj123.11123   Invalid Token       
 *                   Operator            
 work                Identifier          
 ?                   Invalid Token       

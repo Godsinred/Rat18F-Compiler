@@ -198,6 +198,7 @@ tuple<string, string> lexer(ifstream &inFile)
                     }
                     else
                     {
+                        inFile.putback(c);
                         return make_tuple(lexeme, "Invalid Token");
                     }
                 }
@@ -211,7 +212,14 @@ tuple<string, string> lexer(ifstream &inFile)
                 inFile.get(c);
                 if (isspace(c))
                 {
-                    return make_tuple(lexeme, "Integer");
+                    if (is_number_DFSM(lexeme))
+                    {
+                        return make_tuple(lexeme, "Integer");
+                    }
+                    else
+                    {
+                        return make_tuple(lexeme, "Invalid Token");
+                    }
                 }
                 else if (c == '.')
                 {
@@ -225,7 +233,14 @@ tuple<string, string> lexer(ifstream &inFile)
                     }
                     if(!isspace(c))
                     {
-                        inFile.putback(c);
+                        if (is_number_DFSM(lexeme))
+                        {
+                            inFile.putback(c);
+                        }
+                        else
+                        {
+                            return make_tuple(lexeme, "Invalid Token");
+                        }
                     }
                     return make_tuple(lexeme, "Real");
                 }
