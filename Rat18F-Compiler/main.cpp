@@ -7,27 +7,29 @@ using namespace std;
 //returns a col for the identifier DFSM
 int char_to_col_identifier(char c)
 {
-    if (c >= 'a' && c <= 'z')
-        return 1;
-    if (c >= 'a' && c <= 'Z')
-        return 1;
-    if (c >= '0' && c <= '9')
-        return 0;
+    if (isdigit(c)) return 1;
+    if (isalpha(c)) return 0;
     return 2;
 }
 
 //returns true if the string passed to it is an identifier
 bool identifier_DFSM(string str)
 {
-    int dfsmTable [2][4] = {{0, 3, 3, 3},{2, 4, 4, 4}};
+    const int STATES = 5, INPUT = 3;
+    int dfsmTable [STATES][INPUT] =
+        {{0, 0, 0},
+        {2, 0, 0},
+        {3, 4, 0},
+        {3, 4, 0},
+        {3, 4, 0}};
     int state = 1;
     int strLength = int(str.length());
     for (int i = 0; i < strLength; ++i)
     {
         int col  = char_to_col_identifier(str[i]);
-        state = dfsmTable[col][state];
+        state = dfsmTable[state][col];
     }
-    if (state == 2 || state == 4) return true;
+    if (state == 2 || state == 3) return true;
     return false;
 }
 
@@ -77,7 +79,7 @@ bool isSeparator(string &lexeme, ifstream &inFile)
     if (lexeme == "$")
     {
         char c;
-        if (!inFile.eof())
+        if (inFile)
         {
             inFile.get(c);
             lexeme += c;
@@ -105,7 +107,7 @@ bool isOperator(string &lexeme, ifstream &inFile)
     }
     if (lexeme == "^" || lexeme == "=") // checks to see if the lexer has the first character of a double character operator
     {
-        if (!inFile.eof())
+        if (inFile)
         {
             char c;
             inFile.get(c);
@@ -121,6 +123,7 @@ bool isOperator(string &lexeme, ifstream &inFile)
             inFile.putback(c);  //lexeme is not a double character operator. put back the last character removed from inFile.
             if (lexeme[0] == '^')   // since the lexeme is not a double character operator check wether the first characer is a '^'.
             {
+                lexeme = "^";
                 return false;       //if it is the lexeme is not a operator
             }
             lexeme = "=";   //the first character must be an equal sign, so reset lexeme to '='
@@ -150,7 +153,7 @@ tuple<string, string> lexer(ifstream &inFile)
 {
     char c;
     string lexeme = "";
-    if(!inFile.eof())
+    if(inFile)
     {
         inFile.get(c);
         lexeme += c;
@@ -164,7 +167,7 @@ tuple<string, string> lexer(ifstream &inFile)
         }
         else if (identifier_DFSM(lexeme))   // check to see if the lexeme is an identifier
         {
-            while (!inFile.eof())
+            while (inFile)
             {
                 inFile.get(c);
                 if (isspace(c)) //checks to see if character is a space
@@ -207,7 +210,7 @@ tuple<string, string> lexer(ifstream &inFile)
         }
         else if(is_number_DFSM(lexeme)) // check to see if lexeme is a real or integer
         {
-            while(!inFile.eof())
+            while(inFile)
             {
                 inFile.get(c);
                 if (isspace(c))
@@ -226,7 +229,7 @@ tuple<string, string> lexer(ifstream &inFile)
                     lexeme += c;
                     inFile.get(c);
                     lexeme += c;
-                    while (!inFile.eof() && isdigit(c))
+                    while (inFile && isdigit(c))
                     {
                         lexeme += c;
                         inFile.get(c);
@@ -254,7 +257,25 @@ tuple<string, string> lexer(ifstream &inFile)
 int main() {
     
     // filepath to code
-    string filepath = "example.txt";
+    string filepath = "";
+    
+    cout << "Enter the file name(for test cases enter \"1\", \"2\", \"3\"): ";
+    cin >> filepath;
+    
+    
+    //check to see if the user wants to test one of the predefined test cases.1
+    if (filepath == "1")
+    {
+        filepath = "testCase1.txt";
+    }
+    else if (filepath == "2")
+    {
+        filepath = "testCase2.txt";
+    }
+    else if(filepath == "3")
+    {
+        filepath = "testCase3.txt";
+    }
     
     // opening the input file
     ifstream inFile;
@@ -278,13 +299,13 @@ int main() {
         char c;
         
         //starts building lexemes
-        while (!inFile.eof())
+        while (inFile)
         {
             // get the first character from file
             inFile.get(c);
             
             // reads all the leading whitespace of the file to the first non-whitespace
-            while (!inFile.eof() && isspace(c))
+            while (inFile && isspace(c))
             {
                 inFile.get(c);
             }
@@ -305,7 +326,7 @@ int main() {
                     if (current == '*' && next == ']') {
                         endComment = true;
                     }
-                    while (!inFile.eof() && !endComment)
+                    while (inFile && !endComment)
                     {
                         current = next;
                         inFile.get(next);
@@ -319,16 +340,16 @@ int main() {
                 {
                     // only the '[' symbol was read and we have to putback the character we peeked at
                     inFile.putback(next);
+                    outfile << left << setw(20) << "[" << setw(20) << "Invalid Token" << endl;
                 }
             }
-            else{
-                if (c != '[' && !isspace(c))
+            else if (c != '\n'){
+                if (!isspace(c))
                 {
                     inFile.putback(c);
                 }
                 tuple<string, string> token = lexer(inFile);
                 outfile << left << setw(20) << get<0>(token) << setw(20) << get<1>(token) << endl;
-                //cout << left << setw(20) << get<0>(token) << setw(20) << get<1>(token) << endl;
             }
         }
     }

@@ -27,6 +27,9 @@
 		3F2E022321605925007BF43E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		3F98F58E2160B3D000D4D43B /* example.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = example.txt; sourceTree = "<group>"; };
 		3F98F58F2160C97000D4D43B /* ouput.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ouput.txt; sourceTree = "<group>"; };
+		8B77E20421631C0300C69BA8 /* TestCase1.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestCase1.txt; sourceTree = "<group>"; };
+		8B77E20521631C0300C69BA8 /* TestCase3.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestCase3.txt; sourceTree = "<group>"; };
+		8B77E20621631C0300C69BA8 /* TestCase2.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestCase2.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +65,9 @@
 				3F98F58F2160C97000D4D43B /* ouput.txt */,
 				3F2E022321605925007BF43E /* main.cpp */,
 				3F98F58E2160B3D000D4D43B /* example.txt */,
+				8B77E20421631C0300C69BA8 /* TestCase1.txt */,
+				8B77E20621631C0300C69BA8 /* TestCase2.txt */,
+				8B77E20521631C0300C69BA8 /* TestCase3.txt */,
 			);
 			path = "Rat18F-Compiler";
 			sourceTree = "<group>";
