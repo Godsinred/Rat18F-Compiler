@@ -302,6 +302,7 @@ int main() {
         while (inFile)
         {
             // get the first character from file
+            c = ' ';
             inFile.get(c);
             
             // reads all the leading whitespace of the file to the first non-whitespace
@@ -343,7 +344,7 @@ int main() {
                     outfile << left << setw(20) << "[" << setw(20) << "Invalid Token" << endl;
                 }
             }
-            else if (c != '\n'){
+            else if (c != '\n' && !isspace(c)){
                 if (!isspace(c))
                 {
                     inFile.putback(c);
