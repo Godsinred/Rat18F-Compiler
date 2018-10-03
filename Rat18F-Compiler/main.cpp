@@ -213,18 +213,7 @@ tuple<string, string> lexer(ifstream &inFile)
             while(inFile)
             {
                 inFile.get(c);
-                if (isspace(c))
-                {
-                    if (is_number_DFSM(lexeme))
-                    {
-                        return make_tuple(lexeme, "Integer");
-                    }
-                    else
-                    {
-                        return make_tuple(lexeme, "Invalid Token");
-                    }
-                }
-                else if (c == '.')
+                if (c == '.')
                 {
                     lexeme += c;
                     inFile.get(c);
@@ -247,6 +236,18 @@ tuple<string, string> lexer(ifstream &inFile)
                     }
                     return make_tuple(lexeme, "Real");
                 }
+                else if (!isdigit(c))
+                {
+                    inFile.putback(c);
+                    if (is_number_DFSM(lexeme))
+                    {
+                        return make_tuple(lexeme, "Integer");
+                    }
+                    else
+                    {
+                        return make_tuple(lexeme, "Invalid Token");
+                    }
+                }
                 lexeme += c;
             }
         }
@@ -262,6 +263,7 @@ int main() {
     
     cout << "Enter the file path of the folder with the test case files in it: ";
     cin >> baseFilePath;
+    baseFilePath += '/';
     cout << "Enter the file name(for supplied test cases enter \"1\", \"2\", or \"3\"): ";
     cin >> filepath;
     
@@ -269,7 +271,7 @@ int main() {
     //check to see if the user wants to test one of the predefined test cases.1
     if (filepath == "1")
     {
-        filepath = baseFilePath + "/TestCase1.txt";
+        filepath = baseFilePath + "TestCase1.txt";
     }
     else if (filepath == "2")
     {

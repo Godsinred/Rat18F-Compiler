@@ -21,7 +21,6 @@ lower               Identifier
 upper               Identifier          
 =                   Operator            
 100                 Integer             
-;                   Separator           
 whileend            Keyword             
 if                  Keyword             
 {                   Separator           
@@ -30,7 +29,6 @@ a                   Identifier
 c                   Identifier          
 ==                  Operator            
 123                 Integer             
-}                   Separator           
 ifend               Keyword             
 silvia              Identifier          
 =                   Operator            
