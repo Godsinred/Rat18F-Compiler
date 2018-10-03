@@ -294,7 +294,7 @@ int main() {
     ofstream outfile;
     filepath =  baseFilePath + "ouput.txt";
     outfile.open(filepath);
-    outfile << left << setw(20) << "token" << setw(20) << "lexeme" << endl;
+    outfile << left << setw(20) << "Token" <<setw(20) << "Lexeme" << endl;
     for (int i = 0; i < 40; ++i)
     {
         outfile << '-';
@@ -354,10 +354,9 @@ int main() {
                 }
             }
             else if (c != '\n' && !isspace(c)){
-                cout << c << " ";
                 inFile.putback(c);
                 tuple<string, string> token = lexer(inFile);
-                outfile << left << setw(20) << get<0>(token) << setw(20) << get<1>(token) << endl;
+                outfile << left << setw(20) << get<1>(token) << setw(20) << get<0>(token) << endl;
             }
         }
     }

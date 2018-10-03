@@ -6,7 +6,7 @@
 	<integer>9</integer>
 	<key>logs</key>
 	<dict>
-		<key>AC164830-9FD3-4F26-8A7D-FEB731862DD1</key>
+		<key>EAAF6EA4-DF2B-4FD1-9D22-A748AD5D3ED4</key>
 		<dict>
 			<key>className</key>
 			<string>IDEActivityLogSection</string>
@@ -15,19 +15,19 @@
 			<key>domainType</key>
 			<string>Xcode.IDEActivityLogDomainType.target.product-type.tool</string>
 			<key>fileName</key>
-			<string>AC164830-9FD3-4F26-8A7D-FEB731862DD1.xcactivitylog</string>
+			<string>EAAF6EA4-DF2B-4FD1-9D22-A748AD5D3ED4.xcactivitylog</string>
 			<key>highLevelStatus</key>
 			<string>S</string>
 			<key>signature</key>
 			<string>Rat18F-Compiler-gxntmhnzfqomtlbrpgeeebjpykmh</string>
 			<key>timeStartedRecording</key>
-			<real>560282313.18432403</real>
+			<real>560283295.79932404</real>
 			<key>timeStoppedRecording</key>
-			<real>560282313.86538601</real>
+			<real>560283296.47559297</real>
 			<key>title</key>
 			<string>Build target Rat18F-Compiler</string>
 			<key>uniqueIdentifier</key>
-			<string>AC164830-9FD3-4F26-8A7D-FEB731862DD1</string>
+			<string>EAAF6EA4-DF2B-4FD1-9D22-A748AD5D3ED4</string>
 		</dict>
 	</dict>
 	<key>preserveOldLogs</key>
