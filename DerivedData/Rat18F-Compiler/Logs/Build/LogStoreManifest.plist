@@ -180,6 +180,35 @@
 			<key>uniqueIdentifier</key>
 			<string>1B53CED7-565B-442F-B5B0-C80187DCF32F</string>
 		</dict>
+		<key>1EE4A827-5C60-4315-B34E-D24961EC7E4A</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>1EE4A827-5C60-4315-B34E-D24961EC7E4A.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>S</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>Rat18F-Compiler project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Rat18F-Compiler</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>0</integer>
+			<key>signature</key>
+			<string>Build Rat18F-Compiler</string>
+			<key>timeStartedRecording</key>
+			<real>560282313.16527796</real>
+			<key>timeStoppedRecording</key>
+			<real>560282313.88732505</real>
+			<key>title</key>
+			<string>Build Rat18F-Compiler</string>
+			<key>uniqueIdentifier</key>
+			<string>1EE4A827-5C60-4315-B34E-D24961EC7E4A</string>
+		</dict>
 		<key>20FA344B-FEE3-4F93-9F39-5A4EA16309D9</key>
 		<dict>
 			<key>className</key>

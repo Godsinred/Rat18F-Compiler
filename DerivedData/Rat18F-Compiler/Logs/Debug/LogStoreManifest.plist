@@ -412,6 +412,35 @@
 			<key>uniqueIdentifier</key>
 			<string>AF64A420-FFDB-4154-9A89-5FE6F6603B78</string>
 		</dict>
+		<key>B3C52E92-E9DC-48D1-9E35-2D01C4339A80</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>B3C52E92-E9DC-48D1-9E35-2D01C4339A80.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>S</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>Rat18F-Compiler project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Rat18F-Compiler</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>0</integer>
+			<key>signature</key>
+			<string>Debug Rat18F-Compiler</string>
+			<key>timeStartedRecording</key>
+			<real>560282313.87040603</real>
+			<key>timeStoppedRecording</key>
+			<real>560282319.65018594</real>
+			<key>title</key>
+			<string>Debug Rat18F-Compiler</string>
+			<key>uniqueIdentifier</key>
+			<string>B3C52E92-E9DC-48D1-9E35-2D01C4339A80</string>
+		</dict>
 		<key>BC6E309D-54EA-4763-8641-306E7B82B7D5</key>
 		<dict>
 			<key>className</key>

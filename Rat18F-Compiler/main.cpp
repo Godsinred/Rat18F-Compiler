@@ -169,7 +169,7 @@ tuple<string, string> lexer(ifstream &inFile)
         {
             while (inFile)
             {
-                inFile.get(c);
+                inFile.get(c);/*
                 if (isspace(c)) //checks to see if character is a space
                 {
                     // checks to see if the lexeme is a keyword
@@ -185,10 +185,11 @@ tuple<string, string> lexer(ifstream &inFile)
                     {
                         return make_tuple(lexeme, "Invalid Token");
                     }
-                }
+                }*/
                 //check to see if the character is not an letter or number and if infile is at the end of the file.
                 if(!isalnum(c) || inFile.eof())
                 {
+                    inFile.putback(c);
                     if (identifier_DFSM(lexeme))
                     {
                         if (isKeyword(lexeme))
@@ -196,7 +197,6 @@ tuple<string, string> lexer(ifstream &inFile)
                             return make_tuple(lexeme, "Keyword");
                         }
                         //if c is not a space, letter, or digit returns c to inFile.
-                        inFile.putback(c);
                         return make_tuple(lexeme, "Identifier");
                     }
                     else
