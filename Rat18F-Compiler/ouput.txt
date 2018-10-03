@@ -1,14 +1,2 @@
 token               lexeme              
 ----------------------------------------
-welcome             Identifier          
-to                  Identifier          
-this                Identifier          
-file                Identifier          
-whant               Identifier          
-to                  Identifier          
-know                Identifier          
-if                  Keyword             
-this                Identifier          
-is                  Identifier          
-going               Identifier          
-to                  Identifier          

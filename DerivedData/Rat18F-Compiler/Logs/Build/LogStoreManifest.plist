@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>logFormatVersion</key>
+	<integer>9</integer>
+	<key>logs</key>
+	<dict>
+		<key>03A266A5-A470-40A3-A06F-87C5D708A4F9</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>03A266A5-A470-40A3-A06F-87C5D708A4F9.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>S</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>Rat18F-Compiler project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Rat18F-Compiler</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>0</integer>
+			<key>signature</key>
+			<string>Build Rat18F-Compiler</string>
+			<key>timeStartedRecording</key>
+			<real>560281083.78825104</real>
+			<key>timeStoppedRecording</key>
+			<real>560281083.82758498</real>
+			<key>title</key>
+			<string>Build Rat18F-Compiler</string>
+			<key>uniqueIdentifier</key>
+			<string>03A266A5-A470-40A3-A06F-87C5D708A4F9</string>
+		</dict>
+		<key>0862E362-AC50-4C88-A61A-4E1F0D2A6E63</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>0862E362-AC50-4C88-A61A-4E1F0D2A6E63.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>S</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>Rat18F-Compiler project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Rat18F-Compiler</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>0</integer>
+			<key>signature</key>
+			<string>Build Rat18F-Compiler</string>
+			<key>timeStartedRecording</key>
+			<real>560280159.93080497</real>
+			<key>timeStoppedRecording</key>
+			<real>560280160.695171</real>
+			<key>title</key>
+			<string>Build Rat18F-Compiler</string>
+			<key>uniqueIdentifier</key>
+			<string>0862E362-AC50-4C88-A61A-4E1F0D2A6E63</string>
+		</dict>
+		<key>0ADBF93D-530B-4C6A-AD73-7100FBFA5C59</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>0ADBF93D-530B-4C6A-AD73-7100FBFA5C59.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>S</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>Rat18F-Compiler project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Rat18F-Compiler</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>0</integer>
+			<key>signature</key>
+			<string>Build Rat18F-Compiler</string>
+			<key>timeStartedRecording</key>
+			<real>560233101.85751104</real>
+			<key>timeStoppedRecording</key>
+			<real>560233101.90416598</real>
+			<key>title</key>
+			<string>Build Rat18F-Compiler</string>
+			<key>uniqueIdentifier</key>
+			<string>0ADBF93D-530B-4C6A-AD73-7100FBFA5C59</string>
+		</dict>
+		<key>0E727C39-7BEF-4541-A6F4-A53E5236681B</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>0E727C39-7BEF-4541-A6F4-A53E5236681B.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>S</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>Rat18F-Compiler project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Rat18F-Compiler</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>0</integer>
+			<key>signature</key>
+			<string>Build Rat18F-Compiler</string>
+			<key>timeStartedRecording</key>
+			<real>560281337.05437303</real>
+			<key>timeStoppedRecording</key>
+			<real>560281337.77021503</real>
+			<key>title</key>
+			<string>Build Rat18F-Compiler</string>
+			<key>uniqueIdentifier</key>
+			<string>0E727C39-7BEF-4541-A6F4-A53E5236681B</string>
+		</dict>
+		<key>10CF5F72-603D-4527-AF6E-8FF0BC1868E1</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>10CF5F72-603D-4527-AF6E-8FF0BC1868E1.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>E</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>Rat18F-Compiler project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Rat18F-Compiler</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>0</integer>
+			<key>signature</key>
+			<string>Build Rat18F-Compiler</string>
+			<key>timeStartedRecording</key>
+			<real>560280076.82153499</real>
+			<key>timeStoppedRecording</key>
+			<real>560280077.33015895</real>
+			<key>title</key>
+			<string>Build Rat18F-Compiler</string>
+			<key>uniqueIdentifier</key>
+			<string>10CF5F72-603D-4527-AF6E-8FF0BC1868E1</string>
+		</dict>
+		<key>1B53CED7-565B-442F-B5B0-C80187DCF32F</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>1B53CED7-565B-442F-B5B0-C80187DCF32F.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>S</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>Rat18F-Compiler project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Rat18F-Compiler</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>0</integer>
+			<key>signature</key>
+			<string>Build Rat18F-Compiler</string>
+			<key>timeStartedRecording</key>
+			<real>560280024.83534098</real>
+			<key>timeStoppedRecording</key>
+			<real>560280025.67821503</real>
+			<key>title</key>
+			<string>Build Rat18F-Compiler</string>
+			<key>uniqueIdentifier</key>
+			<string>1B53CED7-565B-442F-B5B0-C80187DCF32F</string>
+		</dict>
+		<key>31BD3AA4-C4DF-4767-BB65-58A625A71B56</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>31BD3AA4-C4DF-4767-BB65-58A625A71B56.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>S</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>Rat18F-Compiler project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Rat18F-Compiler</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>0</integer>
+			<key>signature</key>
+			<string>Build Rat18F-Compiler</string>
+			<key>timeStartedRecording</key>
+			<real>560280486.21518695</real>
+			<key>timeStoppedRecording</key>
+			<real>560280486.63745296</real>
+			<key>title</key>
+			<string>Build Rat18F-Compiler</string>
+			<key>uniqueIdentifier</key>
+			<string>31BD3AA4-C4DF-4767-BB65-58A625A71B56</string>
+		</dict>
+		<key>69B2AE0F-3B41-4DD9-BFE4-FDC5B366FD85</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>69B2AE0F-3B41-4DD9-BFE4-FDC5B366FD85.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>S</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>Rat18F-Compiler project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Rat18F-Compiler</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>0</integer>
+			<key>signature</key>
+			<string>Build Rat18F-Compiler</string>
+			<key>timeStartedRecording</key>
+			<real>560281069.14147604</real>
+			<key>timeStoppedRecording</key>
+			<real>560281069.18232</real>
+			<key>title</key>
+			<string>Build Rat18F-Compiler</string>
+			<key>uniqueIdentifier</key>
+			<string>69B2AE0F-3B41-4DD9-BFE4-FDC5B366FD85</string>
+		</dict>
+		<key>70A42908-1478-47FB-A993-039CB6790AD0</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>70A42908-1478-47FB-A993-039CB6790AD0.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>S</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>Rat18F-Compiler project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Rat18F-Compiler</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>0</integer>
+			<key>signature</key>
+			<string>Build Rat18F-Compiler</string>
+			<key>timeStartedRecording</key>
+			<real>560281100.70956397</real>
+			<key>timeStoppedRecording</key>
+			<real>560281100.75125396</real>
+			<key>title</key>
+			<string>Build Rat18F-Compiler</string>
+			<key>uniqueIdentifier</key>
+			<string>70A42908-1478-47FB-A993-039CB6790AD0</string>
+		</dict>
+		<key>9175DED1-E59C-4306-AC2B-FA89514E985C</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>9175DED1-E59C-4306-AC2B-FA89514E985C.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>S</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>Rat18F-Compiler project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Rat18F-Compiler</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>0</integer>
+			<key>signature</key>
+			<string>Build Rat18F-Compiler</string>
+			<key>timeStartedRecording</key>
+			<real>560281056.75797606</real>
+			<key>timeStoppedRecording</key>
+			<real>560281057.49832201</real>
+			<key>title</key>
+			<string>Build Rat18F-Compiler</string>
+			<key>uniqueIdentifier</key>
+			<string>9175DED1-E59C-4306-AC2B-FA89514E985C</string>
+		</dict>
+		<key>91FF09B2-2ED7-4C45-9C46-671AD2AA4469</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>91FF09B2-2ED7-4C45-9C46-671AD2AA4469.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>S</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>Rat18F-Compiler project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Rat18F-Compiler</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>0</integer>
+			<key>signature</key>
+			<string>Build Rat18F-Compiler</string>
+			<key>timeStartedRecording</key>
+			<real>560280327.77058101</real>
+			<key>timeStoppedRecording</key>
+			<real>560280327.80871797</real>
+			<key>title</key>
+			<string>Build Rat18F-Compiler</string>
+			<key>uniqueIdentifier</key>
+			<string>91FF09B2-2ED7-4C45-9C46-671AD2AA4469</string>
+		</dict>
+		<key>96E568A5-A094-4EA3-9D9D-4C745D14362A</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>96E568A5-A094-4EA3-9D9D-4C745D14362A.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>S</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>Rat18F-Compiler project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Rat18F-Compiler</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>0</integer>
+			<key>signature</key>
+			<string>Build Rat18F-Compiler</string>
+			<key>timeStartedRecording</key>
+			<real>560280680.88613105</real>
+			<key>timeStoppedRecording</key>
+			<real>560280680.98651803</real>
+			<key>title</key>
+			<string>Build Rat18F-Compiler</string>
+			<key>uniqueIdentifier</key>
+			<string>96E568A5-A094-4EA3-9D9D-4C745D14362A</string>
+		</dict>
+		<key>9A6188E6-7D77-490D-9B3F-0934D8661CB2</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>9A6188E6-7D77-490D-9B3F-0934D8661CB2.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>S</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>Rat18F-Compiler project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Rat18F-Compiler</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>0</integer>
+			<key>signature</key>
+			<string>Build Rat18F-Compiler</string>
+			<key>timeStartedRecording</key>
+			<real>560279914.98558402</real>
+			<key>timeStoppedRecording</key>
+			<real>560279915.09998596</real>
+			<key>title</key>
+			<string>Build Rat18F-Compiler</string>
+			<key>uniqueIdentifier</key>
+			<string>9A6188E6-7D77-490D-9B3F-0934D8661CB2</string>
+		</dict>
+		<key>C7A88A81-2CFD-4140-8005-B12015F82B02</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>C7A88A81-2CFD-4140-8005-B12015F82B02.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>S</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>Rat18F-Compiler project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Rat18F-Compiler</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>0</integer>
+			<key>signature</key>
+			<string>Build Rat18F-Compiler</string>
+			<key>timeStartedRecording</key>
+			<real>560280303.370731</real>
+			<key>timeStoppedRecording</key>
+			<real>560280304.070948</real>
+			<key>title</key>
+			<string>Build Rat18F-Compiler</string>
+			<key>uniqueIdentifier</key>
+			<string>C7A88A81-2CFD-4140-8005-B12015F82B02</string>
+		</dict>
+		<key>CD7DD7FA-D1A3-423B-B829-B1F657C69753</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>CD7DD7FA-D1A3-423B-B829-B1F657C69753.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>S</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>Rat18F-Compiler project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Rat18F-Compiler</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>0</integer>
+			<key>signature</key>
+			<string>Build Rat18F-Compiler</string>
+			<key>timeStartedRecording</key>
+			<real>560279901.51970804</real>
+			<key>timeStoppedRecording</key>
+			<real>560279902.82756901</real>
+			<key>title</key>
+			<string>Build Rat18F-Compiler</string>
+			<key>uniqueIdentifier</key>
+			<string>CD7DD7FA-D1A3-423B-B829-B1F657C69753</string>
+		</dict>
+		<key>D349085C-8FE6-41E6-BDF0-EDBD394E3A05</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>D349085C-8FE6-41E6-BDF0-EDBD394E3A05.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>S</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>Rat18F-Compiler project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Rat18F-Compiler</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>0</integer>
+			<key>signature</key>
+			<string>Build Rat18F-Compiler</string>
+			<key>timeStartedRecording</key>
+			<real>560280082.46291304</real>
+			<key>timeStoppedRecording</key>
+			<real>560280083.18163395</real>
+			<key>title</key>
+			<string>Build Rat18F-Compiler</string>
+			<key>uniqueIdentifier</key>
+			<string>D349085C-8FE6-41E6-BDF0-EDBD394E3A05</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

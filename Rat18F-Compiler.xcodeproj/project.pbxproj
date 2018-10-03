@@ -23,7 +23,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3F2E022021605925007BF43E /* Rat18F-Compiler */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Rat18F-Compiler"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F2E022021605925007BF43E /* Rat18F-Compiler */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; includeInIndex = 0; path = "Rat18F-Compiler"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F2E022321605925007BF43E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		3F98F58E2160B3D000D4D43B /* example.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = example.txt; sourceTree = "<group>"; };
 		3F98F58F2160C97000D4D43B /* ouput.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ouput.txt; sourceTree = "<group>"; };

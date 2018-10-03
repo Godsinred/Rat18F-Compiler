@@ -17,7 +17,7 @@ bool identifier_DFSM(string str)
 {
     const int STATES = 5, INPUT = 3;
     int dfsmTable [STATES][INPUT] =
-        {{0, 0, 0},
+    {{0, 0, 0},
         {2, 0, 0},
         {3, 4, 0},
         {3, 4, 0},
@@ -257,24 +257,31 @@ tuple<string, string> lexer(ifstream &inFile)
 int main() {
     
     // filepath to code
+    string baseFilePath = "";
     string filepath = "";
     
-    cout << "Enter the file name(for test cases enter \"1\", \"2\", \"3\"): ";
+    cout << "Enter the file path of the folder with the test case files in it: ";
+    cin >> baseFilePath;
+    cout << "Enter the file name(for supplied test cases enter \"1\", \"2\", or \"3\"): ";
     cin >> filepath;
     
     
     //check to see if the user wants to test one of the predefined test cases.1
     if (filepath == "1")
     {
-        filepath = "testCase1.txt";
+        filepath = baseFilePath + "/TestCase1.txt";
     }
     else if (filepath == "2")
     {
-        filepath = "testCase2.txt";
+        filepath = baseFilePath + "testCase2.txt";
     }
     else if(filepath == "3")
     {
-        filepath = "testCase3.txt";
+        filepath = baseFilePath + "testCase3.txt";
+    }
+    else
+    {
+        filepath = baseFilePath + filepath;
     }
     
     // opening the input file
@@ -283,7 +290,7 @@ int main() {
     
     //opening the output file
     ofstream outfile;
-    filepath = "ouput.txt";
+    filepath =  baseFilePath + "ouput.txt";
     outfile.open(filepath);
     outfile << left << setw(20) << "token" << setw(20) << "lexeme" << endl;
     for (int i = 0; i < 40; ++i)
@@ -345,16 +352,17 @@ int main() {
                 }
             }
             else if (c != '\n' && !isspace(c)){
-                if (!isspace(c))
-                {
-                    inFile.putback(c);
-                }
+                cout << c << " ";
+                inFile.putback(c);
                 tuple<string, string> token = lexer(inFile);
                 outfile << left << setw(20) << get<0>(token) << setw(20) << get<1>(token) << endl;
             }
         }
     }
-    
+    else
+    {
+        cerr << "Unable to open specified file." << endl;
+    }
     // closes file
     inFile.close();
 }
