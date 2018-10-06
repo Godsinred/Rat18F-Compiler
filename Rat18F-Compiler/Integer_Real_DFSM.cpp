@@ -16,7 +16,7 @@ int number_to_col(char c)
 }
 
 // determines if the input is a integer or real
-int is_number_DFSM(string lexeme)
+bool is_number_DFSM(string lexeme)
 {
     const int STATES = 5, INPUT = 3;
     int dfsmTable [STATES][INPUT] = {
@@ -37,104 +37,98 @@ int is_number_DFSM(string lexeme)
     
     if(state == 2 || state == 5)
     {
-        return 1;
+        return true;
     }
-    return 0;
+    return false;
 }
-
-// helper function to print out results of test cases
-void number_result_print(string lexeme, int result)
-{
-    if(result == 1)
-    {
-        cout << setw(10) << left << lexeme << ": is an integer or real." << endl;
-    }
-    else
-    {
-        cout << setw(10) << left << lexeme << ": is NOT integer or real." << endl;
-    }
-}
-
-// helper function of test cases
-void integer_real_test_cases()
-{
-    // testing
-    string lexeme = "123";
-    int result = is_number_DFSM(lexeme);
-    number_result_print(lexeme, result);
-    
-    lexeme = "123456789";
-    result = is_number_DFSM(lexeme);
-    number_result_print(lexeme, result);
-    
-    lexeme = "000000";
-    result = is_number_DFSM(lexeme);
-    number_result_print(lexeme, result);
-    
-    lexeme = "123.123";
-    result = is_number_DFSM(lexeme);
-    number_result_print(lexeme, result);
-    
-    lexeme = "0.123";
-    result = is_number_DFSM(lexeme);
-    number_result_print(lexeme, result);
-    
-    lexeme = "number";
-    result = is_number_DFSM(lexeme);
-    number_result_print(lexeme, result);
-    
-    lexeme = "123.";
-    result = is_number_DFSM(lexeme);
-    number_result_print(lexeme, result);
-    
-    lexeme = ".123";
-    result = is_number_DFSM(lexeme);
-    number_result_print(lexeme, result);
-    
-    lexeme = "123.num";
-    result = is_number_DFSM(lexeme);
-    number_result_print(lexeme, result);
-    
-    lexeme = "num.123";
-    result = is_number_DFSM(lexeme);
-    number_result_print(lexeme, result);
-    
-    lexeme = "num.num";
-    result = is_number_DFSM(lexeme);
-    number_result_print(lexeme, result);
-    
-    lexeme = ".";
-    result = is_number_DFSM(lexeme);
-    number_result_print(lexeme, result);
-    
-    lexeme = ".num";
-    result = is_number_DFSM(lexeme);
-    number_result_print(lexeme, result);
-    
-    lexeme = "num.";
-    result = is_number_DFSM(lexeme);
-    number_result_print(lexeme, result);
-    
-    lexeme = "123.123#";
-    result = is_number_DFSM(lexeme);
-    number_result_print(lexeme, result);
-    
-    lexeme = "123$123";
-    result = is_number_DFSM(lexeme);
-    number_result_print(lexeme, result);
-    
-    lexeme = "123five123";
-    result = is_number_DFSM(lexeme);
-    number_result_print(lexeme, result);
-    
-    lexeme = "#";
-    result = is_number_DFSM(lexeme);
-    number_result_print(lexeme, result);
-}
-
-//int main(int argc, const char * argv[]) {
-//    
-//    integer_real_test_cases();
-//    
-//    return 0;
-//}
+/*
+ // helper function to print out results of test cases
+ void number_result_print(string lexeme, int result)
+ {
+ if(result == 1)
+ {
+ cout << setw(10) << left << lexeme << ": is an integer or real." << endl;
+ }
+ else
+ {
+ cout << setw(10) << left << lexeme << ": is NOT integer or real." << endl;
+ }
+ }
+ /*
+ // helper function of test cases
+ void integer_real_test_cases()
+ {
+ // testing
+ string lexeme = "123";
+ int result = is_number_DFSM(lexeme);
+ number_result_print(lexeme, result);
+ 
+ lexeme = "123456789";
+ result = is_number_DFSM(lexeme);
+ number_result_print(lexeme, result);
+ 
+ lexeme = "000000";
+ result = is_number_DFSM(lexeme);
+ number_result_print(lexeme, result);
+ 
+ lexeme = "123.123";
+ result = is_number_DFSM(lexeme);
+ number_result_print(lexeme, result);
+ 
+ lexeme = "0.123";
+ result = is_number_DFSM(lexeme);
+ number_result_print(lexeme, result);
+ 
+ lexeme = "number";
+ result = is_number_DFSM(lexeme);
+ number_result_print(lexeme, result);
+ 
+ lexeme = "123.";
+ result = is_number_DFSM(lexeme);
+ number_result_print(lexeme, result);
+ 
+ lexeme = ".123";
+ result = is_number_DFSM(lexeme);
+ number_result_print(lexeme, result);
+ 
+ lexeme = "123.num";
+ result = is_number_DFSM(lexeme);
+ number_result_print(lexeme, result);
+ 
+ lexeme = "num.123";
+ result = is_number_DFSM(lexeme);
+ number_result_print(lexeme, result);
+ 
+ lexeme = "num.num";
+ result = is_number_DFSM(lexeme);
+ number_result_print(lexeme, result);
+ 
+ lexeme = ".";
+ result = is_number_DFSM(lexeme);
+ number_result_print(lexeme, result);
+ 
+ lexeme = ".num";
+ result = is_number_DFSM(lexeme);
+ number_result_print(lexeme, result);
+ 
+ lexeme = "num.";
+ result = is_number_DFSM(lexeme);
+ number_result_print(lexeme, result);
+ 
+ lexeme = "123.123#";
+ result = is_number_DFSM(lexeme);
+ number_result_print(lexeme, result);
+ 
+ lexeme = "123$123";
+ result = is_number_DFSM(lexeme);
+ number_result_print(lexeme, result);
+ 
+ lexeme = "123five123";
+ result = is_number_DFSM(lexeme);
+ number_result_print(lexeme, result);
+ 
+ lexeme = "#";
+ result = is_number_DFSM(lexeme);
+ number_result_print(lexeme, result);
+ }
+ */

@@ -25,6 +25,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3F01EF052169640D00C69586 /* TestCase1.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestCase1.txt; sourceTree = "<group>"; };
+		3F01EF062169645700C69586 /* TestCase2.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestCase2.txt; sourceTree = "<group>"; };
+		3F01EF072169647300C69586 /* TestCase3.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestCase3.txt; sourceTree = "<group>"; };
 		3F2E022021605925007BF43E /* Rat18F-Compiler */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Rat18F-Compiler"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F2E022321605925007BF43E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		3F98F58A2160B32900D4D43B /* Integer_Real_DFSM.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Integer_Real_DFSM.cpp; sourceTree = "<group>"; };
@@ -64,6 +67,9 @@
 			isa = PBXGroup;
 			children = (
 				3F98F58F2160C97000D4D43B /* ouput.txt */,
+				3F01EF052169640D00C69586 /* TestCase1.txt */,
+				3F01EF062169645700C69586 /* TestCase2.txt */,
+				3F01EF072169647300C69586 /* TestCase3.txt */,
 				3F2E022321605925007BF43E /* main.cpp */,
 				3F98F58E2160B3D000D4D43B /* example.txt */,
 				3F98F58C2160B39B00D4D43B /* Identifier_DFSM.cpp */,
