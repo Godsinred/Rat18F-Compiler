@@ -139,9 +139,14 @@ bool isKeyword(string &lexeme)
     string keywords[14] ={"function", "int", "bool", "real",
         "if", "ifend", "else","return", "put", "get", "while", "whileend",
         "true", "false"};
+    string lowercaseLexeme = "";
+    for (int i = 0; i < lexeme.length(); ++i)
+    {
+        lowercaseLexeme += tolower(lexeme[i]);
+    }
     for (int i = 0; i < 14; ++i)
     {
-        if (keywords[i] == lexeme)
+        if (keywords[i] == lowercaseLexeme)
         {
             return true;
         }
@@ -169,23 +174,7 @@ tuple<string, string> lexer(ifstream &inFile)
         {
             while (inFile)
             {
-                inFile.get(c);/*
-                if (isspace(c)) //checks to see if character is a space
-                {
-                    // checks to see if the lexeme is a keyword
-                    if (identifier_DFSM(lexeme))
-                    {
-                        if (isKeyword(lexeme))
-                        {
-                            return make_tuple(lexeme, "Keyword");
-                        }
-                        return make_tuple(lexeme, "Identifier");
-                    }
-                    else
-                    {
-                        return make_tuple(lexeme, "Invalid Token");
-                    }
-                }*/
+                inFile.get(c);
                 //check to see if the character is not an letter or number and if infile is at the end of the file.
                 if(!isalnum(c) || inFile.eof())
                 {
@@ -218,7 +207,7 @@ tuple<string, string> lexer(ifstream &inFile)
                     lexeme += c;
                     inFile.get(c);
                     lexeme += c;
-                    while (inFile && isdigit(c))
+                    while (inFile && isalnum(c))
                     {
                         lexeme += c;
                         inFile.get(c);
@@ -236,7 +225,7 @@ tuple<string, string> lexer(ifstream &inFile)
                     }
                     return make_tuple(lexeme, "Real");
                 }
-                else if (!isdigit(c))
+                else if (!isalnum(c))
                 {
                     inFile.putback(c);
                     if (is_number_DFSM(lexeme))
@@ -262,7 +251,7 @@ int main() {
     string filepath = "";
     
     cout << "Enter the file path of the folder with the test case files in it: ";
-    cin >> baseFilePath;
+    getline(cin, baseFilePath);
     baseFilePath += '/';
     cout << "Enter the file name(for supplied test cases enter \"1\", \"2\", or \"3\"): ";
     cin >> filepath;
@@ -350,7 +339,7 @@ int main() {
                 {
                     // only the '[' symbol was read and we have to putback the character we peeked at
                     inFile.putback(next);
-                    outfile << left << setw(20) << "[" << setw(20) << "Invalid Token" << endl;
+                    outfile << left << setw(20) << "Invalid Token"<< setw(20) << "[" << endl;
                 }
             }
             else if (c != '\n' && !isspace(c)){
@@ -359,10 +348,11 @@ int main() {
                 outfile << left << setw(20) << get<1>(token) << setw(20) << get<0>(token) << endl;
             }
         }
+        cout<< endl << "Lexicon Analyzer Complete" << endl;
     }
     else
     {
-        cerr << "Unable to open specified file." << endl;
+        cerr << endl <<  "Unable to open specified file." << endl;
     }
     // closes file
     inFile.close();

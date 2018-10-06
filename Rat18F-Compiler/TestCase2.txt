@@ -1,3 +1,11 @@
 welcome to this file
 
-whant to know if this is going to
+whant to know if this is going to work.
+
+1232131231.1231231231
+4533231231
+[*This is a comment*]
+[This is not a comment]
+[*this is a multiple line comment
+in order to test that it works*]
+[*comment that does not end]
