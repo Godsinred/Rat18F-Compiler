@@ -82,7 +82,16 @@ bool isSeparator(string &lexeme, ifstream &inFile)
         if (inFile)
         {
             inFile.get(c);
+        }
+        if(lexeme + c == "$$")
+        {
             lexeme += c;
+            return true;
+        }
+        else
+        {
+            inFile.putback(c);
+            return false;
         }
     }
     for (int i = 0; i < 7; ++i)
@@ -206,8 +215,7 @@ tuple<string, string> lexer(ifstream &inFile)
                 {
                     lexeme += c;
                     inFile.get(c);
-                    lexeme += c;
-                    while (inFile && isalnum(c))
+                    while (inFile && isdigit(c))
                     {
                         lexeme += c;
                         inFile.get(c);
@@ -247,42 +255,55 @@ tuple<string, string> lexer(ifstream &inFile)
 int main() {
     
     // filepath to code
-    string baseFilePath = "";
-    string filepath = "";
+    string baseFilePath, filepath, userChoice;
     
     cout << "Enter the file path of the folder with the test case files in it: ";
     getline(cin, baseFilePath);
+    
+    // This will only work for Macs since file paths for Windows and other operating systems are different
     baseFilePath += '/';
     cout << "Enter the file name(for supplied test cases enter \"1\", \"2\", or \"3\"): ";
-    cin >> filepath;
+    cin >> userChoice;
     
     
     //check to see if the user wants to test one of the predefined test cases.1
-    if (filepath == "1")
+    if (userChoice == "1")
     {
         filepath = baseFilePath + "TestCase1.txt";
     }
-    else if (filepath == "2")
+    else if (userChoice == "2")
     {
-        filepath = baseFilePath + "testCase2.txt";
+        filepath = baseFilePath + "TestCase2.txt";
     }
-    else if(filepath == "3")
+    else if(userChoice == "3")
     {
-        filepath = baseFilePath + "testCase3.txt";
+        filepath = baseFilePath + "TestCase3.txt";
     }
     else
     {
-        filepath = baseFilePath + filepath;
+        filepath = baseFilePath + userChoice;
     }
     
     // opening the input file
     ifstream inFile;
     inFile.open(filepath);
+    if (!inFile)
+    {
+        cout <<"Error: Unable to open specified input file \"" << filepath << "\"" << endl;
+        exit(0);
+    }
     
     //opening the output file
     ofstream outfile;
-    filepath =  baseFilePath + "ouput.txt";
+    filepath =  baseFilePath + "ouput" + userChoice + ".txt";
     outfile.open(filepath);
+    if (!outfile)
+    {
+        cout <<"Error: Unable to open specified output file \"" << filepath << "\"" << endl;
+        exit(0);
+    }
+    
+    
     outfile << left << setw(20) << "Token" <<setw(20) << "Lexeme" << endl;
     for (int i = 0; i < 40; ++i)
     {
@@ -300,7 +321,7 @@ int main() {
         while (inFile)
         {
             // get the first character from file
-            c = ' ';
+            // c = ' '; // is this necessary? <==================================================
             inFile.get(c);
             
             // reads all the leading whitespace of the file to the first non-whitespace
@@ -322,7 +343,8 @@ int main() {
                     inFile.get(current);
                     inFile.get(next);
                     bool endComment = false;
-                    if (current == '*' && next == ']') {
+                    if (current == '*' && next == ']')
+                    {
                         endComment = true;
                     }
                     while (inFile && !endComment)
@@ -330,9 +352,16 @@ int main() {
                         current = next;
                         inFile.get(next);
                         
-                        if (current == '*' && next == ']') {
+                        if (current == '*' && next == ']')
+                        {
                             endComment = true;
                         }
+                    }
+                    
+                    // need this just in case file ends before the end of comment can be found
+                    if (!endComment) {
+                        outfile << left << setw(20) << "Unknown" << setw(20) << "Unable to find end " \
+                        "of comment" << endl;
                     }
                 }
                 else
@@ -348,7 +377,7 @@ int main() {
                 outfile << left << setw(20) << get<1>(token) << setw(20) << get<0>(token) << endl;
             }
         }
-        cout<< endl << "Lexicon Analyzer Complete" << endl;
+        cout << endl << "Lexicon Analyzer Complete" << endl;
     }
     else
     {
@@ -356,4 +385,6 @@ int main() {
     }
     // closes file
     inFile.close();
+    
+    return 0;
 }

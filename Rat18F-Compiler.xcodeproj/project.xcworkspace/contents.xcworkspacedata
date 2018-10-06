@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:Rat18F-Compiler.xcodeproj">
+      location = "group:/Users/godsinred/Desktop/Rat18F-Compiler/Rat18F-Compiler/ouput1.txt">
+   </FileRef>
+   <FileRef
+      location = "self:">
    </FileRef>
 </Workspace>

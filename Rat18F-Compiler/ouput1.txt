@@ -1,0 +1,66 @@
+Token               Lexeme              
+----------------------------------------
+Invalid Token       $                   
+Identifier          a                   
+Keyword             while               
+Separator           (                   
+Identifier          i                   
+Operator            <                   
+Identifier          lower               
+Separator           )                   
+Keyword             int                 
+Identifier          lower               
+Operator            =                   
+Identifier          i                   
+Separator           ;                   
+Keyword             if                  
+Separator           (                   
+Identifier          lower               
+Operator            =>                  
+Real                22.03               
+Separator           )                   
+Identifier          upper               
+Operator            =                   
+Integer             100                 
+Separator           ;                   
+Keyword             whileend            
+Keyword             if                  
+Separator           {                   
+Identifier          a                   
+Operator            +                   
+Identifier          c                   
+Operator            ==                  
+Integer             123                 
+Separator           }                   
+Keyword             ifend               
+Identifier          silvia              
+Operator            =                   
+Keyword             true                
+Separator           ;                   
+Integer             23                  
+Separator           ,                   
+Integer             4885                
+Keyword             bool                
+Keyword             false               
+Keyword             function            
+Operator            /                   
+Operator            *                   
+Operator            ^=                  
+Invalid Token       ^                   
+Real                12.1                
+Real                123.123             
+Real                123.123             
+Identifier          bweq4wesrgdf        
+Identifier          ifem                
+Invalid Token       #                   
+Identifier          qwe                 
+Operator            ==                  
+Operator            ==                  
+Invalid Token       .                   
+Integer             123                 
+Integer             123                 
+Invalid Token       $                   
+Integer             123                 
+Integer             123                 
+Invalid Token       #                   
+Integer             123                 
