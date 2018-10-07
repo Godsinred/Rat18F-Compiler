@@ -1,3 +1,4 @@
+a=variable12.2x+123.123b;
 $a
 while (i < lower) 
 	int lower = i;
