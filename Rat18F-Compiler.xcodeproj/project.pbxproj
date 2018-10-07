@@ -29,9 +29,7 @@
 		3F01EF0A2169671100C69586 /* TestCase3.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestCase3.txt; sourceTree = "<group>"; };
 		3F01EF0B2169671100C69586 /* example.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = example.txt; sourceTree = "<group>"; };
 		3F28745321696FDC001EA785 /* ouput2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ouput2.txt; sourceTree = "<group>"; };
-		3F28745421697576001EA785 /* ouput1.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = ouput1.txt; path = "/Users/godsinred/Desktop/Rat18F-Compiler/Rat18F-Compiler/ouput1.txt"; sourceTree = "<absolute>"; };
-		3F28745521698206001EA785 /* test_main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = test_main.cpp; path = "/Users/godsinred/Desktop/Rat18F-Compiler/Rat18F-Compiler/test_main.cpp"; sourceTree = "<absolute>"; };
-		3F28745721699676001EA785 /* test_ouput1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test_ouput1.txt; sourceTree = "<group>"; };
+		3F28745521698206001EA785 /* test_main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = test_main.cpp; path = "/Users/Mikulka/Documents/GitHub/Rat18F-Compiler/Rat18F-Compiler/test_main.cpp"; sourceTree = "<absolute>"; };
 		3F2E022021605925007BF43E /* Rat18F-Compiler */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Rat18F-Compiler"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F2E022321605925007BF43E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -72,8 +70,6 @@
 				3F01EF092169671100C69586 /* TestCase2.txt */,
 				3F01EF0A2169671100C69586 /* TestCase3.txt */,
 				3F2E022321605925007BF43E /* main.cpp */,
-				3F28745721699676001EA785 /* test_ouput1.txt */,
-				3F28745421697576001EA785 /* ouput1.txt */,
 				3F28745321696FDC001EA785 /* ouput2.txt */,
 			);
 			path = "Rat18F-Compiler";

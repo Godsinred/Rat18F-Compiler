@@ -1,0 +1,16 @@
+Token               Lexeme              
+----------------------------------------
+Identifier          welcome             
+Identifier          to                  
+Identifier          this                
+Identifier          file                
+Identifier          want                
+Identifier          to                  
+Identifier          know                
+Keyword             if                  
+Identifier          this                
+Identifier          is                  
+Identifier          going               
+Identifier          to                  
+Unknown             work?               
+Unknown             Unable to find end of comment

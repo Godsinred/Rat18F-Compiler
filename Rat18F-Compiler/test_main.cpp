@@ -216,6 +216,12 @@ tuple<string, string> lexer(ifstream &inFile)
             {
                 endOfLexeme = true;
             }
+            else if (c == '[')
+            {
+                // the next character could be part of a comment.
+                inFile.putback(c);
+                endOfLexeme = true;
+            }
             else if (isSeparator(lexeme, nextLexeme, inFile))
             {
                 // means it is the start of a lexeme and then it should be return since a token was found
@@ -292,18 +298,21 @@ int main() {
     cin >> userChoice;
 
 
-    //check to see if the user wants to test one of the predefined test cases.1
+    //check to see if the user wants to test one of the predefined test cases.
     if (userChoice == "1")
     {
         filepath = baseFilePath + "TestCase1.txt";
+        userChoice = "TestCase1.txt";
     }
     else if (userChoice == "2")
     {
         filepath = baseFilePath + "TestCase2.txt";
+        userChoice = "TestCase2.txt";
     }
     else if(userChoice == "3")
     {
         filepath = baseFilePath + "TestCase3.txt";
+        userChoice = "TestCase3.txt";
     }
     else
     {
@@ -321,7 +330,7 @@ int main() {
 
     //opening the output file
     ofstream outfile;
-    filepath =  baseFilePath + "test_ouput" + userChoice + ".txt";
+    filepath =  baseFilePath + "output_" + userChoice;
     outfile.open(filepath);
     if (!outfile)
     {
@@ -347,11 +356,10 @@ int main() {
         while (inFile)
         {
             // get the first character from file
-            // c = ' '; // is this necessary? <==================================================
             inFile.get(c);
 
             // reads all the leading whitespace of the file to the first non-whitespace
-            while (inFile && isspace(c))
+            while (inFile && (isspace(c) || c == '\n'))
             {
                 inFile.get(c);
             }
@@ -397,7 +405,8 @@ int main() {
                     outfile << left << setw(20) << "Invalid Token"<< setw(20) << "[" << endl;
                 }
             }
-            else if (c != '\n' && !isspace(c) && !inFile.eof()){
+            else if (c != '\n' && !isspace(c) && !inFile.eof())
+            {
                 inFile.putback(c);
                 tuple<string, string> token = lexer(inFile);
                 outfile << left << setw(20) << get<1>(token) << setw(20) << get<0>(token) << endl;
