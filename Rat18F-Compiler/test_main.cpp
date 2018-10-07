@@ -104,7 +104,7 @@ bool isSeparator(const string &lexeme, string &nextLexeme, ifstream &inFile)
     if (nextLexeme == "$")
     {
         // peeks at the next character
-        char c;
+        char c = ' ';
         if (inFile)
         {
             inFile.get(c);
