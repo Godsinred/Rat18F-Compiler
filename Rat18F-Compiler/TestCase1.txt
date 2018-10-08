@@ -1,3 +1,5 @@
+[* this holds all our tests cases and source lines to try and break our program *]
+
 a=variable12.2x+123.123b;
 $a
 while (i < lower) 
@@ -13,3 +15,37 @@ ifem#qwe
 .123
 123$123
 123#123
+
+void quickSort(int arr[], int left, int right) {
+int i = left, j = right;
+int tmp;
+int pivot = arr[(left + right) / 2];
+
+[* partition *]
+while (i <= j) {
+while (arr[i] < pivot)
+i++;
+while (arr[j] > pivot)
+j--;
+if (i <= j) {
+tmp = arr[i];
+arr[i] = arr[j];
+arr[j] = tmp;
+i++;
+j--;
+}
+};
+
+[* recursion *]
+if (left < j)
+quickSort(arr, left, j);
+if (i < right)
+quickSort(arr, i, right);
+}
+
+can this   file
+be read  correctly?
+we[* this is a comment to try and throw things off*]
+may never know.
+what about this fake c[o*]mment?
+never end comment? [*   work?

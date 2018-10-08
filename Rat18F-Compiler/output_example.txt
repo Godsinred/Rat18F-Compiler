@@ -1,0 +1,23 @@
+Token               Lexeme              
+----------------------------------------
+Identifier          can                 
+Identifier          this                
+Identifier          file                
+Identifier          be                  
+Identifier          read                
+Unknown             correctly?          
+Unknown             we[                 
+Identifier          may                 
+Identifier          never               
+Unknown             know.               
+Identifier          what                
+Identifier          about               
+Identifier          this                
+Identifier          fake                
+Unknown             c[o                 
+Operator            *                   
+Unknown             ]mment?             
+Identifier          never               
+Identifier          end                 
+Unknown             comment?            
+Unknown             Unable to find end of comment

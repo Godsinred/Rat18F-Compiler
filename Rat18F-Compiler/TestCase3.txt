@@ -1,5 +1,9 @@
-     23224234..234
-    344452
-    test
-2423423423423234
-if elseif whileend
+while (true)
+{
+int a = 0;
+a=2+3;
+    if(true);
+{[**]
+int ifelem = 1;
+}
+}

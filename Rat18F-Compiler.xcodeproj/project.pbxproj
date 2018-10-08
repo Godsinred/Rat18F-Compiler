@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3F28745621698206001EA785 /* test_main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3F28745521698206001EA785 /* test_main.cpp */; };
-		3F2E022421605925007BF43E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3F2E022321605925007BF43E /* main.cpp */; };
+		3FD8FBFE216AD8D700C52E56 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3FD8FBFD216AD8D700C52E56 /* main.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,10 +27,10 @@
 		3F01EF092169671100C69586 /* TestCase2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestCase2.txt; sourceTree = "<group>"; };
 		3F01EF0A2169671100C69586 /* TestCase3.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestCase3.txt; sourceTree = "<group>"; };
 		3F01EF0B2169671100C69586 /* example.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = example.txt; sourceTree = "<group>"; };
-		3F28745321696FDC001EA785 /* ouput2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ouput2.txt; sourceTree = "<group>"; };
-		3F28745521698206001EA785 /* test_main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = test_main.cpp; path = "/Users/Mikulka/Documents/GitHub/Rat18F-Compiler/Rat18F-Compiler/test_main.cpp"; sourceTree = "<absolute>"; };
 		3F2E022021605925007BF43E /* Rat18F-Compiler */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Rat18F-Compiler"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3F2E022321605925007BF43E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		3FD8FBFB216ACD3700C52E56 /* output_example.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = output_example.txt; sourceTree = "<group>"; };
+		3FD8FBFC216AD68400C52E56 /* output_TestCase1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = output_TestCase1.txt; sourceTree = "<group>"; };
+		3FD8FBFD216AD8D700C52E56 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,13 +63,13 @@
 		3F2E022221605925007BF43E /* Rat18F-Compiler */ = {
 			isa = PBXGroup;
 			children = (
-				3F28745521698206001EA785 /* test_main.cpp */,
+				3FD8FBFD216AD8D700C52E56 /* main.cpp */,
 				3F01EF0B2169671100C69586 /* example.txt */,
 				3F01EF082169671100C69586 /* TestCase1.txt */,
 				3F01EF092169671100C69586 /* TestCase2.txt */,
 				3F01EF0A2169671100C69586 /* TestCase3.txt */,
-				3F2E022321605925007BF43E /* main.cpp */,
-				3F28745321696FDC001EA785 /* ouput2.txt */,
+				3FD8FBFB216ACD3700C52E56 /* output_example.txt */,
+				3FD8FBFC216AD68400C52E56 /* output_TestCase1.txt */,
 			);
 			path = "Rat18F-Compiler";
 			sourceTree = "<group>";
@@ -131,8 +130,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F28745621698206001EA785 /* test_main.cpp in Sources */,
-				3F2E022421605925007BF43E /* main.cpp in Sources */,
+				3FD8FBFE216AD8D700C52E56 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

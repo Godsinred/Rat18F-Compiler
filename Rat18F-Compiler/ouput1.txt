@@ -1,5 +1,0 @@
-Token               Lexeme              
-----------------------------------------
-Identifier          a                   
-Operator            =                   
-Invalid Token       variable12          
