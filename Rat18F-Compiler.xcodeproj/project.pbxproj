@@ -30,7 +30,6 @@
 		3FD8FBFC216AD68400C52E56 /* output_TestCase1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = output_TestCase1.txt; sourceTree = "<group>"; };
 		3FD8FBFF216ADAD700C52E56 /* output_TestCase2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = output_TestCase2.txt; sourceTree = "<group>"; };
 		3FD8FC00216ADAE400C52E56 /* output_TestCase3.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = output_TestCase3.txt; sourceTree = "<group>"; };
-		3FD8FC02216AE2F500C52E56 /* test.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test.txt; sourceTree = "<group>"; };
 		8B53D9A2216AEDA2006F6DAB /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -71,7 +70,6 @@
 				3FD8FBFC216AD68400C52E56 /* output_TestCase1.txt */,
 				3FD8FBFF216ADAD700C52E56 /* output_TestCase2.txt */,
 				3FD8FC00216ADAE400C52E56 /* output_TestCase3.txt */,
-				3FD8FC02216AE2F500C52E56 /* test.txt */,
 			);
 			path = "Rat18F-Compiler";
 			sourceTree = "<group>";

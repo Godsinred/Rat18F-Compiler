@@ -1,9 +1,0 @@
-Token               Lexeme              
-----------------------------------------
-Unknown             23224234..234       
-Integer             344452              
-Identifier          test                
-Integer             2423423423423234    
-Keyword             if                  
-Identifier          elseif              
-Keyword             whileend            
