@@ -436,7 +436,10 @@ int main() {
             {
                 inFile.putback(c);
                 tuple<string, string> token = lexer(inFile);
-                outfile << left << setw(20) << get<1>(token) << setw(20) << get<0>(token) << endl;
+                if(get<0>(token) != "")
+                   {
+                       outfile << left << setw(20) << get<1>(token) << setw(20) << get<0>(token) << endl;
+                   }
             }
         }
         cout << endl << "Lexicon Analyzer Complete" << endl;

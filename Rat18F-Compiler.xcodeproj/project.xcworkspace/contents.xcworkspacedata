@@ -2,10 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/godsinred/Desktop/Rat18F-Compiler/Rat18F-Compiler/test_main.cpp">
-   </FileRef>
-   <FileRef
-      location = "group:/Users/godsinred/Desktop/Rat18F-Compiler/Rat18F-Compiler/ouput1.txt">
+      location = "group:../Rat18F-Compiler/output_test.txt">
    </FileRef>
    <FileRef
       location = "self:">
