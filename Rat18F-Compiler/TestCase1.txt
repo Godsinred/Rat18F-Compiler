@@ -7,7 +7,6 @@ while (i < lower)
 	if (lower => 22.03) upper = 100; whileend
  if {a + c == 123}ifend silvia = true;
 23 , 4885 bool false function / * ^=  ^
-12.1
 123.123
 123.123bweq4wesrgdf
 ifem#qwe
@@ -21,21 +20,6 @@ int i = left, j = right;
 int tmp;
 int pivot = arr[(left + right) / 2];
 
-[* partition *]
-while (i <= j) {
-while (arr[i] < pivot)
-i++;
-while (arr[j] > pivot)
-j--;
-if (i <= j) {
-tmp = arr[i];
-arr[i] = arr[j];
-arr[j] = tmp;
-i++;
-j--;
-}
-};
-
 [* recursion *]
 if (left < j)
 quickSort(arr, left, j);
@@ -45,7 +29,8 @@ quickSort(arr, i, right);
 
 can this   file
 be read  correctly?
-we[* this is a comment to try and throw things off*]
+we[* this is a comment
+to try and throw things off*]
 may never know.
 what about this fake c[o*]mment?
 never end comment? [*   work?

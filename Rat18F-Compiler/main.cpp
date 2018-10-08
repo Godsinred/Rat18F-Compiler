@@ -1,3 +1,12 @@
+/*
+    Jonathan Ishii
+    Matthew Mikulka
+ 
+    CPSC 323 - Section 1
+ 
+    Assignment 1
+ */
+
 #include <iostream>
 #include <fstream>
 #include <iomanip>
@@ -234,7 +243,7 @@ tuple<bool, string> is_comment(char c, ifstream &inFile)
             }
             else
             {
-                return make_tuple(false, "1");;
+                return make_tuple(true, "1");;
             }
         }
         else
@@ -262,7 +271,11 @@ tuple<string, string> lexer(ifstream &inFile)
             nextLexeme = c;
             if (isspace(c))
             {
-                endOfLexeme = true;
+                // just in case a comment was found at the end after a lexeme was returned so it doesn't return nothing
+                if (lexeme != "")
+                {
+                    endOfLexeme = true;
+                }
             }
             else if (c == '[')
             {
@@ -356,7 +369,6 @@ int main() {
     cout << "Enter the file name(for supplied test cases enter \"1\", \"2\", or \"3\"): ";
     cin >> userChoice;
 
-
     //check to see if the user wants to test one of the predefined test cases.
     if (userChoice == "1")
     {
@@ -397,14 +409,12 @@ int main() {
         exit(0);
     }
 
-
     outfile << left << setw(20) << "Token" <<setw(20) << "Lexeme" << endl;
     for (int i = 0; i < 40; ++i)
     {
         outfile << '-';
     }
     outfile << endl;
-
 
     // reads one character at a time till end of file and outputs token with lexeme
     if (inFile.is_open())
@@ -422,49 +432,6 @@ int main() {
             {
                 inFile.get(c);
             }
-
-            // first checks for possible comment
-            /*char next;
-            if (c == '[')
-            {
-                // gets the next character to see if the programmers is trying to make a comment
-                inFile.get(next);
-                if (next == '*')
-                {
-                    // reads and ignores all the characters until '*]' is found or eof is reached
-                    char current;
-                    inFile.get(current);
-                    inFile.get(next);
-                    bool endComment = false;
-                    if (current == '*' && next == ']')
-                    {
-                        endComment = true;
-                    }
-                    while (inFile && !endComment)
-                    {
-                        current = next;
-                        inFile.get(next);
-
-                        if (current == '*' && next == ']')
-                        {
-                            endComment = true;
-                        }
-                    }
-
-                    // need this just in case file ends before the end of comment can be found
-                    if (!endComment) {
-                        outfile << left << setw(20) << "Unknown" << setw(20) << "Unable to find end " \
-                        "of comment" << endl;
-                    }
-                }
-                else
-                {
-                    // only the '[' symbol was read and we have to putback the character we peeked at
-                    inFile.putback(next);
-                    outfile << left << setw(20) << "Invalid Token"<< setw(20) << "[" << endl;
-                }
-            }
-            else if (c != '\n' && !isspace(c) && !inFile.eof())*/
             if (!inFile.eof())
             {
                 inFile.putback(c);
@@ -478,9 +445,10 @@ int main() {
     {
         cerr << endl <<  "Unable to open specified file." << endl;
     }
-    // closes file
+    
+    // closes files
     inFile.close();
+    outfile.close();
 
     return 0;
 }
-
