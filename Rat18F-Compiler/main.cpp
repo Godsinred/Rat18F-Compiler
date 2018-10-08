@@ -10,6 +10,7 @@
 #include <iostream>
 #include <fstream>
 #include <iomanip>
+#include <tuple>
 
 using namespace std;
 
@@ -229,7 +230,6 @@ tuple<bool, string> is_comment(char c, ifstream &inFile)
             {
                 current = next;
                 inFile.get(next);
-                
                 if (current == '*' && next == ']')
                 {
                     endComment = true;
