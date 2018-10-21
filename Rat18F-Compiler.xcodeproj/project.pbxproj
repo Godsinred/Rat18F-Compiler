@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F02944D217D2C8600454503 /* SyntaxAnalyzer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3F02944C217D2C8600454503 /* SyntaxAnalyzer.cpp */; };
+		3F029458217D445100454503 /* LexicalAnalyzer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3F029456217D445100454503 /* LexicalAnalyzer.cpp */; };
 		8B53D9A3216AEDA2006F6DAB /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B53D9A2216AEDA2006F6DAB /* main.cpp */; };
 /* End PBXBuildFile section */
 
@@ -23,13 +25,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3F01EF082169671100C69586 /* TestCase1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestCase1.txt; sourceTree = "<group>"; };
-		3F01EF092169671100C69586 /* TestCase2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestCase2.txt; sourceTree = "<group>"; };
-		3F01EF0A2169671100C69586 /* TestCase3.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestCase3.txt; sourceTree = "<group>"; };
+		3F02944C217D2C8600454503 /* SyntaxAnalyzer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SyntaxAnalyzer.cpp; sourceTree = "<group>"; };
+		3F02944F217D371B00454503 /* AssignmentDocs */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AssignmentDocs; sourceTree = "<group>"; };
+		3F029450217D372400454503 /* TestCase3.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestCase3.txt; sourceTree = "<group>"; };
+		3F029451217D396800454503 /* output_TestCase3.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = output_TestCase3.txt; sourceTree = "<group>"; };
+		3F029455217D415400454503 /* SyntaxAnalyzer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SyntaxAnalyzer.h; sourceTree = "<group>"; };
+		3F029456217D445100454503 /* LexicalAnalyzer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LexicalAnalyzer.cpp; sourceTree = "<group>"; };
+		3F029457217D445100454503 /* LexicalAnalyzer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LexicalAnalyzer.h; sourceTree = "<group>"; };
 		3F2E022021605925007BF43E /* Rat18F-Compiler */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Rat18F-Compiler"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3FD8FBFC216AD68400C52E56 /* output_TestCase1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = output_TestCase1.txt; sourceTree = "<group>"; };
-		3FD8FBFF216ADAD700C52E56 /* output_TestCase2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = output_TestCase2.txt; sourceTree = "<group>"; };
-		3FD8FC00216ADAE400C52E56 /* output_TestCase3.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = output_TestCase3.txt; sourceTree = "<group>"; };
 		8B53D9A2216AEDA2006F6DAB /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -63,13 +66,14 @@
 		3F2E022221605925007BF43E /* Rat18F-Compiler */ = {
 			isa = PBXGroup;
 			children = (
+				3F029451217D396800454503 /* output_TestCase3.txt */,
+				3F029450217D372400454503 /* TestCase3.txt */,
+				3F02944F217D371B00454503 /* AssignmentDocs */,
 				8B53D9A2216AEDA2006F6DAB /* main.cpp */,
-				3F01EF082169671100C69586 /* TestCase1.txt */,
-				3F01EF092169671100C69586 /* TestCase2.txt */,
-				3F01EF0A2169671100C69586 /* TestCase3.txt */,
-				3FD8FBFC216AD68400C52E56 /* output_TestCase1.txt */,
-				3FD8FBFF216ADAD700C52E56 /* output_TestCase2.txt */,
-				3FD8FC00216ADAE400C52E56 /* output_TestCase3.txt */,
+				3F029455217D415400454503 /* SyntaxAnalyzer.h */,
+				3F02944C217D2C8600454503 /* SyntaxAnalyzer.cpp */,
+				3F029457217D445100454503 /* LexicalAnalyzer.h */,
+				3F029456217D445100454503 /* LexicalAnalyzer.cpp */,
 			);
 			path = "Rat18F-Compiler";
 			sourceTree = "<group>";
@@ -130,6 +134,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F02944D217D2C8600454503 /* SyntaxAnalyzer.cpp in Sources */,
+				3F029458217D445100454503 /* LexicalAnalyzer.cpp in Sources */,
 				8B53D9A3216AEDA2006F6DAB /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
