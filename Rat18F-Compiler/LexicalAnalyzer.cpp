@@ -304,7 +304,7 @@ tuple<string, string> lexer(ifstream &inFile)
                 // means it is the start of a lexeme and then it should be return since a token was found
                 if (lexeme == "")
                 {
-                    return make_tuple(nextLexeme, "Separator");
+                    return make_tuple("Separator", nextLexeme);
                 }
                 // means a sep was found but it is next to a non sep so it should be put back and end the loop since it could
                 // mean an arithmetic operation

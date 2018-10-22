@@ -15,11 +15,13 @@ void Rat18F(bool printSwitch, ifstream &infile)
         cout << "R1. <Rat18F>  ::=   <Opt Function Definitions>   $$  <Opt Declaration List>  <Statement List>  $$" << endl;
     }
     tuple<string, string> token = lexer(infile);
+    cout << get<1>(token) << endl;
     OptFunctionDefinitions(printSwitch, infile, token);
 //    $$
 //    OptDeclarationList();
 //    StatementList();
 //    $$
+    cout << "SA is correct.\n";
 }
 
 void OptFunctionDefinitions(bool printSwitch, ifstream &infile, tuple<string, string> &token)
@@ -29,7 +31,6 @@ void OptFunctionDefinitions(bool printSwitch, ifstream &infile, tuple<string, st
         cout << "R2. <Opt Function Definitions> ::= <Function Definitions>     |  <Empty>" << endl;
     }
     FunctionDefinitions(printSwitch, infile, token);
-    
 }
 
 void FunctionDefinitions(bool printSwitch, ifstream &infile, tuple<string, string> &token)
@@ -39,7 +40,7 @@ void FunctionDefinitions(bool printSwitch, ifstream &infile, tuple<string, strin
         cout << "R3. <Function Definitions>  ::= <Function> <Function Definitions End>" << endl;
     }
     Function(printSwitch, infile, token);
-    //FunctionDefinitionsEnd();
+    //FunctionDefinitionsEnd(); <==========================================================================================
 }
 
 void Function(bool printSwitch, ifstream &infile, tuple<string, string> &token)
@@ -52,21 +53,37 @@ void Function(bool printSwitch, ifstream &infile, tuple<string, string> &token)
     if(get<1>(token) == "function")
     {
         token = lexer(infile);
-        Identifier(token);
-        
-        token = lexer(infile);
-        if(get<1>(token) != "(")
+        cout << get<1>(token) << endl;
+        if(!Identifier(printSwitch, token))
         {
-            cout << "Expected: Identifier\nReceived: " << get<0>(token) << endl;
+            cout << "Expected: Identifier\nReceived: " << get<1>(token) << endl;
             exit(1);
         }
         
         token = lexer(infile);
+        cout << get<1>(token) << endl;
+        if(get<1>(token) != "(")
+        {
+            cout << "Expected: (\nReceived: " << get<1>(token) << endl;
+            exit(1);
+        }
+        
+        token = lexer(infile);
+        cout << get<1>(token) << endl;
         OptParameterList(printSwitch, infile, token);
+        
+        cout << get<1>(token) << endl;
+        if(get<1>(token) != ")")
+        {
+            cout << "Expected: )\nReceived: " << get<1>(token) << endl;
+            exit(1);
+        }
+        // <Opt Declaration List><==========================================================================================
+        // <Body><==========================================================================================
     }
 }
 
-void Identifier(bool printSwitch, const tuple<string, string> &token)
+bool Identifier(bool printSwitch, const tuple<string, string> &token)
 {
     if (printSwitch)
     {
@@ -75,9 +92,9 @@ void Identifier(bool printSwitch, const tuple<string, string> &token)
     
     if(get<0>(token) != "Identifier")
     {
-        cout << "Expected: Identifier\nReceived: " << get<0>(token) << endl;
-        exit(1);
+        return false;
     }
+    return true;
 }
 
 void OptParameterList(bool printSwitch, ifstream &infile, tuple<string, string> &token)
@@ -86,20 +103,111 @@ void OptParameterList(bool printSwitch, ifstream &infile, tuple<string, string> 
     {
         cout << "R6. <Opt Parameter List> ::=  <Parameter List>    |     <Empty>" << endl;
     }
+    ParameterList(printSwitch, infile, token);
+}
+
+void ParameterList(bool printSwitch, ifstream &infile, tuple<string, string> &token)
+{
+    if (printSwitch)
+    {
+        cout << "R7. <Parameter List>  ::=  <Parameter>  <Parameter List End>" << endl;
+    }
+    Parameter(printSwitch, infile, token);
+    ParameterListEnd(printSwitch, infile, token);
+}
+
+void Parameter(bool printSwitch, ifstream &infile, tuple<string, string> &token)
+{
+    if (printSwitch)
+    {
+        cout << "R9. <Parameter> ::=  <IDs > : <Qualifier>" << endl;
+    }
+    if(IDs(printSwitch, infile, token))
+    {
+        if(get<1>(token) != ":")
+        {
+            cout << "Expected: :\nReceived: " << get<1>(token) << endl;
+            exit(1);
+        }
+        Qualifier(printSwitch, infile, token);
+    }
+    
+}
+
+void ParameterListEnd(bool printSwitch, ifstream &infile, tuple<string, string> &token)
+{
+    if (printSwitch)
+    {
+        cout << "R8. <Parameter List End> ::= , <Parameter List> | ε" << endl;
+    }
+    token = lexer(infile);
+    cout << get<1>(token) << endl;
+    if(get<1>(token) == ",")
+    {
+        ParameterList(printSwitch, infile, token);
+    }
+    
+}
+
+bool IDs(bool printSwitch, ifstream &infile, tuple<string, string> &token)
+{
+    if (printSwitch)
+    {
+        cout << "R16. <IDs> ::=     <Identifier>  <IDs End>" << endl;
+    }
+    if(Identifier(printSwitch, token))
+    {
+        IDsEnd(printSwitch, infile, token);
+        return true;
+    }
+    return false;
+}
+
+void IDsEnd(bool printSwitch, ifstream &infile, tuple<string, string> &token)
+{
+    if (printSwitch)
+    {
+        cout << "R17. <IDs End> ::= , <IDs> | ε" << endl;
+    }
+    token = lexer(infile);
+    cout << get<1>(token) << endl;
+    if(get<1>(token) == ",")
+    {
+        token = lexer(infile);
+        cout << get<1>(token) << endl;
+        if(!IDs(printSwitch, infile, token))
+        {
+            cout << "Expected: Identifier\nReceived: " << get<1>(token) << endl;
+            exit(1);
+        }
+    }
+}
+
+void Qualifier(bool printSwitch, ifstream &infile, tuple<string, string> &token)
+{
+    if (printSwitch)
+    {
+        cout << "R10. <Qualifier> ::= int     |    boolean    |  real" << endl;
+    }
+    token = lexer(infile);
+    cout << get<1>(token) << endl;
+    if(get<1>(token) != "int" && get<1>(token) != "boolean" && get<1>(token) != "real")
+    {
+        cout << "Expected: int or boolean or real\nReceived: " << get<1>(token) << endl;
+        exit(1);
+    }
 }
 
 //R4.<Function Definitions End> ::= <Function Definitions>  | ε
-//R7. <Parameter List>  ::=  <Parameter>  <Parameter List End>
-//R8. <Parameter List End> ::= , <Parameter List> | ε
-//R9. <Parameter> ::=  <IDs > : <Qualifier>
-//R10. <Qualifier> ::= int     |    boolean    |  real
+//
+//
+//
+//
 //R11. <Body>  ::= {  < Statement List>  }
 //R12. <Opt Declaration List> ::= <Declaration List>   |    <Empty>
 //R13. <Declaration List>  ::= <Declaration> ;   <Declaration List End>
 //R14. <Declaration List End> ::= <Declaration List> | ε
 //R15. <Declaration> ::=   <Qualifier > <IDs>
-//R16. <IDs> ::=     <Identifier>  <IDs End>
-//R17. <IDs End> ::= , <IDs> | ε
 //R18. <Statement List> ::=   <Statement>  <Statement List End>
 //R19. <Statement List End> ::= <Statement List> | ε
 //R20. <Statement> ::=   <Compound>  |  <Assign> |   <If>  |  <Return>   | <Print>   |   <Scan>   |  <While>
