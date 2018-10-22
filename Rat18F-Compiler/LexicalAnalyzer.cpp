@@ -7,6 +7,8 @@
 //
 
 #include "LexicalAnalyzer.h"
+
+bool printswitch = true;
 //returns a col for the identifier DFSM
 int char_to_col_identifier(char c)
 {
@@ -249,6 +251,16 @@ tuple<bool, string> is_comment(char c, ifstream &inFile)
 }
 
 tuple<string, string> lexer(ifstream &inFile)
+{
+    tuple<string, string> token = actualLexer(inFile);
+    if (printswitch)
+    {
+        cout << left << setw(20) << "Token: " << get<0>(token) << setw(20) << "Lexeme: " << get<1>(token) << endl;
+    }
+    return token;
+}
+
+tuple<string, string> actualLexer(ifstream &inFile)
 {
     char c;
     string lexeme, nextLexeme;

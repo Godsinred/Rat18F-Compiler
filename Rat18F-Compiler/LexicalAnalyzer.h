@@ -45,4 +45,6 @@ tuple<bool, string> is_comment(char c, ifstream &inFile);
 
 tuple<string, string> lexer(ifstream &inFile);
 
+tuple<string, string> actualLexer(ifstream &infile);
+
 #endif /* LexicalAnalyzer_hpp */
