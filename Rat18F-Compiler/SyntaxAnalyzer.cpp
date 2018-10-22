@@ -8,37 +8,87 @@
 
 using namespace std;
 
-void Rat18F(bool printSwitch)
+void Rat18F(bool printSwitch, ifstream &infile)
 {
     if (printSwitch)
     {
-        cout << "<Rat18F>  ::=   <Opt Function Definitions>   $$  <Opt Declaration List>  <Statement List>  $$" << endl;
+        cout << "R1. <Rat18F>  ::=   <Opt Function Definitions>   $$  <Opt Declaration List>  <Statement List>  $$" << endl;
     }
-    string filepath = "/Users/godsinred/Desktop/Rat18F-Compiler/Rat18F-Compiler/TestCase3.txt";
-    ifstream inFile;
-    inFile.open(filepath);
-    if (!inFile)
-    {
-        cout <<"Error: Unable to open specified input file \"" << filepath << "\"" << endl;
-        exit(0);
-    }
-    tuple<string, string> token = lexer(inFile);
-    if(get<0>(token) != "")
-    {
-        cout << left << setw(20) << get<1>(token) << setw(20) << get<0>(token) << endl;
-    }
-//    OptFunctionDefinitions();
+    tuple<string, string> token = lexer(infile);
+    OptFunctionDefinitions(printSwitch, infile, token);
 //    $$
 //    OptDeclarationList();
-//    OptDeclarationList();
+//    StatementList();
 //    $$
 }
-//
-//R2. <Opt Function Definitions> ::= <Function Definitions>     |  <Empty>
-//R3. <Function Definitions>  ::= <Function> <Function Definitions End>
+
+void OptFunctionDefinitions(bool printSwitch, ifstream &infile, tuple<string, string> &token)
+{
+    if (printSwitch)
+    {
+        cout << "R2. <Opt Function Definitions> ::= <Function Definitions>     |  <Empty>" << endl;
+    }
+    FunctionDefinitions(printSwitch, infile, token);
+    
+}
+
+void FunctionDefinitions(bool printSwitch, ifstream &infile, tuple<string, string> &token)
+{
+    if (printSwitch)
+    {
+        cout << "R3. <Function Definitions>  ::= <Function> <Function Definitions End>" << endl;
+    }
+    Function(printSwitch, infile, token);
+    //FunctionDefinitionsEnd();
+}
+
+void Function(bool printSwitch, ifstream &infile, tuple<string, string> &token)
+{
+    if (printSwitch)
+    {
+        cout << "R5. <Function> ::= function  <Identifier>   ( <Opt Parameter List> )  <Opt Declaration List>  <Body>" << endl;
+    }
+    
+    if(get<1>(token) == "function")
+    {
+        token = lexer(infile);
+        Identifier(token);
+        
+        token = lexer(infile);
+        if(get<1>(token) != "(")
+        {
+            cout << "Expected: Identifier\nReceived: " << get<0>(token) << endl;
+            exit(1);
+        }
+        
+        token = lexer(infile);
+        OptParameterList(printSwitch, infile, token);
+    }
+}
+
+void Identifier(bool printSwitch, const tuple<string, string> &token)
+{
+    if (printSwitch)
+    {
+        cout << "<Identifier>" << endl;
+    }
+    
+    if(get<0>(token) != "Identifier")
+    {
+        cout << "Expected: Identifier\nReceived: " << get<0>(token) << endl;
+        exit(1);
+    }
+}
+
+void OptParameterList(bool printSwitch, ifstream &infile, tuple<string, string> &token)
+{
+    if (printSwitch)
+    {
+        cout << "R6. <Opt Parameter List> ::=  <Parameter List>    |     <Empty>" << endl;
+    }
+}
+
 //R4.<Function Definitions End> ::= <Function Definitions>  | ε
-//R5. <Function> ::= function  <Identifier>   ( <Opt Parameter List> )  <Opt Declaration List>  <Body>
-//R6. <Opt Parameter List> ::=  <Parameter List>    |     <Empty>
 //R7. <Parameter List>  ::=  <Parameter>  <Parameter List End>
 //R8. <Parameter List End> ::= , <Parameter List> | ε
 //R9. <Parameter> ::=  <IDs > : <Qualifier>

@@ -256,6 +256,18 @@ tuple<string, string> lexer(ifstream &inFile)
 
     if (inFile.is_open())
     {
+        // get the first character from file
+        inFile.get(c);
+        
+        // reads all the leading whitespace of the file to the first non-whitespace
+        while (inFile && (isspace(c) || c == '\n'))
+        {
+            inFile.get(c);
+        }
+        if (!inFile.eof())
+        {
+            inFile.putback(c);
+        }
         // builds the lexeme until a space, separator, or operator is found because numbers or identifiers can be separated by operators
         // or separators in arithmetic operations.  i.e a=2+x; is the same as a = 2 + x ;
         while(!inFile.eof() && !endOfLexeme)
@@ -281,7 +293,7 @@ tuple<string, string> lexer(ifstream &inFile)
                     {
                         if (lexeme == "")
                         {
-                            return make_tuple("Unable to find end of comment" , "Unknown");
+                            return make_tuple("Unknown", "Unable to find end of comment");
                         }
                     }
                     lexeme += '[';
@@ -304,7 +316,7 @@ tuple<string, string> lexer(ifstream &inFile)
                 // means it is the start of a lexeme and then it should be return since a token was found
                 if (lexeme == "")
                 {
-                    return make_tuple(nextLexeme, "Operator");
+                    return make_tuple("Operator", nextLexeme);
                 }
                 // means a sep was found but it is next to a non sep so it should be put back and end the loop since it could
                 // mean an arithmetic operation
@@ -322,29 +334,29 @@ tuple<string, string> lexer(ifstream &inFile)
         {
             if(isKeyword(lexeme))
             {
-                return make_tuple(lexeme, "Keyword");
+                return make_tuple("Keyword", lexeme);
             }
             else
             {
-                return make_tuple(lexeme, "Identifier");
+                return make_tuple("Identifier", lexeme);
             }
         }
         else if (is_number_DFSM(lexeme))
         {
             if (is_integer(lexeme))
             {
-                return make_tuple(lexeme, "Integer");
+                return make_tuple("Integer", lexeme);
             }
-            return make_tuple(lexeme, "Real");
+            return make_tuple("Real", lexeme);
         }
         else
         {
-            return make_tuple(lexeme, "Unknown");
+            return make_tuple("Unknown", lexeme);
         }
     }
     else
     {
         cerr << "Error: File is not open.";
-        return make_tuple(lexeme, "Unknown");
+        return make_tuple("Unknown", lexeme);
     }
 }
