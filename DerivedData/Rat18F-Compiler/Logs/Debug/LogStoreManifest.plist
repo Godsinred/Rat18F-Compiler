@@ -6,6 +6,64 @@
 	<integer>9</integer>
 	<key>logs</key>
 	<dict>
+		<key>00FC0F5B-1A76-4076-AE78-FBA0B057D8AC</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>00FC0F5B-1A76-4076-AE78-FBA0B057D8AC.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>S</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>Rat18F-Compiler project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Rat18F-Compiler</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>0</integer>
+			<key>signature</key>
+			<string>Debug Rat18F-Compiler</string>
+			<key>timeStartedRecording</key>
+			<real>561875705.285164</real>
+			<key>timeStoppedRecording</key>
+			<real>561875709.68286502</real>
+			<key>title</key>
+			<string>Debug Rat18F-Compiler</string>
+			<key>uniqueIdentifier</key>
+			<string>00FC0F5B-1A76-4076-AE78-FBA0B057D8AC</string>
+		</dict>
+		<key>0266F76D-1974-46D2-BF88-02053ADFE74E</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>0266F76D-1974-46D2-BF88-02053ADFE74E.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>S</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>Rat18F-Compiler project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Rat18F-Compiler</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>0</integer>
+			<key>signature</key>
+			<string>Debug Rat18F-Compiler</string>
+			<key>timeStartedRecording</key>
+			<real>561875042.577371</real>
+			<key>timeStoppedRecording</key>
+			<real>561875046.935022</real>
+			<key>title</key>
+			<string>Debug Rat18F-Compiler</string>
+			<key>uniqueIdentifier</key>
+			<string>0266F76D-1974-46D2-BF88-02053ADFE74E</string>
+		</dict>
 		<key>076DC823-A90E-4BCF-B40A-B64BB090057B</key>
 		<dict>
 			<key>className</key>
@@ -34,6 +92,93 @@
 			<string>Debug Rat18F-Compiler</string>
 			<key>uniqueIdentifier</key>
 			<string>076DC823-A90E-4BCF-B40A-B64BB090057B</string>
+		</dict>
+		<key>123B47CF-EA89-449F-9356-69DC8CE23674</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>123B47CF-EA89-449F-9356-69DC8CE23674.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>S</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>Rat18F-Compiler project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Rat18F-Compiler</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>0</integer>
+			<key>signature</key>
+			<string>Debug Rat18F-Compiler</string>
+			<key>timeStartedRecording</key>
+			<real>561876540.56557405</real>
+			<key>timeStoppedRecording</key>
+			<real>561876545.62383699</real>
+			<key>title</key>
+			<string>Debug Rat18F-Compiler</string>
+			<key>uniqueIdentifier</key>
+			<string>123B47CF-EA89-449F-9356-69DC8CE23674</string>
+		</dict>
+		<key>14658542-F08E-47B0-AD8C-62B50262FE6E</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>14658542-F08E-47B0-AD8C-62B50262FE6E.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>S</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>Rat18F-Compiler project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Rat18F-Compiler</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>0</integer>
+			<key>signature</key>
+			<string>Debug Rat18F-Compiler</string>
+			<key>timeStartedRecording</key>
+			<real>561876527.41244602</real>
+			<key>timeStoppedRecording</key>
+			<real>561876533.33737803</real>
+			<key>title</key>
+			<string>Debug Rat18F-Compiler</string>
+			<key>uniqueIdentifier</key>
+			<string>14658542-F08E-47B0-AD8C-62B50262FE6E</string>
+		</dict>
+		<key>1588DA52-D6A6-45D1-9638-5205C39FD614</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>1588DA52-D6A6-45D1-9638-5205C39FD614.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>S</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>Rat18F-Compiler project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Rat18F-Compiler</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>0</integer>
+			<key>signature</key>
+			<string>Debug Rat18F-Compiler</string>
+			<key>timeStartedRecording</key>
+			<real>561875090.39197195</real>
+			<key>timeStoppedRecording</key>
+			<real>561875093.94620204</real>
+			<key>title</key>
+			<string>Debug Rat18F-Compiler</string>
+			<key>uniqueIdentifier</key>
+			<string>1588DA52-D6A6-45D1-9638-5205C39FD614</string>
 		</dict>
 		<key>1BE37763-87E0-4BF0-AA02-768A80E9E63A</key>
 		<dict>
@@ -122,6 +267,93 @@
 			<key>uniqueIdentifier</key>
 			<string>435A5856-0498-4949-AA73-1D2DAD91884B</string>
 		</dict>
+		<key>4635ABE2-3ED5-4819-A550-BB41C06244FB</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>4635ABE2-3ED5-4819-A550-BB41C06244FB.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>S</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>Rat18F-Compiler project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Rat18F-Compiler</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>0</integer>
+			<key>signature</key>
+			<string>Debug Rat18F-Compiler</string>
+			<key>timeStartedRecording</key>
+			<real>561876552.84202397</real>
+			<key>timeStoppedRecording</key>
+			<real>561876558.12455702</real>
+			<key>title</key>
+			<string>Debug Rat18F-Compiler</string>
+			<key>uniqueIdentifier</key>
+			<string>4635ABE2-3ED5-4819-A550-BB41C06244FB</string>
+		</dict>
+		<key>4CBA3746-BD1E-4245-BD7A-2E3EF928E6C4</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>4CBA3746-BD1E-4245-BD7A-2E3EF928E6C4.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>S</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>Rat18F-Compiler project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Rat18F-Compiler</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>0</integer>
+			<key>signature</key>
+			<string>Debug Rat18F-Compiler</string>
+			<key>timeStartedRecording</key>
+			<real>561875117.91324794</real>
+			<key>timeStoppedRecording</key>
+			<real>561875121.54677296</real>
+			<key>title</key>
+			<string>Debug Rat18F-Compiler</string>
+			<key>uniqueIdentifier</key>
+			<string>4CBA3746-BD1E-4245-BD7A-2E3EF928E6C4</string>
+		</dict>
+		<key>5BB22D16-6C62-4A12-87B9-A6C61ED09DFA</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>5BB22D16-6C62-4A12-87B9-A6C61ED09DFA.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>S</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>Rat18F-Compiler project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Rat18F-Compiler</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>0</integer>
+			<key>signature</key>
+			<string>Debug Rat18F-Compiler</string>
+			<key>timeStartedRecording</key>
+			<real>561875744.04463303</real>
+			<key>timeStoppedRecording</key>
+			<real>561875748.25995398</real>
+			<key>title</key>
+			<string>Debug Rat18F-Compiler</string>
+			<key>uniqueIdentifier</key>
+			<string>5BB22D16-6C62-4A12-87B9-A6C61ED09DFA</string>
+		</dict>
 		<key>5CE0AA56-2165-4E31-BAFE-0E0DE6735C61</key>
 		<dict>
 			<key>className</key>
@@ -208,6 +440,35 @@
 			<string>Debug Rat18F-Compiler</string>
 			<key>uniqueIdentifier</key>
 			<string>6EE3698F-8CF9-43DC-B4A1-F96F1C3D68CC</string>
+		</dict>
+		<key>8245A926-4C5F-4A58-B6D3-0A61C43499E3</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>8245A926-4C5F-4A58-B6D3-0A61C43499E3.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>S</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>Rat18F-Compiler project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Rat18F-Compiler</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>0</integer>
+			<key>signature</key>
+			<string>Debug Rat18F-Compiler</string>
+			<key>timeStartedRecording</key>
+			<real>561875503.32010603</real>
+			<key>timeStoppedRecording</key>
+			<real>561875507.53247297</real>
+			<key>title</key>
+			<string>Debug Rat18F-Compiler</string>
+			<key>uniqueIdentifier</key>
+			<string>8245A926-4C5F-4A58-B6D3-0A61C43499E3</string>
 		</dict>
 		<key>846AF81A-D593-428C-9FC5-A911B244E067</key>
 		<dict>
@@ -325,6 +586,64 @@
 			<key>uniqueIdentifier</key>
 			<string>97AA4AD0-43C2-46FC-923B-213A3966619A</string>
 		</dict>
+		<key>9E770A57-DF62-464F-8A84-40DF8732735D</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>9E770A57-DF62-464F-8A84-40DF8732735D.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>S</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>Rat18F-Compiler project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Rat18F-Compiler</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>0</integer>
+			<key>signature</key>
+			<string>Debug Rat18F-Compiler</string>
+			<key>timeStartedRecording</key>
+			<real>561874821.74203598</real>
+			<key>timeStoppedRecording</key>
+			<real>561874826.12275302</real>
+			<key>title</key>
+			<string>Debug Rat18F-Compiler</string>
+			<key>uniqueIdentifier</key>
+			<string>9E770A57-DF62-464F-8A84-40DF8732735D</string>
+		</dict>
+		<key>A489E2AB-075E-432F-8B3A-E2A2FD8D6A7B</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>A489E2AB-075E-432F-8B3A-E2A2FD8D6A7B.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>S</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>Rat18F-Compiler project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Rat18F-Compiler</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>0</integer>
+			<key>signature</key>
+			<string>Debug Rat18F-Compiler</string>
+			<key>timeStartedRecording</key>
+			<real>561874834.39935601</real>
+			<key>timeStoppedRecording</key>
+			<real>561874838.592574</real>
+			<key>title</key>
+			<string>Debug Rat18F-Compiler</string>
+			<key>uniqueIdentifier</key>
+			<string>A489E2AB-075E-432F-8B3A-E2A2FD8D6A7B</string>
+		</dict>
 		<key>A80CB779-3565-4EFE-A843-5092FEB5FCA9</key>
 		<dict>
 			<key>className</key>
@@ -353,6 +672,35 @@
 			<string>Debug Rat18F-Compiler</string>
 			<key>uniqueIdentifier</key>
 			<string>A80CB779-3565-4EFE-A843-5092FEB5FCA9</string>
+		</dict>
+		<key>B7622D01-E707-4551-B772-4C2DFF823368</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>B7622D01-E707-4551-B772-4C2DFF823368.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>S</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>Rat18F-Compiler project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Rat18F-Compiler</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>0</integer>
+			<key>signature</key>
+			<string>Debug Rat18F-Compiler</string>
+			<key>timeStartedRecording</key>
+			<real>561875725.39583099</real>
+			<key>timeStoppedRecording</key>
+			<real>561875731.82369101</real>
+			<key>title</key>
+			<string>Debug Rat18F-Compiler</string>
+			<key>uniqueIdentifier</key>
+			<string>B7622D01-E707-4551-B772-4C2DFF823368</string>
 		</dict>
 		<key>B840FEAB-921A-4026-A5A5-7FAF2FE26853</key>
 		<dict>
@@ -441,6 +789,35 @@
 			<key>uniqueIdentifier</key>
 			<string>CA1D6A12-4F5F-4434-B2A5-DFD5B5A1C626</string>
 		</dict>
+		<key>D56D700A-3535-4B0A-94D3-B6112731AD67</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>D56D700A-3535-4B0A-94D3-B6112731AD67.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>S</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>Rat18F-Compiler project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Rat18F-Compiler</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>0</integer>
+			<key>signature</key>
+			<string>Debug Rat18F-Compiler</string>
+			<key>timeStartedRecording</key>
+			<real>561874952.45743704</real>
+			<key>timeStoppedRecording</key>
+			<real>561874955.91591501</real>
+			<key>title</key>
+			<string>Debug Rat18F-Compiler</string>
+			<key>uniqueIdentifier</key>
+			<string>D56D700A-3535-4B0A-94D3-B6112731AD67</string>
+		</dict>
 		<key>D5E9C345-2054-4860-9BCE-F2D1F8973915</key>
 		<dict>
 			<key>className</key>
@@ -499,6 +876,35 @@
 			<key>uniqueIdentifier</key>
 			<string>DA9A05B5-0996-4F13-8C31-CEF74449B5B9</string>
 		</dict>
+		<key>F42DFC9D-6162-488B-A165-3EC63E2F796C</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>F42DFC9D-6162-488B-A165-3EC63E2F796C.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>S</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>Rat18F-Compiler project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Rat18F-Compiler</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>0</integer>
+			<key>signature</key>
+			<string>Debug Rat18F-Compiler</string>
+			<key>timeStartedRecording</key>
+			<real>561875011.17295396</real>
+			<key>timeStoppedRecording</key>
+			<real>561875017.69936204</real>
+			<key>title</key>
+			<string>Debug Rat18F-Compiler</string>
+			<key>uniqueIdentifier</key>
+			<string>F42DFC9D-6162-488B-A165-3EC63E2F796C</string>
+		</dict>
 		<key>F4A89D1A-17EC-4CFF-A85F-F468219D37DC</key>
 		<dict>
 			<key>className</key>
@@ -556,6 +962,35 @@
 			<string>Debug Rat18F-Compiler</string>
 			<key>uniqueIdentifier</key>
 			<string>F7775908-6494-4615-878A-D8B387F0EB3B</string>
+		</dict>
+		<key>F85FE6DB-869B-4296-9974-027C53250D2F</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>F85FE6DB-869B-4296-9974-027C53250D2F.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>S</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>Rat18F-Compiler project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Rat18F-Compiler</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>0</integer>
+			<key>signature</key>
+			<string>Debug Rat18F-Compiler</string>
+			<key>timeStartedRecording</key>
+			<real>561875823.41694295</real>
+			<key>timeStoppedRecording</key>
+			<real>561875828.71794701</real>
+			<key>title</key>
+			<string>Debug Rat18F-Compiler</string>
+			<key>uniqueIdentifier</key>
+			<string>F85FE6DB-869B-4296-9974-027C53250D2F</string>
 		</dict>
 	</dict>
 </dict>

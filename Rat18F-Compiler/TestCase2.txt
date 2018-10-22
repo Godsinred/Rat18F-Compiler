@@ -1,3 +1,3 @@
 [* this is comment for this sample code which
 converts Fahrenheit into Celcius *]
-function convert1x (fahr : int)
+function convert1x (fahrtest : int, testing : boolean)

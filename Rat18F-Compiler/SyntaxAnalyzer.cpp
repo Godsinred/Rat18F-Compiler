@@ -8,15 +8,17 @@
 
 using namespace std;
 
-void Rat18F(bool printSwitch, ifstream &infile)
+bool printSwitch = true;
+
+void Rat18F(ifstream &infile)
 {
     if (printSwitch)
     {
         cout << "R1. <Rat18F>  ::=   <Opt Function Definitions>   $$  <Opt Declaration List>  <Statement List>  $$" << endl;
     }
-    tuple<string, string> token = lexer(infile);
+    tuple<string, string> token = make_tuple("N/A", "N/A");
     cout << get<1>(token) << endl;
-    OptFunctionDefinitions(printSwitch, infile, token);
+    OptFunctionDefinitions(infile, token);
 //    $$
 //    OptDeclarationList();
 //    StatementList();
@@ -24,37 +26,38 @@ void Rat18F(bool printSwitch, ifstream &infile)
     cout << "SA is correct.\n";
 }
 
-void OptFunctionDefinitions(bool printSwitch, ifstream &infile, tuple<string, string> &token)
+void OptFunctionDefinitions(ifstream &infile, tuple<string, string> &token)
 {
     if (printSwitch)
     {
         cout << "R2. <Opt Function Definitions> ::= <Function Definitions>     |  <Empty>" << endl;
     }
-    FunctionDefinitions(printSwitch, infile, token);
+    FunctionDefinitions(infile, token);
 }
 
-void FunctionDefinitions(bool printSwitch, ifstream &infile, tuple<string, string> &token)
+void FunctionDefinitions(ifstream &infile, tuple<string, string> &token)
 {
     if (printSwitch)
     {
         cout << "R3. <Function Definitions>  ::= <Function> <Function Definitions End>" << endl;
     }
-    Function(printSwitch, infile, token);
+    Function(infile, token);
     //FunctionDefinitionsEnd(); <==========================================================================================
 }
 
-void Function(bool printSwitch, ifstream &infile, tuple<string, string> &token)
+void Function(ifstream &infile, tuple<string, string> &token)
 {
     if (printSwitch)
     {
         cout << "R5. <Function> ::= function  <Identifier>   ( <Opt Parameter List> )  <Opt Declaration List>  <Body>" << endl;
     }
-    
+    token = lexer(infile);
+    cout << get<1>(token) << endl;
     if(get<1>(token) == "function")
     {
         token = lexer(infile);
         cout << get<1>(token) << endl;
-        if(!Identifier(printSwitch, token))
+        if(!Identifier(token))
         {
             cout << "Expected: Identifier\nReceived: " << get<1>(token) << endl;
             exit(1);
@@ -70,7 +73,7 @@ void Function(bool printSwitch, ifstream &infile, tuple<string, string> &token)
         
         token = lexer(infile);
         cout << get<1>(token) << endl;
-        OptParameterList(printSwitch, infile, token);
+        OptParameterList(infile, token);
         
         cout << get<1>(token) << endl;
         if(get<1>(token) != ")")
@@ -83,7 +86,7 @@ void Function(bool printSwitch, ifstream &infile, tuple<string, string> &token)
     }
 }
 
-bool Identifier(bool printSwitch, const tuple<string, string> &token)
+bool Identifier(const tuple<string, string> &token)
 {
     if (printSwitch)
     {
@@ -97,44 +100,47 @@ bool Identifier(bool printSwitch, const tuple<string, string> &token)
     return true;
 }
 
-void OptParameterList(bool printSwitch, ifstream &infile, tuple<string, string> &token)
+void OptParameterList(ifstream &infile, tuple<string, string> &token)
 {
     if (printSwitch)
     {
         cout << "R6. <Opt Parameter List> ::=  <Parameter List>    |     <Empty>" << endl;
     }
-    ParameterList(printSwitch, infile, token);
+    ParameterList(infile, token);
 }
 
-void ParameterList(bool printSwitch, ifstream &infile, tuple<string, string> &token)
+void ParameterList(ifstream &infile, tuple<string, string> &token)
 {
     if (printSwitch)
     {
         cout << "R7. <Parameter List>  ::=  <Parameter>  <Parameter List End>" << endl;
     }
-    Parameter(printSwitch, infile, token);
-    ParameterListEnd(printSwitch, infile, token);
+    if(Parameter(infile, token))
+    {
+        ParameterListEnd(infile, token);
+    }
 }
 
-void Parameter(bool printSwitch, ifstream &infile, tuple<string, string> &token)
+bool Parameter(ifstream &infile, tuple<string, string> &token)
 {
     if (printSwitch)
     {
         cout << "R9. <Parameter> ::=  <IDs > : <Qualifier>" << endl;
     }
-    if(IDs(printSwitch, infile, token))
+    if(IDs(infile, token))
     {
         if(get<1>(token) != ":")
         {
             cout << "Expected: :\nReceived: " << get<1>(token) << endl;
             exit(1);
         }
-        Qualifier(printSwitch, infile, token);
+        Qualifier(infile, token);
+        return true;
     }
-    
+    return false;
 }
 
-void ParameterListEnd(bool printSwitch, ifstream &infile, tuple<string, string> &token)
+void ParameterListEnd(ifstream &infile, tuple<string, string> &token)
 {
     if (printSwitch)
     {
@@ -144,26 +150,26 @@ void ParameterListEnd(bool printSwitch, ifstream &infile, tuple<string, string> 
     cout << get<1>(token) << endl;
     if(get<1>(token) == ",")
     {
-        ParameterList(printSwitch, infile, token);
+        ParameterList(infile, token);
     }
     
 }
 
-bool IDs(bool printSwitch, ifstream &infile, tuple<string, string> &token)
+bool IDs(ifstream &infile, tuple<string, string> &token)
 {
     if (printSwitch)
     {
         cout << "R16. <IDs> ::=     <Identifier>  <IDs End>" << endl;
     }
-    if(Identifier(printSwitch, token))
+    if(Identifier(token))
     {
-        IDsEnd(printSwitch, infile, token);
+        IDsEnd(infile, token);
         return true;
     }
     return false;
 }
 
-void IDsEnd(bool printSwitch, ifstream &infile, tuple<string, string> &token)
+void IDsEnd(ifstream &infile, tuple<string, string> &token)
 {
     if (printSwitch)
     {
@@ -175,7 +181,7 @@ void IDsEnd(bool printSwitch, ifstream &infile, tuple<string, string> &token)
     {
         token = lexer(infile);
         cout << get<1>(token) << endl;
-        if(!IDs(printSwitch, infile, token))
+        if(!IDs(infile, token))
         {
             cout << "Expected: Identifier\nReceived: " << get<1>(token) << endl;
             exit(1);
@@ -183,7 +189,7 @@ void IDsEnd(bool printSwitch, ifstream &infile, tuple<string, string> &token)
     }
 }
 
-void Qualifier(bool printSwitch, ifstream &infile, tuple<string, string> &token)
+void Qualifier(ifstream &infile, tuple<string, string> &token)
 {
     if (printSwitch)
     {
