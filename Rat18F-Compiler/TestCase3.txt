@@ -1,9 +1,0 @@
-while (true)
-{
-int a = 0;
-a=2+3;
-    if(true);
-{[**]
-int ifelem = 1;
-}
-}

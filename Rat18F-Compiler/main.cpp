@@ -81,30 +81,22 @@ int main()
     // reads one character at a time till end of file and outputs token with lexeme
     if (inFile.is_open())
     {
-        char c;
+        // controls all the functions if they should print their grammar
+        bool printSwitch = true;
         
-
         //starts building lexemes
         while (inFile)
         {
-            // get the first character from file
-            inFile.get(c);
-            
-            // reads all the leading whitespace of the file to the first non-whitespace
-            while (inFile && (isspace(c) || c == '\n'))
+            // uncomment this for LA testing
+            /*
+            tuple<string, string> token = lexer(inFile);
+            if(get<0>(token) != "")
             {
-                inFile.get(c);
+                // token / lexeme
+                outfile << left << setw(20) << get<0>(token) << setw(20) << get<1>(token) << endl;
             }
-            if (!inFile.eof())
-            {
-                inFile.putback(c);
-                tuple<string, string> token = lexer(inFile);
-                if(get<0>(token) != "")
-                {
-                    outfile << left << setw(20) << get<1>(token) << setw(20) << get<0>(token) << endl;
-                }
-                // function call here should be SA now that makes calls to the lexer to get a token
-            }
+            */
+            Rat18F(printSwitch, inFile);
         }
         cout << endl << "Lexicon Analyzer Complete" << endl;
     }

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>logFormatVersion</key>
+	<integer>9</integer>
+	<key>logs</key>
+	<dict>
+		<key>41D6A60E-C877-4F03-8F86-0CF3CB11B594</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.target.product-type.tool</string>
+			<key>fileName</key>
+			<string>41D6A60E-C877-4F03-8F86-0CF3CB11B594.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>W</string>
+			<key>signature</key>
+			<string>Rat18F-Compiler-bhbpcjqoiabqljffawgyhkruiofh</string>
+			<key>timeStartedRecording</key>
+			<real>561860626.25320101</real>
+			<key>timeStoppedRecording</key>
+			<real>561860626.95093501</real>
+			<key>title</key>
+			<string>Build target Rat18F-Compiler</string>
+			<key>uniqueIdentifier</key>
+			<string>41D6A60E-C877-4F03-8F86-0CF3CB11B594</string>
+		</dict>
+		<key>9EFBD919-C01D-4B83-B823-ADA6D3DEEB69</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.target.product-type.tool</string>
+			<key>fileName</key>
+			<string>9EFBD919-C01D-4B83-B823-ADA6D3DEEB69.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>W</string>
+			<key>signature</key>
+			<string>Rat18F-Compiler-gbewpddrycoyeicvihnwfjgttkkg</string>
+			<key>timeStartedRecording</key>
+			<real>561854263.18951797</real>
+			<key>timeStoppedRecording</key>
+			<real>561854264.15587199</real>
+			<key>title</key>
+			<string>Build target Rat18F-Compiler</string>
+			<key>uniqueIdentifier</key>
+			<string>9EFBD919-C01D-4B83-B823-ADA6D3DEEB69</string>
+		</dict>
+	</dict>
+	<key>preserveOldLogs</key>
+	<true/>
+</dict>
+</plist>
