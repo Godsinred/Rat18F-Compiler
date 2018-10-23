@@ -58,6 +58,14 @@ bool Compound(ifstream &infile, tuple<string, string> &token);
 
 bool Assign(ifstream &infile, tuple<string, string> &token);
 
+bool If(ifstream &infile, tuple<string, string> &token);
+
+void Condition(ifstream &infile, tuple<string, string> &token);
+
+void IfEnd(ifstream &infile, tuple<string, string> &token);
+
+void Relop(ifstream &infile, tuple<string, string> &token);
+
 void Expression(ifstream &infile, tuple<string, string> &token);
 
 void Term(ifstream &infile, tuple<string, string> &token);
@@ -71,5 +79,7 @@ void PrimaryEnd(ifstream &infile, tuple<string, string> &token);
 bool TermPrime(ifstream &infile, tuple<string, string> &token);
 
 bool ExpressionPrime(ifstream &infile, tuple<string, string> &token);
+
+
 
 #endif /* SyntaxAnalyzer_h */
