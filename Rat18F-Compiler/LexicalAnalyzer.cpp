@@ -1,10 +1,11 @@
-//
-//  LexicalAnalyzer.cpp
-//  Rat18F-Compiler
-//
-//  Created by Jonathan Ishii on 10/21/18.
-//  Copyright © 2018 Jonathan Ishii. All rights reserved.
-//
+/*
+     Jonathan Ishii
+     Matthew Mikulka
+     
+     CPSC 323 - Section 1
+     
+     Assignment 2
+ */
 
 #include "LexicalAnalyzer.h"
 
@@ -93,11 +94,12 @@ bool is_integer(const string &lexeme)
 // Checks to see if the lexeme is a separator
 bool isSeparator(const string &lexeme, string &nextLexeme, ifstream &inFile)
 {
-    string separators[7] = {"(", ")", ",", "{",
-        "}", ";", "$$"}; // list of all separators in the language
+    const int SIZE = 8;
+    string separators[SIZE] = {"(", ")", ",", "{",
+        "}", ";", ":", "$$"}; // list of all separators in the language
 
     // checks to see if it is a separator
-    for (int i = 0; i < 7; ++i)
+    for (int i = 0; i < SIZE; ++i)
     {
         if (separators[i] == nextLexeme)
         {
@@ -139,10 +141,11 @@ bool isSeparator(const string &lexeme, string &nextLexeme, ifstream &inFile)
 //checks to see if the lexeme is an operator
 bool isOperator(const string &lexeme, string &nextLexeme, ifstream &inFile)
 {
+    const int SIZE = 6, SIZE_FINAL = 4;
     bool isOperator = false;
-    string singleOperators[6] = {"+", ">",
+    string singleOperators[SIZE] = {"+", ">",
         "<", "-", "*", "/"};    //Array of single character operators
-    for (int i = 0; i < 6; ++i)
+    for (int i = 0; i < SIZE; ++i)
     {
         if (singleOperators[i] == nextLexeme)
             return true;
@@ -154,8 +157,8 @@ bool isOperator(const string &lexeme, string &nextLexeme, ifstream &inFile)
             char c;
             inFile.get(c);
             nextLexeme += c;
-            string finalOperators[4] = {"^=", "==", "=>", "=<"};
-            for (int j = 0; j < 4; ++j)
+            string finalOperators[SIZE_FINAL] = {"^=", "==", "=>", "=<"};
+            for (int j = 0; j < SIZE_FINAL; ++j)
             {
                 if(nextLexeme == finalOperators[j])
                 {
@@ -255,7 +258,12 @@ tuple<string, string> lexer(ifstream &inFile)
     tuple<string, string> token = actualLexer(inFile);
     if (printswitch)
     {
-        cout << left << setw(20) << "Token: " << get<0>(token) << setw(20) << "Lexeme: " << get<1>(token) << endl;
+        cout << left << "Token: " << setw(20) << get<0>(token) << "Lexeme: " << setw(20) << get<1>(token) << endl;
+        if(get<0>(token) == "Unknown")
+        {
+            cout << "ERROR: Unknown token.\n";
+            exit(1);
+        }
     }
     return token;
 }

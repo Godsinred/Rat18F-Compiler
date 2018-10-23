@@ -33,6 +33,7 @@
 		3F029457217D445100454503 /* LexicalAnalyzer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LexicalAnalyzer.h; sourceTree = "<group>"; };
 		3F02945A217D7DB100454503 /* TestCase2.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestCase2.txt; sourceTree = "<group>"; };
 		3F2E022021605925007BF43E /* Rat18F-Compiler */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Rat18F-Compiler"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F581F93217E88A700C3CB1E /* TestCase3.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestCase3.txt; sourceTree = "<group>"; };
 		8B53D9A2216AEDA2006F6DAB /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -68,6 +69,7 @@
 			children = (
 				3F029450217D372400454503 /* TestCase1.txt */,
 				3F02945A217D7DB100454503 /* TestCase2.txt */,
+				3F581F93217E88A700C3CB1E /* TestCase3.txt */,
 				3F02944F217D371B00454503 /* AssignmentDocs */,
 				8B53D9A2216AEDA2006F6DAB /* main.cpp */,
 				3F029455217D415400454503 /* SyntaxAnalyzer.h */,

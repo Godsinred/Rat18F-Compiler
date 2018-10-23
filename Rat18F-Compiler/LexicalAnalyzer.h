@@ -1,10 +1,11 @@
-//
-//  LexicalAnalyzer.hpp
-//  Rat18F-Compiler
-//
-//  Created by Jonathan Ishii on 10/21/18.
-//  Copyright © 2018 Jonathan Ishii. All rights reserved.
-//
+/*
+     Jonathan Ishii
+     Matthew Mikulka
+     
+     CPSC 323 - Section 1
+ 
+     Assignment 2
+ */
 
 #ifndef LexicalAnalyzer_hpp
 #define LexicalAnalyzer_hpp

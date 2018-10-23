@@ -1,3 +1,6 @@
 [* this is comment for this sample code which
 converts Fahrenheit into Celcius *]
-function convert1x (fahrtest : int, testing : boolean)
+function convert1x (fahrtest : int , test:real)
+{
+a=3;
+}
