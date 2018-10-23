@@ -1,16 +1,21 @@
 [* this is comment for this sample code which
 converts Fahrenheit into Celcius *]
-function convert1x (fahr : int)
+function convert1x (fahrtest : int , test:real)
 {
-return 5 * (fahr -32) / 9;
+a=1;
+b=1+2;
+c=1+2-(-3);
+d=1+2-(-3)*4;
+e=1+2-(-3)*4/5;
+}
+function secondFunction (paramOne : int , paramTwo:boolean)
+{
+a=1;
+b=1+2;
+c=1+2-(-3);
+d=1+2-(-3)*4;
+e=1+2-(-3)*4/5;
 }
 $$
-int low, high, step; [* declarations *]
-get (low, high, step);
-while (low &lt; high )
-{ put (low);
-put (convert1x (low));
-low = low + step;
-}
-whileend
+
 $$

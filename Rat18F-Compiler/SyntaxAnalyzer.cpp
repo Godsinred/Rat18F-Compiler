@@ -27,11 +27,28 @@ void Rat18F(ifstream &infile)
     {
         cout << "R1. <Rat18F>  ::=   <Opt Function Definitions>   $$  <Opt Declaration List>  <Statement List>  $$" << endl;
     }
+    
     OptFunctionDefinitions(infile, token);
-//    $$
-//    OptDeclarationList();
-//    StatementList();
-//    $$
+    
+    
+    if(get<1>(token) != "$$")
+    {
+        cout << "\nERROR: NOT VALID SYNTAX.\n";
+        cout << "Expected: $$\nReceived: " << get<1>(token) << endl;
+        exit(1);
+    }
+
+//    OptDeclarationList(); ==========================================================================================
+//    StatementList(); =========================================================================================================
+
+    token = lexer(infile);
+    if(get<1>(token) != "$$")
+    {
+        cout << "\nERROR: NOT VALID SYNTAX.\n";
+        cout << "Expected: $$\nReceived: " << get<1>(token) << endl;
+        exit(1);
+    }
+    
     cout << "\nSA is correct.\n";
 }
 
@@ -50,11 +67,23 @@ void FunctionDefinitions(ifstream &infile, tuple<string, string> &token)
     {
         cout << "R3. <Function Definitions>  ::= <Function> <Function Definitions End>" << endl;
     }
-    Function(infile, token);
-    //FunctionDefinitionsEnd(); <==========================================================================================
+    if(Function(infile, token))
+    {
+        token = lexer(infile);
+        FunctionDefinitionsEnd(infile, token);
+    }
 }
 
-void Function(ifstream &infile, tuple<string, string> &token)
+void FunctionDefinitionsEnd(ifstream &infile, tuple<string, string> &token)
+{
+    if (printSwitch)
+    {
+        cout << "R4.<Function Definitions End> ::= <Function Definitions>  | ε" << endl;
+    }
+    FunctionDefinitions(infile, token);
+}
+
+bool Function(ifstream &infile, tuple<string, string> &token)
 {
     if (printSwitch)
     {
@@ -91,7 +120,10 @@ void Function(ifstream &infile, tuple<string, string> &token)
         OptDeclarationList(infile, token);
         
         Body(infile, token);
+        
+        return true;
     }
+    return false;
 }
 
 bool Identifier(const tuple<string, string> &token)
@@ -305,7 +337,6 @@ void Body(ifstream &infile, tuple<string, string> &token)
         exit(1);
     }
     
-    token = lexer(infile);
     if(get<1>(token) != "}")
     {
         cout << "\nERROR: NOT VALID SYNTAX.\n";
@@ -322,10 +353,19 @@ bool StatementList(ifstream &infile, tuple<string, string> &token)
     }
     if(Statement(infile, token))
     {
-        // <Statement List End> ============================================================================
+        StatementListEnd(infile, token);
         return true;
     }
     return false;
+}
+
+void StatementListEnd(ifstream &infile, tuple<string, string> &token)
+{
+    if (printSwitch)
+    {
+        cout << "R19. <Statement List End> ::= <Statement List> | ε" << endl;
+    }
+    StatementList(infile, token);
 }
 
 bool Statement(ifstream &infile, tuple<string, string> &token)
@@ -336,7 +376,7 @@ bool Statement(ifstream &infile, tuple<string, string> &token)
     }
 
     token = lexer(infile);
-    if(Compound(infile, token))
+    if(Compound(infile, token)) // THIS DOES NOT WORK!!!!!!!!!!!!!!!!!!!!! <<<<<=======================================
     {
         return true;
     }
@@ -400,7 +440,7 @@ bool Assign(ifstream &infile, tuple<string, string> &token)
     
         Expression(infile, token);
         
-        token = lexer(infile);
+        
         if(get<1>(token) != ";")
         {
             cout << "\nERROR: NOT VALID SYNTAX.\n";
@@ -420,7 +460,7 @@ void Expression(ifstream &infile, tuple<string, string> &token)
     }
     
     Term(infile, token);
-    //<Expression’>============================================================================
+    ExpressionPrime(infile, token);
 }
 
 void Term(ifstream &infile, tuple<string, string> &token)
@@ -430,8 +470,7 @@ void Term(ifstream &infile, tuple<string, string> &token)
         cout << "R34. <Term>    ::=    <Factor>  <Term’>" << endl;
     }
     Factor(infile, token);
-    //<Term’>============================================================================
-    
+    TermPrime(infile, token);
 }
 
 void Factor(ifstream &infile, tuple<string, string> &token)
@@ -443,6 +482,7 @@ void Factor(ifstream &infile, tuple<string, string> &token)
     token = lexer(infile);
     if (get<1>(token) == "-")
     {
+        token = lexer(infile);
         Primary(infile, token);
     }
     else
@@ -536,9 +576,54 @@ void PrimaryEnd(ifstream &infile, tuple<string, string> &token)
     }
 }
 
-//R4.<Function Definitions End> ::= <Function Definitions>  | ε
+bool TermPrime(ifstream &infile, tuple<string, string> &token)
+{
+    if (printSwitch)
+    {
+        cout << "R35.<Term’> ::= * <Factor> <Term’>  | / <Factor> <Term’> | ε" << endl;
+    }
+    
+    token = lexer(infile);
+    if (get<1>(token) == "*")
+    {
+        Factor(infile, token);
+        TermPrime(infile, token);
+        return true;
+    }
+    else if (get<1>(token) == "/")
+    {
+        Factor(infile, token);
+        TermPrime(infile, token);
+        return true;
+    }
+    return false;
+}
+
+bool ExpressionPrime(ifstream &infile, tuple<string, string> &token)
+{
+    if (printSwitch)
+    {
+        cout << "R33. <Expression’> ::= + <Term> <Expression’>   |  - <Term>  <Expression’>   | ε" << endl;
+    }
+
+    if (get<1>(token) == "+")
+    {
+        Term(infile, token);
+        ExpressionPrime(infile, token);
+        return true;
+    }
+    else if (get<1>(token) == "-")
+    {
+        Term(infile, token);
+        ExpressionPrime(infile, token);
+        return true;
+    }
+    return false;
+}
+
+
 //
-//R19. <Statement List End> ::= <Statement List> | ε
+//
 //
 //
 //R23. <If> ::=     if  ( <Condition>  ) <Statement>   <if End>
@@ -551,9 +636,9 @@ void PrimaryEnd(ifstream &infile, tuple<string, string> &token)
 //R30. <Condition> ::=     <Expression>  <Relop>   <Expression>
 //R31. <Relop> ::=        ==   |   ^=    |   >     |   <    |   =>    |   =<
 //
-//R33. <Expression’> ::= + <Term> <Expression’>   |  - <Term>  <Expression’>   | ε
 //
-//R35.<Term’> ::= * <Factor> <Term’>  | / <Factor> <Term’> | ε
+//
+//
 //
 //
 //

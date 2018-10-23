@@ -18,7 +18,9 @@ void OptFunctionDefinitions(ifstream &infile, tuple<string, string> &token);
 
 void FunctionDefinitions(ifstream &infile, tuple<string, string> &token);
 
-void Function(ifstream &infile, tuple<string, string> &token);
+void FunctionDefinitionsEnd(ifstream &infile, tuple<string, string> &token);
+
+bool Function(ifstream &infile, tuple<string, string> &token);
 
 bool Identifier(const tuple<string, string> &token);
 
@@ -48,6 +50,8 @@ void Body(ifstream &infile, tuple<string, string> &token);
 
 bool StatementList(ifstream &infile, tuple<string, string> &token);
 
+void StatementListEnd(ifstream &infile, tuple<string, string> &token);
+
 bool Statement(ifstream &infile, tuple<string, string> &token);
 
 bool Compound(ifstream &infile, tuple<string, string> &token);
@@ -63,5 +67,9 @@ void Factor(ifstream &infile, tuple<string, string> &token);
 bool Primary(ifstream &infile, tuple<string, string> &token);
 
 void PrimaryEnd(ifstream &infile, tuple<string, string> &token);
+
+bool TermPrime(ifstream &infile, tuple<string, string> &token);
+
+bool ExpressionPrime(ifstream &infile, tuple<string, string> &token);
 
 #endif /* SyntaxAnalyzer_h */
