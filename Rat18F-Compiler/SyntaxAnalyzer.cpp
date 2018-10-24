@@ -137,8 +137,10 @@ bool Identifier(const tuple<string, string> &token)
     
     if(get<0>(token) != "Identifier")
     {
+        cout << "Not Identifier. Is: " << get<0>(token) << "Lexeme: " << get<1>(token) <<endl;
         return false;
     }
+    cout << "Identifier found." << endl;
     return true;
 }
 
@@ -383,7 +385,7 @@ bool Statement(ifstream &infile, tuple<string, string> &token)
     {
         cout << "R20. <Statement> ::=   <Compound>  |  <Assign> |   <If>  |  <Return>   | <Print>   |   <Scan>   |  <While>" << endl;
     }
-
+    cout << left << "STATEMENT PRINT TOKEN VALUES. Token: " << setw(20) << get<0>(token) << "Lexeme: " << setw(20) << get<1>(token) << endl;
     if(Compound(infile, token)) // THIS DOES NOT WORK!!!!!!!!!!!!!!!!!!!!! <<<<<=======================================
     {
         return true;
@@ -483,6 +485,7 @@ bool If(ifstream &infile, tuple<string, string> &token)
             cout << "Expected: }\nReceived: " << get<1>(token) << endl;
             exit(1);
         }
+        cout << "Matched (\n";
         
         token = lexer(infile);
         Condition(infile, token);
@@ -493,8 +496,9 @@ bool If(ifstream &infile, tuple<string, string> &token)
             cout << "Expected: ;\nReceived: " << get<1>(token) << endl;
             exit(1);
         }
+        cout << "Matched )\n";
         
-        lexer(infile);
+        token = lexer(infile);
         Statement(infile, token);
         
         IfEnd(infile, token);
@@ -566,7 +570,7 @@ void Relop(ifstream &infile, tuple<string, string> &token)
     }
     
     string temp = get<1>(token);
-    if(temp != "==" || temp != "^=" || temp != ">" || temp != "<" || temp != "=>" || temp != "=<")
+    if(temp != "==" && temp != "^=" && temp != ">" && temp != "<" && temp != "=>" && temp != "=<")
     {
         cout << "\nERROR: NOT VALID SYNTAX.\n";
         cout << "Expected: <Relop>\nReceived: " << get<1>(token) << endl;
@@ -714,7 +718,6 @@ void PrimaryEnd(ifstream &infile, tuple<string, string> &token)
 
 bool TermPrime(ifstream &infile, tuple<string, string> &token)
 {
-    //token = lexer(infile);
     if (printSwitch)
     {
         cout << "R35.<Term’> ::= * <Factor> <Term’>  | / <Factor> <Term’> | ε" << endl;

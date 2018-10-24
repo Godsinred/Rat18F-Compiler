@@ -258,7 +258,7 @@ tuple<string, string> lexer(ifstream &inFile)
     tuple<string, string> token = actualLexer(inFile);
     if (printswitch)
     {
-        cout << left << "Token: " << setw(20) << get<0>(token) << "Lexeme: " << setw(20) << get<1>(token) << endl;
+        cout << endl << left << "Token: " << setw(20) << get<0>(token) << "Lexeme: " << setw(20) << get<1>(token) << endl;
         if(get<0>(token) == "Unknown")
         {
             cout << "ERROR: Unknown token.\n";
