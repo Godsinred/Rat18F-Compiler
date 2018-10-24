@@ -60,6 +60,16 @@ bool Assign(ifstream &infile, tuple<string, string> &token);
 
 bool If(ifstream &infile, tuple<string, string> &token);
 
+bool Return(ifstream &infile, tuple<string, string> &token);
+
+bool ReturnEnd(ifstream &infile, tuple<string, string> &token);
+
+bool Print(ifstream &infile, tuple<string, string> &token);
+
+bool Scan(ifstream &infile, tuple<string, string> &token);
+
+bool While(ifstream &infile, tuple<string, string> &token);
+
 void Condition(ifstream &infile, tuple<string, string> &token);
 
 void IfEnd(ifstream &infile, tuple<string, string> &token);

@@ -14,5 +14,5 @@ if(A > B)
 C = D; ifend
 }
 $$
-
+test = 1;
 $$

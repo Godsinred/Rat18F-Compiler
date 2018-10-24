@@ -38,10 +38,10 @@ void Rat18F(ifstream &infile)
         exit(1);
     }
     token = lexer(infile);
-//
-//    OptDeclarationList(infile, token);
-//    StatementList(infile, token);
-
+    
+    OptDeclarationList(infile, token);
+    
+    StatementList(infile, token);
     
     if(get<1>(token) != "$$")
     {
@@ -50,7 +50,7 @@ void Rat18F(ifstream &infile)
         exit(1);
     }
     
-    cout << "\nSA is correct.\n";
+    cout << "\nSyntax Analyzer is correct.\n";
 }
 
 void OptFunctionDefinitions(ifstream &infile, tuple<string, string> &token)
@@ -398,11 +398,23 @@ bool Statement(ifstream &infile, tuple<string, string> &token)
     {
         return true;
     }
-    
-    // <Return> ============================================================================
-    // <Scan> ============================================================================
-    // <While> ============================================================================
-    
+    else if (Return(infile, token))
+    {
+        return true;
+    }
+    else if (Print(infile, token))
+    {
+        return true;
+    }
+    else if (Scan(infile, token))
+    {
+        return true;
+    }
+    else if (While(infile, token))
+    {
+        return true;
+    }
+
     return false;
 }
 
@@ -456,7 +468,6 @@ bool Assign(ifstream &infile, tuple<string, string> &token)
         token = lexer(infile);
         Expression(infile, token);
         
-        
         if(get<1>(token) != ";")
         {
             cout << "\nERROR: NOT VALID SYNTAX.\n";
@@ -499,9 +510,189 @@ bool If(ifstream &infile, tuple<string, string> &token)
         cout << "Matched )\n";
         
         token = lexer(infile);
-        Statement(infile, token);
+        if(!Statement(infile, token))
+        {
+            cout << "\nERROR: NOT VALID SYNTAX.\n";
+            cout << "Expected: <Statement>\nReceived: " << get<1>(token) << endl;
+            exit(1);
+        }
         
         IfEnd(infile, token);
+        
+        return true;
+    }
+    return false;
+}
+
+bool Return(ifstream &infile, tuple<string, string> &token)
+{
+    if (printSwitch)
+    {
+        cout << "R25. <Return> ::=  return <Return End>" << endl;
+    }
+    
+    if(get<1>(token) == "return")
+    {
+        token = lexer(infile);
+        ReturnEnd(infile, token);
+        return true;
+    }
+    return false;
+}
+
+bool ReturnEnd(ifstream &infile, tuple<string, string> &token)
+{
+    if (printSwitch)
+    {
+        cout << "R26. <Return End> ::= ; |  <Expression> ;" << endl;
+    }
+    if (get<1>(token) == ";")
+    {
+        cout << "Matched ;\n";
+        token = lexer(infile);
+        return true;
+    }
+    
+    Expression(infile, token);
+    
+    if (get<1>(token) != ";")
+    {
+        cout << "\nERROR: NOT VALID SYNTAX.\n";
+        cout << "Expected: ;\nReceived: " << get<1>(token) << endl;
+        exit(1);
+    }
+    cout << "Matched ;\n";
+    token = lexer(infile);
+    return true;
+}
+
+bool Print(ifstream &infile, tuple<string, string> &token)
+{
+    if (printSwitch)
+    {
+        cout << "R27. <Print> ::=    put ( <Expression>);" << endl;
+    }
+    if (get<1>(token) == "put")
+    {
+        cout << "Matched put\n";
+    
+        token = lexer(infile);
+        if (get<1>(token) != "(")
+        {
+            cout << "\nERROR: NOT VALID SYNTAX.\n";
+            cout << "Expected: (\nReceived: " << get<1>(token) << endl;
+            exit(1);
+        }
+        
+        token = lexer(infile);
+        Expression(infile, token);
+        
+        if (get<1>(token) != ")")
+        {
+            cout << "\nERROR: NOT VALID SYNTAX.\n";
+            cout << "Expected: )\nReceived: " << get<1>(token) << endl;
+            exit(1);
+        }
+        token = lexer(infile);
+        
+        if (get<1>(token) != ";")
+        {
+            cout << "\nERROR: NOT VALID SYNTAX.\n";
+            cout << "Expected: ;\nReceived: " << get<1>(token) << endl;
+            exit(1);
+        }
+        token = lexer(infile);
+        return true;
+    }
+    return false;
+}
+
+bool Scan(ifstream &infile, tuple<string, string> &token)
+{
+    if (printSwitch)
+    {
+        cout << "R28. <Scan> ::=    get ( <IDs> );" << endl;
+    }
+    
+    if (get<1>(token) == "get")
+    {
+        cout << "Matched get\n";
+        
+        token = lexer(infile);
+        if (get<1>(token) != "(")
+        {
+            cout << "\nERROR: NOT VALID SYNTAX.\n";
+            cout << "Expected: (\nReceived: " << get<1>(token) << endl;
+            exit(1);
+        }
+        
+        token = lexer(infile);
+        IDs(infile, token);
+        
+        if (get<1>(token) != ")")
+        {
+            cout << "\nERROR: NOT VALID SYNTAX.\n";
+            cout << "Expected: )\nReceived: " << get<1>(token) << endl;
+            exit(1);
+        }
+        
+        token = lexer(infile);
+        if (get<1>(token) != ";")
+        {
+            cout << "\nERROR: NOT VALID SYNTAX.\n";
+            cout << "Expected: ;\nReceived: " << get<1>(token) << endl;
+            exit(1);
+        }
+        token = lexer(infile);
+        return true;
+    }
+    return false;
+}
+
+bool While(ifstream &infile, tuple<string, string> &token)
+{
+    if (printSwitch)
+    {
+        cout << "R29. <While> ::=  while ( <Condition>  )  <Statement> whileend" << endl;
+    }
+    
+    if (get<1>(token) == "while")
+    {
+        cout << "Matched while\n";
+        
+        token = lexer(infile);
+        if (get<1>(token) != "(")
+        {
+            cout << "\nERROR: NOT VALID SYNTAX.\n";
+            cout << "Expected: (\nReceived: " << get<1>(token) << endl;
+            exit(1);
+        }
+        
+        token = lexer(infile);
+        Condition(infile, token);
+        
+        if (get<1>(token) != ")")
+        {
+            cout << "\nERROR: NOT VALID SYNTAX.\n";
+            cout << "Expected: )\nReceived: " << get<1>(token) << endl;
+            exit(1);
+        }
+        
+        token = lexer(infile);
+        if(!Statement(infile, token))
+        {
+            cout << "\nERROR: NOT VALID SYNTAX.\n";
+            cout << "Expected: <Statement>\nReceived: " << get<1>(token) << endl;
+            exit(1);
+        }
+        
+        if (get<1>(token) != "whileend")
+        {
+            cout << "\nERROR: NOT VALID SYNTAX.\n";
+            cout << "Expected: whileend\nReceived: " << get<1>(token) << endl;
+            exit(1);
+        }
+        token = lexer(infile);
         
         return true;
     }
@@ -766,15 +957,9 @@ bool ExpressionPrime(ifstream &infile, tuple<string, string> &token)
 
 // fix compound function
 
-//
-//
-//R25. <Return> ::=  return <Return End>
-//R26. <Return End> ::= ; |  <Expression> ;
-//R27. <Print> ::=    put ( <Expression>);
-//R28. <Scan> ::=    get ( <IDs> );
-//R29. <While> ::=  while ( <Condition>  )  <Statement> whileend
-//
-//
+// make an error function that takes in expected output and actually received and prints to the screen an error message. example is in code
+
+// maybe clean up code if needed. kinda messy and a lot can obviously be reduced. currently coded based on simple logic.
 
 // do we even need this?
 //R39. <Empty>   ::= ε
