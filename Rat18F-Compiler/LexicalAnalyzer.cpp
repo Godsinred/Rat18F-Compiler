@@ -10,6 +10,9 @@
 #include "LexicalAnalyzer.h"
 
 bool printswitch = true;
+int lineNumber = 0;
+
+
 //returns a col for the identifier DFSM
 int char_to_col_identifier(char c)
 {
@@ -213,12 +216,24 @@ tuple<bool, string> is_comment(char c, ifstream &inFile)
     {
         // gets the next character to see if the programmers is trying to make a comment
         inFile.get(next);
+        if(next == '\n')
+        {
+            ++lineNumber;
+        }
         if (next == '*')
         {
             // reads and ignores all the characters until '*]' is found or eof is reached
             char current;
             inFile.get(current);
+            if(current == '\n')
+            {
+                ++lineNumber;
+            }
             inFile.get(next);
+            if(next == '\n')
+            {
+                ++lineNumber;
+            }
             bool endComment = false;
             if (current == '*' && next == ']')
             {
@@ -228,6 +243,10 @@ tuple<bool, string> is_comment(char c, ifstream &inFile)
             {
                 current = next;
                 inFile.get(next);
+                if (next == '\n')
+                {
+                    ++lineNumber;
+                }
                 if (current == '*' && next == ']')
                 {
                     endComment = true;
@@ -253,14 +272,15 @@ tuple<bool, string> is_comment(char c, ifstream &inFile)
     return make_tuple(false, "Not a comment");
 }
 
-tuple<string, string> lexer(ifstream &inFile)
+tuple<string, string> lexer(ifstream &inFile, ostream &outfile)
 {
     tuple<string, string> token = actualLexer(inFile);
     if (printswitch)
     {
-        cout << endl << left << "Token: " << setw(20) << get<0>(token) << "Lexeme: " << setw(20) << get<1>(token) << endl;
+        outfile << endl << left << "Token: " << setw(20) << get<0>(token) << "Lexeme: " << setw(20) << get<1>(token) << endl;
         if(get<0>(token) == "Unknown")
         {
+            outfile << "ERROR: Unknown token.\n";
             cout << "ERROR: Unknown token.\n";
             exit(1);
         }
@@ -271,6 +291,7 @@ tuple<string, string> lexer(ifstream &inFile)
 tuple<string, string> actualLexer(ifstream &inFile)
 {
     char c;
+  
     string lexeme, nextLexeme;
     bool endOfLexeme = false;
 
@@ -278,11 +299,19 @@ tuple<string, string> actualLexer(ifstream &inFile)
     {
         // get the first character from file
         inFile.get(c);
+        if (c == '\n')
+        {
+            lineNumber++;
+        }
         
         // reads all the leading whitespace of the file to the first non-whitespace
         while (inFile && (isspace(c) || c == '\n'))
         {
             inFile.get(c);
+            if (c == '\n')
+            {
+                lineNumber++;
+            }
         }
         if (!inFile.eof())
         {
@@ -293,6 +322,10 @@ tuple<string, string> actualLexer(ifstream &inFile)
         while(!inFile.eof() && !endOfLexeme)
         {
             inFile.get(c);
+            if (c == '\n')
+            {
+                lineNumber++;
+            }
             nextLexeme = c;
             if (isspace(c))
             {
@@ -379,4 +412,9 @@ tuple<string, string> actualLexer(ifstream &inFile)
         cerr << "Error: File is not open.";
         return make_tuple("Unknown", lexeme);
     }
+}
+
+int getLineNumber()
+{
+    return lineNumber;
 }

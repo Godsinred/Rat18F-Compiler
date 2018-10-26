@@ -80,7 +80,7 @@ int main()
     // reads one character at a time till end of file and outputs token with lexeme
     if (inFile.is_open())
     {
-        Rat18F(inFile);
+        Rat18F(inFile, outfile);
         // uncomment this for LA testing
         //starts building lexemes
 //        while (inFile)

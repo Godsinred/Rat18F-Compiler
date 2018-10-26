@@ -44,8 +44,10 @@ bool isKeyword(const string &lexeme);
 
 tuple<bool, string> is_comment(char c, ifstream &inFile);
 
-tuple<string, string> lexer(ifstream &inFile);
+tuple<string, string> lexer(ifstream &inFile, ostream &outfile);
 
 tuple<string, string> actualLexer(ifstream &infile);
+
+int getLineNumber();
 
 #endif /* LexicalAnalyzer_hpp */

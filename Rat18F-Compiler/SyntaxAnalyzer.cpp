@@ -7,6 +7,11 @@
      Assignment 2
  */
 
+
+//Rewrite using try and catch blocks. if done correctly this should solve all the problems.
+// not sure if this is the most elegand way of writing it.
+
+
 #include <iostream>
 #include "LexicalAnalyzer.h"
 #include <string>
@@ -19,243 +24,238 @@ using namespace std;
 
 bool printSwitch = true;
 
-void Rat18F(ifstream &infile)
+//R1. <Rat18F>  ::=   <Opt Function Definitions>   $$  <Opt Declaration List>  <Statement List>  $$
+void Rat18F(ifstream &infile, ostream &outfile)
 {
-    cout << endl;
-    tuple<string, string> token = lexer(infile);
-    if (printSwitch)
-    {
-        cout << "R1. <Rat18F>  ::=   <Opt Function Definitions>   $$  <Opt Declaration List>  <Statement List>  $$" << endl;
-    }
+        outfile << endl;
+        tuple<string, string> token = lexer(infile, outfile);
+        if (printSwitch)
+        {
+            outfile << "\tR1. <Rat18F>  ::=   <Opt Function Definitions>   $$  <Opt Declaration List>  <Statement List>  $$" << endl;
+        }
+        
+        OptFunctionDefinitions(infile, outfile, token);
+        
+        
+        if(get<1>(token) != "$$")
+        {
+            errorReporting(outfile, "$$", get<1>(token));
+        }
+        token = lexer(infile, outfile);
+        
+        OptDeclarationList(infile, outfile, token);
+        
+        StatementList(infile, outfile, token);
+        
+        if(get<1>(token) != "$$")
+        {
+            errorReporting(outfile, "$$", get<1>(token));
+        }
+        
+        outfile << "\nSyntax Analyzer is correct.\n";
     
-    OptFunctionDefinitions(infile, token);
-    
-    
-    if(get<1>(token) != "$$")
-    {
-        cout << "\nERROR: NOT VALID SYNTAX.\n";
-        cout << "Expected: $$\nReceived: " << get<1>(token) << endl;
-        exit(1);
-    }
-    token = lexer(infile);
-    
-    OptDeclarationList(infile, token);
-    
-    StatementList(infile, token);
-    
-    if(get<1>(token) != "$$")
-    {
-        cout << "\nERROR: NOT VALID SYNTAX.\n";
-        cout << "Expected: $$\nReceived: " << get<1>(token) << endl;
-        exit(1);
-    }
-    
-    cout << "\nSyntax Analyzer is correct.\n";
 }
 
-void OptFunctionDefinitions(ifstream &infile, tuple<string, string> &token)
+//R2. <Opt Function Definitions> ::= <Function Definitions>     |  <Empty>
+void OptFunctionDefinitions(ifstream &infile, ostream &outfile, tuple<string, string> &token)
 {
     if (printSwitch)
     {
-        cout << "R2. <Opt Function Definitions> ::= <Function Definitions>     |  <Empty>" << endl;
+        outfile << "\tR2. <Opt Function Definitions> ::= <Function Definitions>     |  <Empty>" << endl;
     }
-    FunctionDefinitions(infile, token);
+    FunctionDefinitions(infile, outfile, token);
 }
 
-void FunctionDefinitions(ifstream &infile, tuple<string, string> &token)
+//R3. <Function Definitions>  ::= <Function> <Function Definitions End>
+void FunctionDefinitions(ifstream &infile, ostream &outfile, tuple<string, string> &token)
 {
     if (printSwitch)
     {
-        cout << "R3. <Function Definitions>  ::= <Function> <Function Definitions End>" << endl;
+        outfile << "\tR3. <Function Definitions>  ::= <Function> <Function Definitions End>" << endl;
     }
-    if(Function(infile, token))
+    if(Function(infile, outfile, token))
     {
-        FunctionDefinitionsEnd(infile, token);
+        FunctionDefinitionsEnd(infile, outfile, token);
     }
 }
 
-void FunctionDefinitionsEnd(ifstream &infile, tuple<string, string> &token)
+//R4.<Function Definitions End> ::= <Function Definitions>  | ε
+void FunctionDefinitionsEnd(ifstream &infile, ostream &outfile, tuple<string, string> &token)
 {
     if (printSwitch)
     {
-        cout << "R4.<Function Definitions End> ::= <Function Definitions>  | ε" << endl;
+        outfile << "\tR4.<Function Definitions End> ::= <Function Definitions>  | ε" << endl;
     }
-    FunctionDefinitions(infile, token);
+    FunctionDefinitions(infile, outfile, token);
 }
 
-bool Function(ifstream &infile, tuple<string, string> &token)
+//R5. <Function> ::= function  <Identifier>   ( <Opt Parameter List> )  <Opt Declaration List>  <Body>
+bool Function(ifstream &infile, ostream &outfile, tuple<string, string> &token)
 {
     if (printSwitch)
     {
-        cout << "R5. <Function> ::= function  <Identifier>   ( <Opt Parameter List> )  <Opt Declaration List>  <Body>" << endl;
+        outfile << "\tR5. <Function> ::= function  <Identifier>   ( <Opt Parameter List> )  <Opt Declaration List>  <Body>" << endl;
     }
     
     if(get<1>(token) == "function")
     {
-        token = lexer(infile);
-        if(!Identifier(token))
+        token = lexer(infile, outfile);
+        if(!Identifier(outfile, token))
         {
-            cout << "\nERROR: NOT VALID SYNTAX.\n";
-            cout << "Expected: Identifier\nReceived: " << get<1>(token) << endl;
-            exit(1);
+            errorReporting(outfile, "Identifier", get<1>(token));
         }
         
-        token = lexer(infile);
+        token = lexer(infile, outfile);
         if(get<1>(token) != "(")
         {
-            cout << "\nERROR: NOT VALID SYNTAX.\n";
-            cout << "Expected: (\nReceived: " << get<1>(token) << endl;
-            exit(1);
+            errorReporting(outfile, "(", get<1>(token));
         }
         
-        token = lexer(infile);
-        OptParameterList(infile, token);
+        token = lexer(infile, outfile);
+        OptParameterList(infile, outfile, token);
         
         if(get<1>(token) != ")")
         {
-            cout << "\nERROR: NOT VALID SYNTAX.\n";
-            cout << "Expected: )\nReceived: " << get<1>(token) << endl;
-            exit(1);
+            errorReporting(outfile, ")", get<1>(token));
         }
         
-        token = lexer(infile);
-        OptDeclarationList(infile, token);
+        token = lexer(infile, outfile);
+        OptDeclarationList(infile, outfile, token);
         
-        Body(infile, token);
+        Body(infile, outfile, token);
         
         return true;
     }
     return false;
 }
 
-bool Identifier(const tuple<string, string> &token)
+//identifier
+bool Identifier(ostream &outfile, const tuple<string, string> &token)
 {
     if (printSwitch)
     {
-        cout << "R Checker. <Identifier>" << endl;
+        outfile << "\tR Checker. <Identifier>" << endl;
     }
     
     if(get<0>(token) != "Identifier")
     {
-        cout << "Not Identifier. Is: " << get<0>(token) << "Lexeme: " << get<1>(token) <<endl;
-        return false;
+        errorReporting(outfile, "Identifier", get<1>(token));
     }
-    cout << "Identifier found." << endl;
+    outfile << "Identifier found." << endl;
     return true;
 }
 
-bool OptParameterList(ifstream &infile, tuple<string, string> &token)
+//R6. <Opt Parameter List> ::=  <Parameter List>    |     <Empty>
+bool OptParameterList(ifstream &infile, ostream &outfile, tuple<string, string> &token)
 {
     if (printSwitch)
     {
-        cout << "R6. <Opt Parameter List> ::=  <Parameter List>    |     <Empty>" << endl;
+        outfile << "\tR6. <Opt Parameter List> ::=  <Parameter List>    |     <Empty>" << endl;
     }
-    if(ParameterList(infile, token))
+    if(ParameterList(infile, outfile, token))
     {
         return true;
     }
     return false;
 }
 
-bool ParameterList(ifstream &infile, tuple<string, string> &token)
+//R7. <Parameter List>  ::=  <Parameter>  <Parameter List End>
+bool ParameterList(ifstream &infile, ostream &outfile, tuple<string, string> &token)
 {
     if (printSwitch)
     {
-        cout << "R7. <Parameter List>  ::=  <Parameter>  <Parameter List End>" << endl;
+        outfile << "\tR7. <Parameter List>  ::=  <Parameter>  <Parameter List End>" << endl;
     }
-    if(Parameter(infile, token))
+    if(Parameter(infile, outfile, token))
     {
-        ParameterListEnd(infile, token);
+        ParameterListEnd(infile, outfile, token);
         return true;
     }
     return false;
 }
 
-bool Parameter(ifstream &infile, tuple<string, string> &token)
+//R9. <Parameter> ::=  <IDs > : <Qualifier>
+bool Parameter(ifstream &infile, ostream &outfile, tuple<string, string> &token)
 {
     if (printSwitch)
     {
-        cout << "R9. <Parameter> ::=  <IDs > : <Qualifier>" << endl;
+        outfile << "\tR9. <Parameter> ::=  <IDs > : <Qualifier>" << endl;
     }
-    if(IDs(infile, token))
+    if(IDs(infile, outfile, token))
     {
         if(get<1>(token) != ":")
         {
-            cout << "\nERROR: NOT VALID SYNTAX.\n";
-            cout << "Expected: :\nReceived: " << get<1>(token) << endl;
-            exit(1);
+            errorReporting(outfile, ":", get<1>(token));
         }
         
-        token = lexer(infile);
-        if(!Qualifier(infile, token))
+        token = lexer(infile, outfile);
+        if(!Qualifier(infile, outfile, token))
         {
-            cout << "\nERROR: NOT VALID SYNTAX.\n";
-            cout << "Expected: int or boolean or real\nReceived: " << get<1>(token) << endl;
-            exit(1);
+            errorReporting(outfile, "int | true | false | real", get<1>(token));
         }
-        token = lexer(infile);
+        token = lexer(infile, outfile);
         return true;
     }
     return false;
 }
 
-void ParameterListEnd(ifstream &infile, tuple<string, string> &token)
+//R8. <Parameter List End> ::= , <Parameter List> | ε
+void ParameterListEnd(ifstream &infile, ostream &outfile, tuple<string, string> &token)
 {
     if (printSwitch)
     {
-        cout << "R8. <Parameter List End> ::= , <Parameter List> | ε" << endl;
+        outfile << "\tR8. <Parameter List End> ::= , <Parameter List> | ε" << endl;
     }
     if(get<1>(token) == ",")
     {
-        token = lexer(infile);
-        if(!ParameterList(infile, token))
+        token = lexer(infile, outfile);
+        if(!ParameterList(infile, outfile, token))
         {
-            cout << "\nERROR: NOT VALID SYNTAX.\n";
-            cout << "Expected: <ParameterList> i.e. <Identifier> \nReceived: " << get<1>(token) << endl;
-            exit(1);
+            errorReporting(outfile, "<ParameterList", get<1>(token));
         }
     }
 }
 
-bool IDs(ifstream &infile, tuple<string, string> &token)
+//R16. <IDs> ::=     <Identifier>  <IDs End>
+bool IDs(ifstream &infile, ostream &outfile, tuple<string, string> &token)
 {
     if (printSwitch)
     {
-        cout << "R16. <IDs> ::=     <Identifier>  <IDs End>" << endl;
+        outfile << "\tR16. <IDs> ::=     <Identifier>  <IDs End>" << endl;
     }
-    if(Identifier(token))
+    if(Identifier(outfile, token))
     {
-        token = lexer(infile);
-        IDsEnd(infile, token);
+        token = lexer(infile, outfile);
+        IDsEnd(infile, outfile, token);
         return true;
     }
     return false;
 }
 
-void IDsEnd(ifstream &infile, tuple<string, string> &token)
+//R17. <IDs End> ::= , <IDs> | ε
+void IDsEnd(ifstream &infile, ostream &outfile, tuple<string, string> &token)
 {
     if (printSwitch)
     {
-        cout << "R17. <IDs End> ::= , <IDs> | ε" << endl;
+        outfile << "\tR17. <IDs End> ::= , <IDs> | ε" << endl;
     }
     if(get<1>(token) == ",")
     {
-        token = lexer(infile);
-        if(!IDs(infile, token))
+        token = lexer(infile, outfile);
+        if(!IDs(infile, outfile, token))
         {
-            cout << "\nERROR: NOT VALID SYNTAX.\n";
-            cout << "Expected: Identifier\nReceived: " << get<1>(token) << endl;
-            exit(1);
+            errorReporting(outfile, "Identifier", get<1>(token));
         }
     }
 }
 
-bool Qualifier(ifstream &infile, tuple<string, string> &token)
+//R10. <Qualifier> ::= int     |    boolean    |  real
+bool Qualifier(ifstream &infile, ostream &outfile, tuple<string, string> &token)
 {
-    //token = lexer(infile);
+    //token = lexer(infile, outfile);
     if (printSwitch)
     {
-        cout << "R10. <Qualifier> ::= int     |    boolean    |  real" << endl;
+        outfile << "\tR10. <Qualifier> ::= int     |    boolean    |  real" << endl;
     }
     if(get<1>(token) != "int" && get<1>(token) != "boolean" && get<1>(token) != "real")
     {
@@ -264,591 +264,569 @@ bool Qualifier(ifstream &infile, tuple<string, string> &token)
     return true;
 }
 
-void OptDeclarationList(ifstream &infile, tuple<string, string> &token)
+//R12. <Opt Declaration List> ::= <Declaration List>   |    <Empty>
+void OptDeclarationList(ifstream &infile, ostream &outfile, tuple<string, string> &token)
 {
     if (printSwitch)
     {
-        cout << "R12. <Opt Declaration List> ::= <Declaration List>   |    <Empty>" << endl;
+        outfile << "\tR12. <Opt Declaration List> ::= <Declaration List>   |    <Empty>" << endl;
     }
     
-    DeclarationList(infile, token);
+    DeclarationList(infile, outfile, token);
 }
 
-void DeclarationList(ifstream &infile, tuple<string, string> &token)
+//R13. <Declaration List>  ::= <Declaration> ;   <Declaration List End>
+void DeclarationList(ifstream &infile, ostream &outfile, tuple<string, string> &token)
 {
     if (printSwitch)
     {
-        cout << "R13. <Declaration List>  ::= <Declaration> ;   <Declaration List End>" << endl;
+        outfile << "\tR13. <Declaration List>  ::= <Declaration> ;   <Declaration List End>" << endl;
     }
     
-    if(Declaration(infile, token))
+    if(Declaration(infile, outfile, token))
     {
         if(get<1>(token) != ";")
         {
-            cout << "\nERROR: NOT VALID SYNTAX.\n";
-            cout << "Expected: ;\nReceived: " << get<1>(token) << endl;
-            exit(1);
+            errorReporting(outfile, ";", get<1>(token));
         }
-        token = lexer(infile);
-        DeclarationListEnd(infile, token);
+        token = lexer(infile, outfile);
+        DeclarationListEnd(infile, outfile, token);
     }
 }
 
-bool Declaration(ifstream &infile, tuple<string, string> &token)
+//R15. <Declaration> ::=   <Qualifier > <IDs>
+bool Declaration(ifstream &infile, ostream &outfile, tuple<string, string> &token)
 {
     if (printSwitch)
     {
-        cout << "R15. <Declaration> ::=   <Qualifier > <IDs>" << endl;
+        outfile << "\tR15. <Declaration> ::=   <Qualifier > <IDs>" << endl;
     }
     
-    if(Qualifier(infile, token))
+    if(Qualifier(infile, outfile, token))
     {
-        token = lexer(infile);
-        if(!IDs(infile, token))
+        token = lexer(infile, outfile);
+        if(!IDs(infile, outfile, token))
         {
-            cout << "\nERROR: NOT VALID SYNTAX.\n";
-            cout << "Expected: <IDs>/Identifier\nReceived: " << get<1>(token) << endl;
-            exit(1);
+            errorReporting(outfile, "<IDs>/Identifier", get<1>(token));
         }
         return true;
     }
     return false;
 }
 
-void DeclarationListEnd(ifstream &infile, tuple<string, string> &token)
+//R14. <Declaration List End> ::= <Declaration List> | ε
+void DeclarationListEnd(ifstream &infile, ostream &outfile, tuple<string, string> &token)
 {
     if (printSwitch)
     {
-        cout << "R14. <Declaration List End> ::= <Declaration List> | ε" << endl;
+        outfile << "\tR14. <Declaration List End> ::= <Declaration List> | ε" << endl;
     }
-    DeclarationList(infile, token);
+    DeclarationList(infile, outfile, token);
 }
 
-void Body(ifstream &infile, tuple<string, string> &token)
+//R11. <Body>  ::= {  < Statement List>  }
+void Body(ifstream &infile, ostream &outfile, tuple<string, string> &token)
 {
     
     if (printSwitch)
     {
-        cout << "R11. <Body>  ::= {  < Statement List>  }" << endl;
+        outfile << "\tR11. <Body>  ::= {  < Statement List>  }" << endl;
     }
     
     if(get<1>(token) != "{")
     {
-        cout << "\nERROR: NOT VALID SYNTAX.\n";
-        cout << "Expected: {\nReceived: " << get<1>(token) << endl;
-        exit(1);
+        errorReporting(outfile, "{", get<1>(token));
     }
     
-    token = lexer(infile);
-    if(!StatementList(infile, token))
+    token = lexer(infile, outfile);
+    if(!StatementList(infile, outfile, token))
     {
-        cout << "\nERROR: NOT VALID SYNTAX.\n";
-        cout << "Expected: <Statement List>\nReceived: " << get<1>(token) << endl;
-        exit(1);
+        errorReporting(outfile, "<statement List>",get<1>(token));
     }
     
     if(get<1>(token) != "}")
     {
-        cout << "\nERROR: NOT VALID SYNTAX.\n";
-        cout << "Expected: }\nReceived: " << get<1>(token) << endl;
-        exit(1);
+        errorReporting(outfile, "}", get<1>(token));
     }
-    token = lexer(infile);
+    token = lexer(infile, outfile);
 }
 
-bool StatementList(ifstream &infile, tuple<string, string> &token)
+//R18. <Statement List> ::=   <Statement>  <Statement List End>
+bool StatementList(ifstream &infile, ostream &outfile, tuple<string, string> &token)
 {
     if (printSwitch)
     {
-        cout << "R18. <Statement List> ::=   <Statement>  <Statement List End>" << endl;
+        outfile << "\tR18. <Statement List> ::=   <Statement>  <Statement List End>" << endl;
     }
-    if(Statement(infile, token))
+    if(Statement(infile, outfile, token))
     {
-        StatementListEnd(infile, token);
+        StatementListEnd(infile, outfile, token);
         return true;
     }
     return false;
 }
 
-void StatementListEnd(ifstream &infile, tuple<string, string> &token)
+//R19. <Statement List End> ::= <Statement List> | ε
+void StatementListEnd(ifstream &infile, ostream &outfile, tuple<string, string> &token)
 {
     if (printSwitch)
     {
-        cout << "R19. <Statement List End> ::= <Statement List> | ε" << endl;
+        outfile << "\tR19. <Statement List End> ::= <Statement List> | ε" << endl;
     }
-    StatementList(infile, token);
+    if (StatementList(infile, outfile, token))
+    {
+        
+    }
 }
 
-bool Statement(ifstream &infile, tuple<string, string> &token)
+//R20. <Statement> ::=   <Compound>  |  <Assign> |   <If>  |  <Return>   | <Print>   |   <Scan>   |  <While>
+bool Statement(ifstream &infile, ostream &outfile, tuple<string, string> &token)
 {
     if (printSwitch)
     {
-        cout << "R20. <Statement> ::=   <Compound>  |  <Assign> |   <If>  |  <Return>   | <Print>   |   <Scan>   |  <While>" << endl;
+        outfile << "\tR20. <Statement> ::=   <Compound>  |  <Assign> |   <If>  |  <Return>   | <Print>   |   <Scan>   |  <While>" << endl;
     }
-    cout << left << "STATEMENT PRINT TOKEN VALUES. Token: " << setw(20) << get<0>(token) << "Lexeme: " << setw(20) << get<1>(token) << endl;
-    if(Compound(infile, token)) // THIS DOES NOT WORK!!!!!!!!!!!!!!!!!!!!! <<<<<=======================================
+    
+    if (If(infile, outfile, token))
     {
         return true;
     }
-    else if (Assign(infile, token))
+    else if (Return(infile, outfile, token))
     {
         return true;
     }
-    else if (If(infile, token))
+    else if (Print(infile, outfile, token))
     {
         return true;
     }
-    else if (Return(infile, token))
+    else if (Scan(infile, outfile, token))
     {
         return true;
     }
-    else if (Print(infile, token))
+    else if (While(infile, outfile, token))
     {
         return true;
     }
-    else if (Scan(infile, token))
+    else if (Assign(infile, outfile, token))
     {
         return true;
     }
-    else if (While(infile, token))
+    else if(Compound(infile, outfile, token))
     {
         return true;
     }
-
     return false;
 }
 
-bool Compound(ifstream &infile, tuple<string, string> &token)
+//R21. <Compound> ::=   { <Statement List>  }
+bool Compound(ifstream &infile, ostream &outfile, tuple<string, string> &token)
 {
     if (printSwitch)
     {
-        cout << "R21. <Compound> ::=   { <Statement List>  }" << endl;
+        outfile << "\tR21. <Compound> ::=   { <Statement List>  }" << endl;
     }
     
     if(get<1>(token) == "{")
     {
-        token = lexer(infile);
-        if(!StatementList(infile, token))
+        token = lexer(infile, outfile);
+        if(!StatementList(infile, outfile, token))
         {
-            cout << "\nERROR: NOT VALID SYNTAX.\n";
-            cout << "Expected: <Statement List>\nReceived: " << get<1>(token) << endl;
+            outfile << "\nERROR: NOT VALID SYNTAX.\n";
+            outfile << "Expected: <Statement List>\nReceived: " << get<1>(token) << endl;
             exit(1);
         }
         
-        token = lexer(infile);
+        token = lexer(infile, outfile);
         if(get<1>(token) != "}")
         {
-            cout << "\nERROR: NOT VALID SYNTAX.\n";
-            cout << "Expected: }\nReceived: " << get<1>(token) << endl;
+            outfile << "\nERROR: NOT VALID SYNTAX.\n";
+            outfile << "Expected: }\nReceived: " << get<1>(token) << endl;
             exit(1);
         }
-        token = lexer(infile);
+        token = lexer(infile, outfile);
         return true;
     }
     return false;
 }
 
-bool Assign(ifstream &infile, tuple<string, string> &token)
+//R22. <Assign> ::=     <Identifier> = <Expression> ;
+bool Assign(ifstream &infile, ostream &outfile, tuple<string, string> &token)
 {
     if (printSwitch)
     {
-        cout << "R22. <Assign> ::=     <Identifier> = <Expression> ;" << endl;
+        outfile << "\tR22. <Assign> ::=     <Identifier> = <Expression> ;" << endl;
     }
     
-    if(Identifier(token))
+    if(Identifier(outfile, token))
     {
-        token = lexer(infile);
+        token = lexer(infile, outfile);
         if(get<1>(token) != "=")
         {
-            cout << "\nERROR: NOT VALID SYNTAX.\n";
-            cout << "Expected: }\nReceived: " << get<1>(token) << endl;
+            outfile << "\nERROR: NOT VALID SYNTAX.\n";
+            outfile << "Expected: }\nReceived: " << get<1>(token) << endl;
             exit(1);
         }
     
-        token = lexer(infile);
-        Expression(infile, token);
+        token = lexer(infile, outfile);
+        Expression(infile, outfile, token);
         
         if(get<1>(token) != ";")
         {
-            cout << "\nERROR: NOT VALID SYNTAX.\n";
-            cout << "Expected: ;\nReceived: " << get<1>(token) << endl;
+            outfile << "\nERROR: NOT VALID SYNTAX.\n";
+            outfile << "Expected: ;\nReceived: " << get<1>(token) << endl;
             exit(1);
         }
-        token = lexer(infile);
+        token = lexer(infile, outfile);
         return true;
     }
     return false;
 }
 
-bool If(ifstream &infile, tuple<string, string> &token)
+//R23. <If> ::=     if  ( <Condition>  ) <Statement>   <if End>
+bool If(ifstream &infile, ostream &outfile, tuple<string, string> &token)
 {
     if (printSwitch)
     {
-        cout << "R23. <If> ::=     if  ( <Condition>  ) <Statement>   <if End>" << endl;
+        outfile << "\tR23. <If> ::=     if  ( <Condition>  ) <Statement>   <if End>" << endl;
     }
     
     if(get<1>(token) == "if")
     {
-        token = lexer(infile);
+        token = lexer(infile, outfile);
         if(get<1>(token) != "(")
         {
-            cout << "\nERROR: NOT VALID SYNTAX.\n";
-            cout << "Expected: }\nReceived: " << get<1>(token) << endl;
+            outfile << "\nERROR: NOT VALID SYNTAX.\n";
+            outfile << "Expected: }\nReceived: " << get<1>(token) << endl;
             exit(1);
         }
-        cout << "Matched (\n";
+        outfile << "\tMatched (\n";
         
-        token = lexer(infile);
-        Condition(infile, token);
+        token = lexer(infile, outfile);
+        Condition(infile, outfile, token);
         
         if(get<1>(token) != ")")
         {
-            cout << "\nERROR: NOT VALID SYNTAX.\n";
-            cout << "Expected: ;\nReceived: " << get<1>(token) << endl;
+            outfile << "\nERROR: NOT VALID SYNTAX.\n";
+            outfile << "Expected: ;\nReceived: " << get<1>(token) << endl;
             exit(1);
         }
-        cout << "Matched )\n";
+        outfile << "\tMatched )\n";
         
-        token = lexer(infile);
-        if(!Statement(infile, token))
+        token = lexer(infile, outfile);
+        if(!Statement(infile, outfile, token))
         {
-            cout << "\nERROR: NOT VALID SYNTAX.\n";
-            cout << "Expected: <Statement>\nReceived: " << get<1>(token) << endl;
+            outfile << "\nERROR: NOT VALID SYNTAX.\n";
+            outfile << "Expected: <Statement>\nReceived: " << get<1>(token) << endl;
             exit(1);
         }
         
-        IfEnd(infile, token);
+        IfEnd(infile, outfile, token);
         
         return true;
     }
     return false;
 }
 
-bool Return(ifstream &infile, tuple<string, string> &token)
+//R25. <Return> ::=  return <Return End>
+bool Return(ifstream &infile, ostream &outfile, tuple<string, string> &token)
 {
     if (printSwitch)
     {
-        cout << "R25. <Return> ::=  return <Return End>" << endl;
+        outfile << "\tR25. <Return> ::=  return <Return End>" << endl;
     }
     
     if(get<1>(token) == "return")
     {
-        token = lexer(infile);
-        ReturnEnd(infile, token);
+        token = lexer(infile, outfile);
+        ReturnEnd(infile, outfile, token);
         return true;
     }
     return false;
 }
 
-bool ReturnEnd(ifstream &infile, tuple<string, string> &token)
+//R26. <Return End> ::= ; |  <Expression> ;
+bool ReturnEnd(ifstream &infile, ostream &outfile, tuple<string, string> &token)
 {
     if (printSwitch)
     {
-        cout << "R26. <Return End> ::= ; |  <Expression> ;" << endl;
+        outfile << "\tR26. <Return End> ::= ; |  <Expression> ;" << endl;
     }
     if (get<1>(token) == ";")
     {
-        cout << "Matched ;\n";
-        token = lexer(infile);
+        outfile << "Matched ;\n";
+        token = lexer(infile, outfile);
         return true;
     }
     
-    Expression(infile, token);
+    Expression(infile, outfile, token);
     
     if (get<1>(token) != ";")
     {
-        cout << "\nERROR: NOT VALID SYNTAX.\n";
-        cout << "Expected: ;\nReceived: " << get<1>(token) << endl;
+        outfile << "\nERROR: NOT VALID SYNTAX.\n";
+        outfile << "Expected: ;\nReceived: " << get<1>(token) << endl;
         exit(1);
     }
-    cout << "Matched ;\n";
-    token = lexer(infile);
+    outfile << "Matched ;\n";
+    token = lexer(infile, outfile);
     return true;
 }
 
-bool Print(ifstream &infile, tuple<string, string> &token)
+//R27. <Print> ::=    put ( <Expression>);
+bool Print(ifstream &infile, ostream &outfile, tuple<string, string> &token)
 {
     if (printSwitch)
     {
-        cout << "R27. <Print> ::=    put ( <Expression>);" << endl;
+        outfile << "\tR27. <Print> ::=    put ( <Expression>);" << endl;
     }
     if (get<1>(token) == "put")
     {
-        cout << "Matched put\n";
+        outfile << "\tMatched put\n";
     
-        token = lexer(infile);
+        token = lexer(infile, outfile);
         if (get<1>(token) != "(")
         {
-            cout << "\nERROR: NOT VALID SYNTAX.\n";
-            cout << "Expected: (\nReceived: " << get<1>(token) << endl;
+            outfile << "\nERROR: NOT VALID SYNTAX.\n";
+            outfile << "Expected: (\nReceived: " << get<1>(token) << endl;
             exit(1);
         }
         
-        token = lexer(infile);
-        Expression(infile, token);
+        token = lexer(infile, outfile);
+        Expression(infile, outfile, token);
         
         if (get<1>(token) != ")")
         {
-            cout << "\nERROR: NOT VALID SYNTAX.\n";
-            cout << "Expected: )\nReceived: " << get<1>(token) << endl;
-            exit(1);
+            errorReporting(outfile, ")", get<1>(token));
         }
-        token = lexer(infile);
+        token = lexer(infile, outfile);
         
         if (get<1>(token) != ";")
         {
-            cout << "\nERROR: NOT VALID SYNTAX.\n";
-            cout << "Expected: ;\nReceived: " << get<1>(token) << endl;
-            exit(1);
+            errorReporting(outfile, ";", get<1>(token));
         }
-        token = lexer(infile);
+        token = lexer(infile, outfile);
         return true;
     }
     return false;
 }
 
-bool Scan(ifstream &infile, tuple<string, string> &token)
+//R28. <Scan> ::=    get ( <IDs> );
+bool Scan(ifstream &infile, ostream &outfile, tuple<string, string> &token)
 {
     if (printSwitch)
     {
-        cout << "R28. <Scan> ::=    get ( <IDs> );" << endl;
+        outfile << "\tR28. <Scan> ::=    get ( <IDs> );" << endl;
     }
     
     if (get<1>(token) == "get")
     {
-        cout << "Matched get\n";
+        outfile << "\tMatched get\n";
         
-        token = lexer(infile);
+        token = lexer(infile, outfile);
         if (get<1>(token) != "(")
         {
-            cout << "\nERROR: NOT VALID SYNTAX.\n";
-            cout << "Expected: (\nReceived: " << get<1>(token) << endl;
-            exit(1);
+            errorReporting(outfile, "(", get<1>(token));
         }
         
-        token = lexer(infile);
-        IDs(infile, token);
+        token = lexer(infile, outfile);
+        IDs(infile, outfile, token);
         
         if (get<1>(token) != ")")
         {
-            cout << "\nERROR: NOT VALID SYNTAX.\n";
-            cout << "Expected: )\nReceived: " << get<1>(token) << endl;
-            exit(1);
+            errorReporting(outfile, ")", get<1>(token));
         }
         
-        token = lexer(infile);
+        token = lexer(infile, outfile);
         if (get<1>(token) != ";")
         {
-            cout << "\nERROR: NOT VALID SYNTAX.\n";
-            cout << "Expected: ;\nReceived: " << get<1>(token) << endl;
-            exit(1);
+            errorReporting(outfile, ";", get<1>(token));
         }
-        token = lexer(infile);
+        token = lexer(infile, outfile);
         return true;
     }
     return false;
 }
 
-bool While(ifstream &infile, tuple<string, string> &token)
+//R29. <While> ::=  while ( <Condition>  )  <Statement> whileend
+bool While(ifstream &infile, ostream &outfile, tuple<string, string> &token)
 {
     if (printSwitch)
     {
-        cout << "R29. <While> ::=  while ( <Condition>  )  <Statement> whileend" << endl;
+        outfile << "\tR29. <While> ::=  while ( <Condition>  )  <Statement> whileend" << endl;
     }
     
     if (get<1>(token) == "while")
     {
-        cout << "Matched while\n";
+        outfile << "Matched while\n";
         
-        token = lexer(infile);
+        token = lexer(infile, outfile);
         if (get<1>(token) != "(")
         {
-            cout << "\nERROR: NOT VALID SYNTAX.\n";
-            cout << "Expected: (\nReceived: " << get<1>(token) << endl;
-            exit(1);
+            errorReporting(outfile, "(", get<1>(token));
         }
         
-        token = lexer(infile);
-        Condition(infile, token);
+        token = lexer(infile, outfile);
+        Condition(infile, outfile, token);
         
         if (get<1>(token) != ")")
         {
-            cout << "\nERROR: NOT VALID SYNTAX.\n";
-            cout << "Expected: )\nReceived: " << get<1>(token) << endl;
-            exit(1);
+            errorReporting(outfile, ")", get<1>(token));
         }
         
-        token = lexer(infile);
-        if(!Statement(infile, token))
+        token = lexer(infile, outfile);
+        if(!Statement(infile, outfile, token))
         {
-            cout << "\nERROR: NOT VALID SYNTAX.\n";
-            cout << "Expected: <Statement>\nReceived: " << get<1>(token) << endl;
-            exit(1);
+            errorReporting(outfile, "<statement>", get<0>(token));
         }
         
         if (get<1>(token) != "whileend")
         {
-            cout << "\nERROR: NOT VALID SYNTAX.\n";
-            cout << "Expected: whileend\nReceived: " << get<1>(token) << endl;
-            exit(1);
+            errorReporting(outfile, "whileend", get<1>(token));
         }
-        token = lexer(infile);
+        token = lexer(infile, outfile);
         
         return true;
     }
     return false;
 }
 
-void Condition(ifstream &infile, tuple<string, string> &token)
+//R30. <Condition> ::=     <Expression>  <Relop>   <Expression>
+void Condition(ifstream &infile, ostream &outfile, tuple<string, string> &token)
 {
     if (printSwitch)
     {
-        cout << "R30. <Condition> ::=     <Expression>  <Relop>   <Expression>" << endl;
+        outfile << "\tR30. <Condition> ::=     <Expression>  <Relop>   <Expression>" << endl;
     }
-    Expression(infile, token);
+    Expression(infile, outfile, token);
     
-    Relop(infile, token);
+    Relop(infile, outfile, token);
     
-    Expression(infile, token);
+    Expression(infile, outfile, token);
     
 }
 
-void IfEnd(ifstream &infile, tuple<string, string> &token)
+//R24. <if End> ::= ifend | else <Statement> ifend
+void IfEnd(ifstream &infile, ostream &outfile, tuple<string, string> &token)
 {
     if (printSwitch)
     {
-        cout << "R24> <if End> ::= ifend | else <Statement> ifend" << endl;
+        outfile << "\tR24. <if End> ::= ifend | else <Statement> ifend" << endl;
     }
     
-    if(get<1>(token) != "ifend")
+    if(get<1>(token) == "else")
     {
-        if(get<1>(token) == "else")
+        token = lexer(infile, outfile);
+        if(!Statement(infile, outfile, token))
         {
-            token = lexer(infile);
-            if(!Statement(infile, token))
-            {
-                cout << "\nERROR: NOT VALID SYNTAX.\n";
-                cout << "Expected: <Statement>\nReceived: " << get<1>(token) << endl;
-                exit(1);
-            }
-            
-            if(get<1>(token) != "ifend")
-            {
-                cout << "\nERROR: NOT VALID SYNTAX.\n";
-                cout << "Expected: ifend\nReceived: " << get<1>(token) << endl;
-                exit(1);
-            }
-            token = lexer(infile);
+            errorReporting(outfile, "<statement>", get<0>(token));
         }
-        else
+
+        if(get<1>(token) != "ifend")
         {
-            cout << "\nERROR: NOT VALID SYNTAX.\n";
-            cout << "Expected: <IfEnd> ifend/else\nReceived: " << get<1>(token) << endl;
-            exit(1);
+            errorReporting(outfile, "ifEnd", get<1>(token));
         }
+        token = lexer(infile, outfile);
+    }
+    else if(get<1>(token) == "ifend")
+    {
+        token  = lexer(infile, outfile);
     }
     else
     {
-        token = lexer(infile);
+        errorReporting(outfile, "ifEnd | else", get<1>(token));
     }
 }
 
-void Relop(ifstream &infile, tuple<string, string> &token)
+//R31. <Relop> ::=  ==   |   ^=    |   >     |   <    |   =>    |   =<
+void Relop(ifstream &infile, ostream &outfile, tuple<string, string> &token)
 {
     if (printSwitch)
     {
-        cout << "R31. <Relop> ::=        ==   |   ^=    |   >     |   <    |   =>    |   =<" << endl;
+        outfile << "\tR31. <Relop> ::=        ==   |   ^=    |   >     |   <    |   =>    |   =<" << endl;
     }
     
     string temp = get<1>(token);
     if(temp != "==" && temp != "^=" && temp != ">" && temp != "<" && temp != "=>" && temp != "=<")
     {
-        cout << "\nERROR: NOT VALID SYNTAX.\n";
-        cout << "Expected: <Relop>\nReceived: " << get<1>(token) << endl;
-        exit(1);
+        errorReporting(outfile, "== | ^= | > | < | => | =<", get<1>(token));
     }
-    token = lexer(infile);
+    token = lexer(infile, outfile);
 }
 
-void Expression(ifstream &infile, tuple<string, string> &token)
+//R32. <Expression>  ::=    <Term> <Expression’>
+void Expression(ifstream &infile, ostream &outfile, tuple<string, string> &token)
 {
     if (printSwitch)
     {
-        cout << "R32. <Expression>  ::=    <Term> <Expression’>" << endl;
+        outfile << "\tR32. <Expression> ::= <Term> <Expression’>" << endl;
     }
     
-    Term(infile, token);
-    ExpressionPrime(infile, token);
+    Term(infile, outfile, token);
+    ExpressionPrime(infile, outfile, token);
 }
 
-void Term(ifstream &infile, tuple<string, string> &token)
+//R34. <Term>    ::=    <Factor>  <Term’>
+void Term(ifstream &infile, ostream &outfile, tuple<string, string> &token)
 {
     if (printSwitch)
     {
-        cout << "R34. <Term>    ::=    <Factor>  <Term’>" << endl;
+        outfile << "\tR34. <Term> ::= <Factor> <Term’>" << endl;
     }
-    Factor(infile, token);
-    TermPrime(infile, token);
+    Factor(infile, outfile, token);
+    TermPrime(infile, outfile, token);
 }
 
-void Factor(ifstream &infile, tuple<string, string> &token)
+//R36. <Factor> ::=  -  <Primary>  |  <Primary>
+void Factor(ifstream &infile, ostream &outfile, tuple<string, string> &token)
 {
     if (printSwitch)
     {
-        cout << "R36. <Factor> ::=      -  <Primary>    |    <Primary>" << endl;
+        outfile << "\tR36. <Factor> ::= - <Primary> | <Primary>" << endl;
     }
     
     if (get<1>(token) == "-")
     {
-        token = lexer(infile);
-        Primary(infile, token);
+        token = lexer(infile, outfile);
+        Primary(infile, outfile, token);
     }
     else
     {
-        Primary(infile, token);
+        Primary(infile, outfile, token);
     }
     
 }
-        
-bool Primary(ifstream &infile, tuple<string, string> &token)
+
+//R37. <Primary> ::= <Identifier> <Primary End> | <Integer> | ( <Expression> ) | <Real> | true | false
+bool Primary(ifstream &infile, ostream &outfile, tuple<string, string> &token)
 {
     if (printSwitch)
     {
-        cout << "R37. <Primary> ::=     <Identifier> <Primary End>   |  <Integer> |   ( <Expression> )   |   <Real>  |   true   |  false" << endl;
+        outfile << "\tR37. <Primary> ::=     <Identifier> <Primary End>   |  <Integer> |   ( <Expression> )   |   <Real>  |   true   |  false" << endl;
     }
-    
-    if (Identifier(token))
+    string expected ="<Identifier> | <Integer> | ( | <Real> | true | false";
+    if(get<0>(token) == "Integer")
     {
-        token = lexer(infile);
-        PrimaryEnd(infile, token);
-        return true;
-    }
-    else if(get<0>(token) == "Integer")
-    {
-        cout << "R. <Integer>\n";
-        token = lexer(infile);
+        outfile << "\tR. <Integer>\n";
+        token = lexer(infile, outfile);
         return true;
     }
     else if (get<1>(token) == "(")
     {
-        cout << "Used: (" << endl;
+        outfile << "Used: (" << endl;
         
-        token = lexer(infile);
-        Expression(infile, token);
+        token = lexer(infile, outfile);
+        Expression(infile, outfile, token);
         
         if (get<1>(token) != ")")
         {
-            cout << "\nERROR: NOT VALID SYNTAX.\n";
-            cout << "Expected: )\nReceived: " << get<1>(token) << endl;
-            exit(1);
+            errorReporting(outfile, ")", get<1>(token));
         }
-        token = lexer(infile);
+        token = lexer(infile, outfile);
         return true;
     }
     else if (get<0>(token) == "Real")
     {
-        cout << "used R. <Real>\n";
-        token = lexer(infile);
+        outfile << "used R. <Real>\n";
+        token = lexer(infile, outfile);
         return true;
     }
     else if (get<0>(token) == "Keyword")
@@ -861,98 +839,122 @@ bool Primary(ifstream &infile, tuple<string, string> &token)
         }
         if (temp == "true")
         {
-            cout << "R. true\n";
-            token = lexer(infile);
+            outfile << "\tR. true\n";
+            token = lexer(infile, outfile);
             return true;
         }
         else if (temp == "false")
         {
-            cout << "R. false\n";
-            token = lexer(infile);
+            outfile << "\tR. false\n";
+            token = lexer(infile, outfile);
             return true;
         }
-        cout << "\nERROR: NOT VALID SYNTAX.\n";
-        cout << "Expected: <Primary>\nReceived: " << get<1>(token) << endl;
-        exit(1);
+        errorReporting(outfile, expected, get<0>(token));
         return false;
     }
-    cout << "\nERROR: NOT VALID SYNTAX.\n";
-    cout << "Expected: <Primary>\nReceived: " << get<1>(token) << endl;
-    exit(1);
+    else if (Identifier(outfile, token))
+    {
+        token = lexer(infile, outfile);
+        PrimaryEnd(infile, outfile, token);
+        return true;
+    }
+    
+    errorReporting(outfile, expected, get<0>(token));
+    
     return false;
 }
 
-void PrimaryEnd(ifstream &infile, tuple<string, string> &token)
+//R38. <Primary End> ::= ( <IDs> ) | ε
+void PrimaryEnd(ifstream &infile, ostream &outfile, tuple<string, string> &token)
 {
     if (printSwitch)
     {
-        cout << "R38. <Primary End> ::= ( <IDs> ) | ε" << endl;
+        outfile << "\tR38. <Primary End> ::= ( <IDs> ) | ε" << endl;
     }
     if (get<1>(token) == "(")
     {
-        token = lexer(infile);
-        if(!IDs(infile, token))
+        token = lexer(infile, outfile);
+        if(!IDs(infile, outfile, token))
         {
-            cout << "\nERROR: NOT VALID SYNTAX.\n";
-            cout << "Expected: (\nReceived: " << get<1>(token) << endl;
-            exit(1);
+            errorReporting(outfile, "(", get<1>(token));
         }
+        
         
         if (get<1>(token) != ")")
         {
-            cout << "\nERROR: NOT VALID SYNTAX.\n";
-            cout << "Expected: )\nReceived: " << get<1>(token) << endl;
-            exit(1);
+            errorReporting(outfile, ")", get<1>(token));
         }
+        token = lexer(infile, outfile);
     }
 }
 
-bool TermPrime(ifstream &infile, tuple<string, string> &token)
+//R35.<Term’> ::= * <Factor> <Term’>  | / <Factor> <Term’> | ε
+bool TermPrime(ifstream &infile, ostream &outfile, tuple<string, string> &token)
 {
     if (printSwitch)
     {
-        cout << "R35.<Term’> ::= * <Factor> <Term’>  | / <Factor> <Term’> | ε" << endl;
+        outfile << "\tR35.<Term’> ::= * <Factor> <Term’>  | / <Factor> <Term’> | ε" << endl;
     }
     
     if (get<1>(token) == "*")
     {
-        token = lexer(infile);
-        Factor(infile, token);
-        TermPrime(infile, token);
+        token = lexer(infile, outfile);
+        Factor(infile, outfile, token);
+        TermPrime(infile, outfile, token);
         return true;
     }
     else if (get<1>(token) == "/")
     {
-        token = lexer(infile);
-        Factor(infile, token);
-        TermPrime(infile, token);
+        token = lexer(infile, outfile);
+        Factor(infile, outfile, token);
+        TermPrime(infile, outfile, token);
         return true;
     }
     return false;
 }
 
-bool ExpressionPrime(ifstream &infile, tuple<string, string> &token)
+//R33. <Expression’> ::= + <Term> <Expression’>   |  - <Term>  <Expression’>   | ε
+bool ExpressionPrime(ifstream &infile, ostream &outfile, tuple<string, string> &token)
 {
     if (printSwitch)
     {
-        cout << "R33. <Expression’> ::= + <Term> <Expression’>   |  - <Term>  <Expression’>   | ε" << endl;
+        outfile << "\tR33. <Expression’> ::= + <Term> <Expression’>   |  - <Term>  <Expression’>   | ε" << endl;
     }
 
     if (get<1>(token) == "+")
     {
-        token = lexer(infile);
-        Term(infile, token);
-        ExpressionPrime(infile, token);
+        token = lexer(infile, outfile);
+        Term(infile, outfile, token);
+        ExpressionPrime(infile, outfile, token);
         return true;
     }
     else if (get<1>(token) == "-")
     {
-        token = lexer(infile);
-        Term(infile, token);
-        ExpressionPrime(infile, token);
+        token = lexer(infile, outfile);
+        Term(infile, outfile, token);
+        ExpressionPrime(infile, outfile, token);
         return true;
     }
     return false;
+}
+
+//R38. <Primary End> ::= ( <IDs> ) | ε
+void empty(ifstream &infile, ostream &outfile, tuple<string, string> &token)
+{
+    outfile << "R39. <Empty>   ::= ε";
+}
+
+void errorReporting(ostream &outfile, string expected, string received)
+{
+    if(printSwitch)
+    {
+        
+        outfile << "\nERROR: NOT VALID SYNTAX. on line: " << getLineNumber() << "\n";
+        outfile << "Expected: " << expected << "\nReceived: " << received << endl;
+    }
+    cerr << "\nERROR: NOT VALID SYNTAX. On line: " << getLineNumber() << "\n";
+    cerr << "Expected: " << expected << "\nReceived: " << received << endl;
+    exit(1);
 }
 
 // fix compound function
