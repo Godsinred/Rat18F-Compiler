@@ -139,7 +139,7 @@ bool Identifier(ostream &outfile, const tuple<string, string> &token)
     
     if(get<0>(token) != "Identifier")
     {
-        errorReporting(outfile, "Identifier", get<1>(token));
+        return false;
     }
     outfile << "Identifier found." << endl;
     return true;
@@ -348,6 +348,10 @@ void Body(ifstream &infile, ostream &outfile, tuple<string, string> &token)
     {
         errorReporting(outfile, "}", get<1>(token));
     }
+    else{
+        cout << "\n This is for a Body \n;";
+    }
+    
     token = lexer(infile, outfile);
 }
 
@@ -431,17 +435,13 @@ bool Compound(ifstream &infile, ostream &outfile, tuple<string, string> &token)
         token = lexer(infile, outfile);
         if(!StatementList(infile, outfile, token))
         {
-            outfile << "\nERROR: NOT VALID SYNTAX.\n";
-            outfile << "Expected: <Statement List>\nReceived: " << get<1>(token) << endl;
-            exit(1);
+            errorReporting(outfile, "<statement List>", get<1>(token));
         }
         
-        token = lexer(infile, outfile);
+        //token = lexer(infile, outfile); //Could be found @ and earlier time.
         if(get<1>(token) != "}")
         {
-            outfile << "\nERROR: NOT VALID SYNTAX.\n";
-            outfile << "Expected: }\nReceived: " << get<1>(token) << endl;
-            exit(1);
+            errorReporting(outfile, "}", get<1>(token));
         }
         token = lexer(infile, outfile);
         return true;
