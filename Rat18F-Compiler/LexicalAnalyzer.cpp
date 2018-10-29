@@ -10,7 +10,7 @@
 #include "LexicalAnalyzer.h"
 
 bool printswitch = true;
-int lineNumber = 0;
+int lineNumber = 1;
 
 
 //returns a col for the identifier DFSM
@@ -280,8 +280,8 @@ tuple<string, string> lexer(ifstream &inFile, ostream &outfile)
         outfile << endl << left << "Token: " << setw(20) << get<0>(token) << "Lexeme: " << setw(20) << get<1>(token) << endl;
         if(get<0>(token) == "Unknown")
         {
-            outfile << "ERROR: Unknown token.\n";
-            cout << "ERROR: Unknown token.\n";
+            outfile << "ERROR: Unknown token. line number: " << lineNumber << "\n";
+            cerr << "ERROR: Unknown token. line number: " << lineNumber << "\n";
             exit(1);
         }
     }

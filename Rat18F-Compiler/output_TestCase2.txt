@@ -334,12 +334,293 @@ Token: Identifier          Lexeme: starting
 	R Checker. <Identifier>
 Identifier found.
 
-Token: Separator           Lexeme: )                   
+Token: Operator            Lexeme: ==                  
 	R38. <Primary End> ::= ( <IDs> ) | ε
 	R35.<Term’> ::= * <Factor> <Term’>  | / <Factor> <Term’> | ε
 	R33. <Expression’> ::= + <Term> <Expression’>   |  - <Term>  <Expression’>   | ε
 	R31. <Relop> ::=        ==   |   ^=    |   >     |   <    |   =>    |   =<
 
-ERROR: NOT VALID SYNTAX. on line: 9
-Expected: == | ^= | > | < | => | =<
-Received: )
+Token: Real                Lexeme: 3.543               
+	R32. <Expression> ::= <Term> <Expression’>
+	R34. <Term> ::= <Factor> <Term’>
+	R36. <Factor> ::= - <Primary> | <Primary>
+	R37. <Primary> ::= <Identifier> <Primary End> | <Integer> | (<Expression>) | <Real> | true |false
+used R. <Real>
+
+Token: Separator           Lexeme: )                   
+	R35.<Term’> ::= * <Factor> <Term’>  | / <Factor> <Term’> | ε
+	R33. <Expression’> ::= + <Term> <Expression’>   |  - <Term>  <Expression’>   | ε
+	Matched )
+
+Token: Identifier          Lexeme: e                   
+	R20. <Statement> ::=   <Compound>  |  <Assign> |   <If>  |  <Return>   | <Print>   |   <Scan>   |  <While>
+	R23. <If> ::=     if  ( <Condition>  ) <Statement>   <if End>
+	R25. <Return> ::=  return <Return End>
+	R27. <Print> ::=    put ( <Expression>);
+	R28. <Scan> ::=    get ( <IDs> );
+	R29. <While> ::=  while ( <Condition>  )  <Statement> whileend
+	R22. <Assign> ::=     <Identifier> = <Expression> ;
+	R Checker. <Identifier>
+Identifier found.
+
+Token: Operator            Lexeme: =                   
+
+Token: Keyword             Lexeme: true                
+	R32. <Expression> ::= <Term> <Expression’>
+	R34. <Term> ::= <Factor> <Term’>
+	R36. <Factor> ::= - <Primary> | <Primary>
+	R37. <Primary> ::= <Identifier> <Primary End> | <Integer> | (<Expression>) | <Real> | true |false
+	R. true
+
+Token: Separator           Lexeme: ;                   
+	R35.<Term’> ::= * <Factor> <Term’>  | / <Factor> <Term’> | ε
+	R33. <Expression’> ::= + <Term> <Expression’>   |  - <Term>  <Expression’>   | ε
+
+Token: Keyword             Lexeme: else                
+	R24. <if End> ::= ifend | else <Statement> ifend
+
+Token: Identifier          Lexeme: a                   
+	R20. <Statement> ::=   <Compound>  |  <Assign> |   <If>  |  <Return>   | <Print>   |   <Scan>   |  <While>
+	R23. <If> ::=     if  ( <Condition>  ) <Statement>   <if End>
+	R25. <Return> ::=  return <Return End>
+	R27. <Print> ::=    put ( <Expression>);
+	R28. <Scan> ::=    get ( <IDs> );
+	R29. <While> ::=  while ( <Condition>  )  <Statement> whileend
+	R22. <Assign> ::=     <Identifier> = <Expression> ;
+	R Checker. <Identifier>
+Identifier found.
+
+Token: Operator            Lexeme: =                   
+
+Token: Identifier          Lexeme: b                   
+	R32. <Expression> ::= <Term> <Expression’>
+	R34. <Term> ::= <Factor> <Term’>
+	R36. <Factor> ::= - <Primary> | <Primary>
+	R37. <Primary> ::= <Identifier> <Primary End> | <Integer> | (<Expression>) | <Real> | true |false
+	R Checker. <Identifier>
+Identifier found.
+
+Token: Separator           Lexeme: ;                   
+	R38. <Primary End> ::= ( <IDs> ) | ε
+	R35.<Term’> ::= * <Factor> <Term’>  | / <Factor> <Term’> | ε
+	R33. <Expression’> ::= + <Term> <Expression’>   |  - <Term>  <Expression’>   | ε
+
+Token: Keyword             Lexeme: ifend               
+
+Token: Separator           Lexeme: }                   
+	R19. <Statement List End> ::= <Statement List> | ε
+	R18. <Statement List> ::=   <Statement>  <Statement List End>
+	R20. <Statement> ::=   <Compound>  |  <Assign> |   <If>  |  <Return>   | <Print>   |   <Scan>   |  <While>
+	R23. <If> ::=     if  ( <Condition>  ) <Statement>   <if End>
+	R25. <Return> ::=  return <Return End>
+	R27. <Print> ::=    put ( <Expression>);
+	R28. <Scan> ::=    get ( <IDs> );
+	R29. <While> ::=  while ( <Condition>  )  <Statement> whileend
+	R22. <Assign> ::=     <Identifier> = <Expression> ;
+	R Checker. <Identifier>
+	R21. <Compound> ::=   { <Statement List>  }
+
+Token: Keyword             Lexeme: function            
+	R4.<Function Definitions End> ::= <Function Definitions>  | ε
+	R3. <Function Definitions>  ::= <Function> <Function Definitions End>
+	R5. <Function> ::= function  <Identifier>   ( <Opt Parameter List> )  <Opt Declaration List>  <Body>
+
+Token: Identifier          Lexeme: secondFunction      
+	R Checker. <Identifier>
+Identifier found.
+
+Token: Separator           Lexeme: (                   
+
+Token: Identifier          Lexeme: paramOne            
+	R6. <Opt Parameter List> ::=  <Parameter List>    |     <Empty>
+	R7. <Parameter List>  ::=  <Parameter>  <Parameter List End>
+	R9. <Parameter> ::=  <IDs > : <Qualifier>
+	R16. <IDs> ::=     <Identifier>  <IDs End>
+	R Checker. <Identifier>
+Identifier found.
+
+Token: Separator           Lexeme: :                   
+	R17. <IDs End> ::= , <IDs> | ε
+
+Token: Keyword             Lexeme: int                 
+	R10. <Qualifier> ::= int     |    boolean    |  real
+
+Token: Separator           Lexeme: )                   
+	R8. <Parameter List End> ::= , <Parameter List> | ε
+
+Token: Separator           Lexeme: {                   
+	R12. <Opt Declaration List> ::= <Declaration List>   |    <Empty>
+	R13. <Declaration List>  ::= <Declaration> ;   <Declaration List End>
+	R15. <Declaration> ::=   <Qualifier > <IDs>
+	R10. <Qualifier> ::= int     |    boolean    |  real
+	R11. <Body>  ::= {  < Statement List>  }
+
+Token: Keyword             Lexeme: if                  
+	R18. <Statement List> ::=   <Statement>  <Statement List End>
+	R20. <Statement> ::=   <Compound>  |  <Assign> |   <If>  |  <Return>   | <Print>   |   <Scan>   |  <While>
+	R23. <If> ::=     if  ( <Condition>  ) <Statement>   <if End>
+
+Token: Separator           Lexeme: (                   
+	Matched (
+
+Token: Identifier          Lexeme: A                   
+	R30. <Condition> ::=     <Expression>  <Relop>   <Expression>
+	R32. <Expression> ::= <Term> <Expression’>
+	R34. <Term> ::= <Factor> <Term’>
+	R36. <Factor> ::= - <Primary> | <Primary>
+	R37. <Primary> ::= <Identifier> <Primary End> | <Integer> | (<Expression>) | <Real> | true |false
+	R Checker. <Identifier>
+Identifier found.
+
+Token: Operator            Lexeme: >                   
+	R38. <Primary End> ::= ( <IDs> ) | ε
+	R35.<Term’> ::= * <Factor> <Term’>  | / <Factor> <Term’> | ε
+	R33. <Expression’> ::= + <Term> <Expression’>   |  - <Term>  <Expression’>   | ε
+	R31. <Relop> ::=        ==   |   ^=    |   >     |   <    |   =>    |   =<
+
+Token: Identifier          Lexeme: B                   
+	R32. <Expression> ::= <Term> <Expression’>
+	R34. <Term> ::= <Factor> <Term’>
+	R36. <Factor> ::= - <Primary> | <Primary>
+	R37. <Primary> ::= <Identifier> <Primary End> | <Integer> | (<Expression>) | <Real> | true |false
+	R Checker. <Identifier>
+Identifier found.
+
+Token: Separator           Lexeme: )                   
+	R38. <Primary End> ::= ( <IDs> ) | ε
+	R35.<Term’> ::= * <Factor> <Term’>  | / <Factor> <Term’> | ε
+	R33. <Expression’> ::= + <Term> <Expression’>   |  - <Term>  <Expression’>   | ε
+	Matched )
+
+Token: Identifier          Lexeme: C                   
+	R20. <Statement> ::=   <Compound>  |  <Assign> |   <If>  |  <Return>   | <Print>   |   <Scan>   |  <While>
+	R23. <If> ::=     if  ( <Condition>  ) <Statement>   <if End>
+	R25. <Return> ::=  return <Return End>
+	R27. <Print> ::=    put ( <Expression>);
+	R28. <Scan> ::=    get ( <IDs> );
+	R29. <While> ::=  while ( <Condition>  )  <Statement> whileend
+	R22. <Assign> ::=     <Identifier> = <Expression> ;
+	R Checker. <Identifier>
+Identifier found.
+
+Token: Operator            Lexeme: =                   
+
+Token: Identifier          Lexeme: D                   
+	R32. <Expression> ::= <Term> <Expression’>
+	R34. <Term> ::= <Factor> <Term’>
+	R36. <Factor> ::= - <Primary> | <Primary>
+	R37. <Primary> ::= <Identifier> <Primary End> | <Integer> | (<Expression>) | <Real> | true |false
+	R Checker. <Identifier>
+Identifier found.
+
+Token: Separator           Lexeme: ;                   
+	R38. <Primary End> ::= ( <IDs> ) | ε
+	R35.<Term’> ::= * <Factor> <Term’>  | / <Factor> <Term’> | ε
+	R33. <Expression’> ::= + <Term> <Expression’>   |  - <Term>  <Expression’>   | ε
+
+Token: Keyword             Lexeme: ifend               
+	R24. <if End> ::= ifend | else <Statement> ifend
+
+Token: Separator           Lexeme: }                   
+	R19. <Statement List End> ::= <Statement List> | ε
+	R18. <Statement List> ::=   <Statement>  <Statement List End>
+	R20. <Statement> ::=   <Compound>  |  <Assign> |   <If>  |  <Return>   | <Print>   |   <Scan>   |  <While>
+	R23. <If> ::=     if  ( <Condition>  ) <Statement>   <if End>
+	R25. <Return> ::=  return <Return End>
+	R27. <Print> ::=    put ( <Expression>);
+	R28. <Scan> ::=    get ( <IDs> );
+	R29. <While> ::=  while ( <Condition>  )  <Statement> whileend
+	R22. <Assign> ::=     <Identifier> = <Expression> ;
+	R Checker. <Identifier>
+	R21. <Compound> ::=   { <Statement List>  }
+
+Token: Separator           Lexeme: $$                  
+	R4.<Function Definitions End> ::= <Function Definitions>  | ε
+	R3. <Function Definitions>  ::= <Function> <Function Definitions End>
+	R5. <Function> ::= function  <Identifier>   ( <Opt Parameter List> )  <Opt Declaration List>  <Body>
+
+Token: Keyword             Lexeme: int                 
+	R12. <Opt Declaration List> ::= <Declaration List>   |    <Empty>
+	R13. <Declaration List>  ::= <Declaration> ;   <Declaration List End>
+	R15. <Declaration> ::=   <Qualifier > <IDs>
+	R10. <Qualifier> ::= int     |    boolean    |  real
+
+Token: Identifier          Lexeme: test                
+	R16. <IDs> ::=     <Identifier>  <IDs End>
+	R Checker. <Identifier>
+Identifier found.
+
+Token: Separator           Lexeme: ,                   
+	R17. <IDs End> ::= , <IDs> | ε
+
+Token: Identifier          Lexeme: opt                 
+	R16. <IDs> ::=     <Identifier>  <IDs End>
+	R Checker. <Identifier>
+Identifier found.
+
+Token: Separator           Lexeme: ,                   
+	R17. <IDs End> ::= , <IDs> | ε
+
+Token: Identifier          Lexeme: Dec                 
+	R16. <IDs> ::=     <Identifier>  <IDs End>
+	R Checker. <Identifier>
+Identifier found.
+
+Token: Separator           Lexeme: ,                   
+	R17. <IDs End> ::= , <IDs> | ε
+
+Token: Identifier          Lexeme: list                
+	R16. <IDs> ::=     <Identifier>  <IDs End>
+	R Checker. <Identifier>
+Identifier found.
+
+Token: Separator           Lexeme: ;                   
+	R17. <IDs End> ::= , <IDs> | ε
+
+Token: Identifier          Lexeme: test                
+	R14. <Declaration List End> ::= <Declaration List> | ε
+	R13. <Declaration List>  ::= <Declaration> ;   <Declaration List End>
+	R15. <Declaration> ::=   <Qualifier > <IDs>
+	R10. <Qualifier> ::= int     |    boolean    |  real
+	R18. <Statement List> ::=   <Statement>  <Statement List End>
+	R20. <Statement> ::=   <Compound>  |  <Assign> |   <If>  |  <Return>   | <Print>   |   <Scan>   |  <While>
+	R23. <If> ::=     if  ( <Condition>  ) <Statement>   <if End>
+	R25. <Return> ::=  return <Return End>
+	R27. <Print> ::=    put ( <Expression>);
+	R28. <Scan> ::=    get ( <IDs> );
+	R29. <While> ::=  while ( <Condition>  )  <Statement> whileend
+	R22. <Assign> ::=     <Identifier> = <Expression> ;
+	R Checker. <Identifier>
+Identifier found.
+
+Token: Operator            Lexeme: =                   
+
+Token: Integer             Lexeme: 1                   
+	R32. <Expression> ::= <Term> <Expression’>
+	R34. <Term> ::= <Factor> <Term’>
+	R36. <Factor> ::= - <Primary> | <Primary>
+	R37. <Primary> ::= <Identifier> <Primary End> | <Integer> | (<Expression>) | <Real> | true |false
+	R. <Integer>
+
+Token: Separator           Lexeme: ;                   
+	R35.<Term’> ::= * <Factor> <Term’>  | / <Factor> <Term’> | ε
+	R33. <Expression’> ::= + <Term> <Expression’>   |  - <Term>  <Expression’>   | ε
+
+Token: Keyword             Lexeme: return              
+	R19. <Statement List End> ::= <Statement List> | ε
+	R18. <Statement List> ::=   <Statement>  <Statement List End>
+	R20. <Statement> ::=   <Compound>  |  <Assign> |   <If>  |  <Return>   | <Print>   |   <Scan>   |  <While>
+	R23. <If> ::=     if  ( <Condition>  ) <Statement>   <if End>
+	R25. <Return> ::=  return <Return End>
+
+Token: Separator           Lexeme: $$                  
+	R26. <Return End> ::= ; |  <Expression> ;
+	R32. <Expression> ::= <Term> <Expression’>
+	R34. <Term> ::= <Factor> <Term’>
+	R36. <Factor> ::= - <Primary> | <Primary>
+	R37. <Primary> ::= <Identifier> <Primary End> | <Integer> | (<Expression>) | <Real> | true |false
+	R Checker. <Identifier>
+
+ERROR: NOT VALID SYNTAX. on line: 23
+Expected: <Identifier> | <Integer> | ( | <Real> | true | false
+Received: Separator

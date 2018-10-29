@@ -52,7 +52,8 @@ void Rat18F(ifstream &infile, ostream &outfile)
             errorReporting(outfile, "$$", get<1>(token));
         }
         
-        outfile << "\nSyntax Analyzer is correct.\n";
+        outfile << "\nSyntax Analyzer is completes.\n";
+    cout << "\nSyntax Analyzer is complete.\n";
     
 }
 
@@ -102,7 +103,7 @@ bool Function(ifstream &infile, ostream &outfile, tuple<string, string> &token)
         token = lexer(infile, outfile);
         if(!Identifier(outfile, token))
         {
-            errorReporting(outfile, "Identifier", get<1>(token));
+            errorReporting(outfile, "Identifier", get<0>(token));
         }
         
         token = lexer(infile, outfile);
@@ -244,7 +245,7 @@ void IDsEnd(ifstream &infile, ostream &outfile, tuple<string, string> &token)
         token = lexer(infile, outfile);
         if(!IDs(infile, outfile, token))
         {
-            errorReporting(outfile, "Identifier", get<1>(token));
+            errorReporting(outfile, "Identifier", get<0>(token));
         }
     }
 }
@@ -341,7 +342,7 @@ void Body(ifstream &infile, ostream &outfile, tuple<string, string> &token)
     token = lexer(infile, outfile);
     if(!StatementList(infile, outfile, token))
     {
-        errorReporting(outfile, "<statement List>",get<1>(token));
+        errorReporting(outfile, "{ | identifier | if | return | put | get | while", get<1>(token));
     }
     
     if(get<1>(token) != "}")
@@ -431,7 +432,7 @@ bool Compound(ifstream &infile, ostream &outfile, tuple<string, string> &token)
         token = lexer(infile, outfile);
         if(!StatementList(infile, outfile, token))
         {
-            errorReporting(outfile, "<statement List>", get<1>(token));
+            //errorReporting(outfile, "<statement List>", get<1>(token));
         }
         
         //token = lexer(infile, outfile); //Could be found @ and earlier time.
@@ -458,9 +459,7 @@ bool Assign(ifstream &infile, ostream &outfile, tuple<string, string> &token)
         token = lexer(infile, outfile);
         if(get<1>(token) != "=")
         {
-            outfile << "\nERROR: NOT VALID SYNTAX.\n";
-            outfile << "Expected: }\nReceived: " << get<1>(token) << endl;
-            exit(1);
+            errorReporting(outfile, "=", get<1>(token));
         }
     
         token = lexer(infile, outfile);
@@ -468,9 +467,7 @@ bool Assign(ifstream &infile, ostream &outfile, tuple<string, string> &token)
         
         if(get<1>(token) != ";")
         {
-            outfile << "\nERROR: NOT VALID SYNTAX.\n";
-            outfile << "Expected: ;\nReceived: " << get<1>(token) << endl;
-            exit(1);
+            errorReporting(outfile, ";", get<1>(token));
         }
         token = lexer(infile, outfile);
         return true;
@@ -551,9 +548,7 @@ bool ReturnEnd(ifstream &infile, ostream &outfile, tuple<string, string> &token)
     
     if (get<1>(token) != ";")
     {
-        outfile << "\nERROR: NOT VALID SYNTAX.\n";
-        outfile << "Expected: ;\nReceived: " << get<1>(token) << endl;
-        exit(1);
+        errorReporting(outfile, ";", get<1>(token));
     }
     outfile << "Matched ;\n";
     token = lexer(infile, outfile);
@@ -574,9 +569,7 @@ bool Print(ifstream &infile, ostream &outfile, tuple<string, string> &token)
         token = lexer(infile, outfile);
         if (get<1>(token) != "(")
         {
-            outfile << "\nERROR: NOT VALID SYNTAX.\n";
-            outfile << "Expected: (\nReceived: " << get<1>(token) << endl;
-            exit(1);
+            errorReporting(outfile, "(", get<1>(token));
         }
         
         token = lexer(infile, outfile);
@@ -664,7 +657,7 @@ bool While(ifstream &infile, ostream &outfile, tuple<string, string> &token)
         token = lexer(infile, outfile);
         if(!Statement(infile, outfile, token))
         {
-            errorReporting(outfile, "<statement>", get<0>(token));
+            errorReporting(outfile, "{ | identifier | if | return | put | get | while", get<1>(token));
         }
         
         if (get<1>(token) != "whileend")
@@ -706,16 +699,16 @@ void IfEnd(ifstream &infile, ostream &outfile, tuple<string, string> &token)
         token = lexer(infile, outfile);
         if(!Statement(infile, outfile, token))
         {
-            errorReporting(outfile, "<statement>", get<0>(token));
+            errorReporting(outfile, "{ | identifier | if | return | put | get | while", get<1>(token));
         }
 
-        if(get<1>(token) != "ifend")
+        if(get<1>(token) != "ifend" && get<1>(token) != "ifEnd")
         {
             errorReporting(outfile, "ifEnd", get<1>(token));
         }
         token = lexer(infile, outfile);
     }
-    else if(get<1>(token) == "ifend")
+    else if(get<1>(token) == "ifend" || get<1>(token) == "ifEnd")
     {
         token  = lexer(infile, outfile);
     }
@@ -953,3 +946,6 @@ void errorReporting(ostream &outfile, string expected, string received)
 
 // do we even need this?
 //R39. <Empty>   ::= ε
+
+
+//errorReporting(outfile, "{ | identifier | if | return | put | get | while", get<1>(token));

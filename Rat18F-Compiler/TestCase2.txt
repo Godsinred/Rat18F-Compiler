@@ -7,7 +7,9 @@ b=1+2;
 c=1+2-(-3);
 d=1+2-(-3)*4;
 e=1+2-(-3)*4/5;
-if (starting )
+if (starting  == 3.543) e = true;
+else a = b;
+ifend
 }
 function secondFunction (paramOne : int)
 {
@@ -15,5 +17,7 @@ if(A > B)
 C = D; ifend
 }
 $$
+int test, opt, Dec, list;
 test = 1;
+return
 $$
