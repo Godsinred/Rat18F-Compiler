@@ -1,4 +1,4 @@
- Token               Lexeme              
+Token               Lexeme              
 ----------------------------------------
 
 
@@ -49,7 +49,7 @@ Token: Integer             Lexeme: 5
 	R32. <Expression> ::= <Term> <Expression’>
 	R34. <Term> ::= <Factor> <Term’>
 	R36. <Factor> ::= - <Primary> | <Primary>
-	R37. <Primary> ::=     <Identifier> <Primary End>   |  <Integer> |   ( <Expression> )   |   <Real>  |   true   |  false
+	R37. <Primary> ::= <Identifier> <Primary End> | <Integer> | (<Expression>) | <Real> | true |false
 	R. <Integer>
 
 Token: Operator            Lexeme: *                   
@@ -57,14 +57,14 @@ Token: Operator            Lexeme: *
 
 Token: Separator           Lexeme: (                   
 	R36. <Factor> ::= - <Primary> | <Primary>
-	R37. <Primary> ::=     <Identifier> <Primary End>   |  <Integer> |   ( <Expression> )   |   <Real>  |   true   |  false
+	R37. <Primary> ::= <Identifier> <Primary End> | <Integer> | (<Expression>) | <Real> | true |false
 Used: (
 
 Token: Identifier          Lexeme: fahr                
 	R32. <Expression> ::= <Term> <Expression’>
 	R34. <Term> ::= <Factor> <Term’>
 	R36. <Factor> ::= - <Primary> | <Primary>
-	R37. <Primary> ::=     <Identifier> <Primary End>   |  <Integer> |   ( <Expression> )   |   <Real>  |   true   |  false
+	R37. <Primary> ::= <Identifier> <Primary End> | <Integer> | (<Expression>) | <Real> | true |false
 	R Checker. <Identifier>
 Identifier found.
 
@@ -76,7 +76,7 @@ Token: Operator            Lexeme: -
 Token: Integer             Lexeme: 32                  
 	R34. <Term> ::= <Factor> <Term’>
 	R36. <Factor> ::= - <Primary> | <Primary>
-	R37. <Primary> ::=     <Identifier> <Primary End>   |  <Integer> |   ( <Expression> )   |   <Real>  |   true   |  false
+	R37. <Primary> ::= <Identifier> <Primary End> | <Integer> | (<Expression>) | <Real> | true |false
 	R. <Integer>
 
 Token: Separator           Lexeme: )                   
@@ -88,7 +88,7 @@ Token: Operator            Lexeme: /
 
 Token: Integer             Lexeme: 9                   
 	R36. <Factor> ::= - <Primary> | <Primary>
-	R37. <Primary> ::=     <Identifier> <Primary End>   |  <Integer> |   ( <Expression> )   |   <Real>  |   true   |  false
+	R37. <Primary> ::= <Identifier> <Primary End> | <Integer> | (<Expression>) | <Real> | true |false
 	R. <Integer>
 
 Token: Separator           Lexeme: ;                   
@@ -203,7 +203,7 @@ Token: Identifier          Lexeme: low
 	R32. <Expression> ::= <Term> <Expression’>
 	R34. <Term> ::= <Factor> <Term’>
 	R36. <Factor> ::= - <Primary> | <Primary>
-	R37. <Primary> ::=     <Identifier> <Primary End>   |  <Integer> |   ( <Expression> )   |   <Real>  |   true   |  false
+	R37. <Primary> ::= <Identifier> <Primary End> | <Integer> | (<Expression>) | <Real> | true |false
 	R Checker. <Identifier>
 Identifier found.
 
@@ -217,7 +217,7 @@ Token: Identifier          Lexeme: high
 	R32. <Expression> ::= <Term> <Expression’>
 	R34. <Term> ::= <Factor> <Term’>
 	R36. <Factor> ::= - <Primary> | <Primary>
-	R37. <Primary> ::=     <Identifier> <Primary End>   |  <Integer> |   ( <Expression> )   |   <Real>  |   true   |  false
+	R37. <Primary> ::= <Identifier> <Primary End> | <Integer> | (<Expression>) | <Real> | true |false
 	R Checker. <Identifier>
 Identifier found.
 
@@ -251,7 +251,7 @@ Token: Identifier          Lexeme: low
 	R32. <Expression> ::= <Term> <Expression’>
 	R34. <Term> ::= <Factor> <Term’>
 	R36. <Factor> ::= - <Primary> | <Primary>
-	R37. <Primary> ::=     <Identifier> <Primary End>   |  <Integer> |   ( <Expression> )   |   <Real>  |   true   |  false
+	R37. <Primary> ::= <Identifier> <Primary End> | <Integer> | (<Expression>) | <Real> | true |false
 	R Checker. <Identifier>
 Identifier found.
 
@@ -277,7 +277,7 @@ Token: Identifier          Lexeme: convert1x
 	R32. <Expression> ::= <Term> <Expression’>
 	R34. <Term> ::= <Factor> <Term’>
 	R36. <Factor> ::= - <Primary> | <Primary>
-	R37. <Primary> ::=     <Identifier> <Primary End>   |  <Integer> |   ( <Expression> )   |   <Real>  |   true   |  false
+	R37. <Primary> ::= <Identifier> <Primary End> | <Integer> | (<Expression>) | <Real> | true |false
 	R Checker. <Identifier>
 Identifier found.
 
@@ -317,7 +317,7 @@ Token: Identifier          Lexeme: low
 	R32. <Expression> ::= <Term> <Expression’>
 	R34. <Term> ::= <Factor> <Term’>
 	R36. <Factor> ::= - <Primary> | <Primary>
-	R37. <Primary> ::=     <Identifier> <Primary End>   |  <Integer> |   ( <Expression> )   |   <Real>  |   true   |  false
+	R37. <Primary> ::= <Identifier> <Primary End> | <Integer> | (<Expression>) | <Real> | true |false
 	R Checker. <Identifier>
 Identifier found.
 
@@ -329,7 +329,7 @@ Token: Operator            Lexeme: +
 Token: Identifier          Lexeme: step                
 	R34. <Term> ::= <Factor> <Term’>
 	R36. <Factor> ::= - <Primary> | <Primary>
-	R37. <Primary> ::=     <Identifier> <Primary End>   |  <Integer> |   ( <Expression> )   |   <Real>  |   true   |  false
+	R37. <Primary> ::= <Identifier> <Primary End> | <Integer> | (<Expression>) | <Real> | true |false
 	R Checker. <Identifier>
 Identifier found.
 

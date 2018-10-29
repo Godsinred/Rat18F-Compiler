@@ -56,7 +56,7 @@ void Rat18F(ifstream &infile, ostream &outfile)
     
 }
 
-//R2. <Opt Function Definitions> ::= <Function Definitions>     |  <Empty>
+//R2. <Opt Function Definitions> ::= <Function Definitions>  |  <Empty>
 void OptFunctionDefinitions(ifstream &infile, ostream &outfile, tuple<string, string> &token)
 {
     if (printSwitch)
@@ -348,10 +348,6 @@ void Body(ifstream &infile, ostream &outfile, tuple<string, string> &token)
     {
         errorReporting(outfile, "}", get<1>(token));
     }
-    else{
-        cout << "\n This is for a Body \n;";
-    }
-    
     token = lexer(infile, outfile);
 }
 
@@ -495,9 +491,7 @@ bool If(ifstream &infile, ostream &outfile, tuple<string, string> &token)
         token = lexer(infile, outfile);
         if(get<1>(token) != "(")
         {
-            outfile << "\nERROR: NOT VALID SYNTAX.\n";
-            outfile << "Expected: }\nReceived: " << get<1>(token) << endl;
-            exit(1);
+            errorReporting(outfile, "(", get<1>(token));
         }
         outfile << "\tMatched (\n";
         
@@ -506,20 +500,15 @@ bool If(ifstream &infile, ostream &outfile, tuple<string, string> &token)
         
         if(get<1>(token) != ")")
         {
-            outfile << "\nERROR: NOT VALID SYNTAX.\n";
-            outfile << "Expected: ;\nReceived: " << get<1>(token) << endl;
-            exit(1);
+            errorReporting(outfile, ")", get<1>(token));
         }
         outfile << "\tMatched )\n";
         
         token = lexer(infile, outfile);
         if(!Statement(infile, outfile, token))
         {
-            outfile << "\nERROR: NOT VALID SYNTAX.\n";
-            outfile << "Expected: <Statement>\nReceived: " << get<1>(token) << endl;
-            exit(1);
+            errorReporting(outfile, "<Statement>", get<1>(token));
         }
-        
         IfEnd(infile, outfile, token);
         
         return true;
@@ -800,7 +789,7 @@ bool Primary(ifstream &infile, ostream &outfile, tuple<string, string> &token)
 {
     if (printSwitch)
     {
-        outfile << "\tR37. <Primary> ::=     <Identifier> <Primary End>   |  <Integer> |   ( <Expression> )   |   <Real>  |   true   |  false" << endl;
+        outfile << "\tR37. <Primary> ::= <Identifier> <Primary End> | <Integer> | (<Expression>) | <Real> | true |false" << endl;
     }
     string expected ="<Identifier> | <Integer> | ( | <Real> | true | false";
     if(get<0>(token) == "Integer")
@@ -948,7 +937,6 @@ void errorReporting(ostream &outfile, string expected, string received)
 {
     if(printSwitch)
     {
-        
         outfile << "\nERROR: NOT VALID SYNTAX. on line: " << getLineNumber() << "\n";
         outfile << "Expected: " << expected << "\nReceived: " << received << endl;
     }
