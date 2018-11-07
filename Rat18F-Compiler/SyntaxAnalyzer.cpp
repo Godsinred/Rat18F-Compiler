@@ -212,7 +212,7 @@ void ParameterListEnd(ifstream &infile, ostream &outfile, tuple<string, string> 
         token = lexer(infile, outfile);
         if(!ParameterList(infile, outfile, token))
         {
-            errorReporting(outfile, "<ParameterList", get<1>(token));
+            errorReporting(outfile, "<ParameterList>", get<1>(token));
         }
     }
 }
@@ -374,10 +374,8 @@ void StatementListEnd(ifstream &infile, ostream &outfile, tuple<string, string> 
     {
         outfile << "\tR19. <Statement List End> ::= <Statement List> | ε" << endl;
     }
-    if (StatementList(infile, outfile, token))
-    {
-        
-    }
+    
+    StatementList(infile, outfile, token);
 }
 
 //R20. <Statement> ::=   <Compound>  |  <Assign> |   <If>  |  <Return>   | <Print>   |   <Scan>   |  <While>
@@ -430,16 +428,14 @@ bool Compound(ifstream &infile, ostream &outfile, tuple<string, string> &token)
     if(get<1>(token) == "{")
     {
         token = lexer(infile, outfile);
-        if(!StatementList(infile, outfile, token))
-        {
-            //errorReporting(outfile, "<statement List>", get<1>(token));
-        }
         
-        //token = lexer(infile, outfile); //Could be found @ and earlier time.
+        StatementList(infile, outfile, token);
+        
         if(get<1>(token) != "}")
         {
             errorReporting(outfile, "}", get<1>(token));
         }
+        
         token = lexer(infile, outfile);
         return true;
     }

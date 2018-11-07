@@ -366,4 +366,4 @@ Token: Separator           Lexeme: $$
 	R Checker. <Identifier>
 	R21. <Compound> ::=   { <Statement List>  }
 
-Syntax Analyzer is correct.
+Syntax Analyzer is completes.
