@@ -27,32 +27,38 @@ bool printSwitch = true;
 //R1. <Rat18F>  ::=   <Opt Function Definitions>   $$  <Opt Declaration List>  <Statement List>  $$
 void Rat18F(ifstream &infile, ostream &outfile)
 {
-        outfile << endl;
-        tuple<string, string> token = lexer(infile, outfile);
-        if (printSwitch)
-        {
-            outfile << "\tR1. <Rat18F>  ::=   <Opt Function Definitions>   $$  <Opt Declaration List>  <Statement List>  $$" << endl;
-        }
-        
-        OptFunctionDefinitions(infile, outfile, token);
-        
-        
-        if(get<1>(token) != "$$")
-        {
-            errorReporting(outfile, "$$", get<1>(token));
-        }
+    outfile << endl;
+    tuple<string, string> token = lexer(infile, outfile);
+    if (printSwitch)
+    {
+        outfile << "\tR1. <Rat18F>  ::=   <Opt Function Definitions>   $$  <Opt Declaration List>  <Statement List>  $$" << endl;
+    }
+    
+    OptFunctionDefinitions(infile, outfile, token);
+    
+    
+    if(get<1>(token) != "$$")
+    {
+        errorReporting(outfile, "$$", get<1>(token));
+    }
+    token = lexer(infile, outfile);
+    
+    OptDeclarationList(infile, outfile, token);
+    
+    StatementList(infile, outfile, token);
+    
+    if(get<1>(token) != "$$")
+    {
+        errorReporting(outfile, "$$", get<1>(token));
+    }
+    
+    if(infile)
+    {
         token = lexer(infile, outfile);
-        
-        OptDeclarationList(infile, outfile, token);
-        
-        StatementList(infile, outfile, token);
-        
-        if(get<1>(token) != "$$")
-        {
-            errorReporting(outfile, "$$", get<1>(token));
-        }
-        
-        outfile << "\nSyntax Analyzer is completes.\n";
+        errorReporting(outfile, "End of File", get<1>(token));
+    }
+    
+    outfile << "\nSyntax Analyzer is completes.\n";
     cout << "\nSyntax Analyzer is complete.\n";
     
 }

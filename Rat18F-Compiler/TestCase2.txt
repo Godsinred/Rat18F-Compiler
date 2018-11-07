@@ -17,7 +17,7 @@ if(A > B)
 C = D; ifend
 }
 $$
-int test, opt, Dec, list;
 test = 1;
-return
+$$
+$$
 $$
