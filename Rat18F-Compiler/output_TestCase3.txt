@@ -57,7 +57,7 @@ Identifier found.
 Token: Separator           Lexeme: :                   
 	R17. <IDs End> ::= , <IDs> | ε
 
-Token: Identifier          Lexeme: boolean             
+Token: Keyword             Lexeme: boolean             
 	R10. <Qualifier> ::= int     |    boolean    |  real
 
 Token: Separator           Lexeme: )                   
@@ -458,7 +458,7 @@ Identifier found.
 Token: Separator           Lexeme: :                   
 	R17. <IDs End> ::= , <IDs> | ε
 
-Token: Identifier          Lexeme: boolean             
+Token: Keyword             Lexeme: boolean             
 	R10. <Qualifier> ::= int     |    boolean    |  real
 
 Token: Separator           Lexeme: )                   
@@ -781,7 +781,7 @@ Identifier found.
 Token: Separator           Lexeme: ;                   
 	R17. <IDs End> ::= , <IDs> | ε
 
-Token: Keyword             Lexeme: bool                
+Token: Identifier          Lexeme: bool                
 	R14. <Declaration List End> ::= <Declaration List> | ε
 	R13. <Declaration List>  ::= <Declaration> ;   <Declaration List End>
 	R15. <Declaration> ::=   <Qualifier > <IDs>
@@ -795,8 +795,10 @@ Token: Keyword             Lexeme: bool
 	R29. <While> ::=  while ( <Condition>  )  <Statement> whileend
 	R22. <Assign> ::=     <Identifier> = <Expression> ;
 	R Checker. <Identifier>
-	R21. <Compound> ::=   { <Statement List>  }
+Identifier found.
+
+Token: Identifier          Lexeme: pos                 
 
 ERROR: NOT VALID SYNTAX. on line: 24
-Expected: $$
-Received: bool
+Expected: =
+Received: pos

@@ -15,9 +15,9 @@ function secondFunction (paramOne : int)
 {
 if(A > B)
 C = D; ifend
+return
 }
 $$
 test = 1;
 $$
-$$
-$$
+crash

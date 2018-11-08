@@ -191,7 +191,7 @@ bool isOperator(const string &lexeme, string &nextLexeme, ifstream &inFile)
 //checks to see if the identifier is a keyword
 bool isKeyword(const string &lexeme)
 {
-    string keywords[14] ={"function", "int", "bool", "real",
+    string keywords[14] ={"function", "int", "boolean", "real",
         "if", "ifend", "else","return", "put", "get", "while", "whileend",
         "true", "false"};
     string lowercaseLexeme = "";

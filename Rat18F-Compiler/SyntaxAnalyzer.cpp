@@ -52,6 +52,13 @@ void Rat18F(ifstream &infile, ostream &outfile)
         errorReporting(outfile, "$$", get<1>(token));
     }
     
+    char c;
+    infile.get(c);
+    while (isspace(c) && infile)
+    {
+        infile.get(c);
+    }
+    
     if(infile)
     {
         token = lexer(infile, outfile);
@@ -223,39 +230,6 @@ void ParameterListEnd(ifstream &infile, ostream &outfile, tuple<string, string> 
     }
 }
 
-//R16. <IDs> ::=     <Identifier>  <IDs End>
-bool IDs(ifstream &infile, ostream &outfile, tuple<string, string> &token)
-{
-    if (printSwitch)
-    {
-        outfile << "\tR16. <IDs> ::=     <Identifier>  <IDs End>" << endl;
-    }
-    if(Identifier(outfile, token))
-    {
-        token = lexer(infile, outfile);
-        IDsEnd(infile, outfile, token);
-        return true;
-    }
-    return false;
-}
-
-//R17. <IDs End> ::= , <IDs> | ε
-void IDsEnd(ifstream &infile, ostream &outfile, tuple<string, string> &token)
-{
-    if (printSwitch)
-    {
-        outfile << "\tR17. <IDs End> ::= , <IDs> | ε" << endl;
-    }
-    if(get<1>(token) == ",")
-    {
-        token = lexer(infile, outfile);
-        if(!IDs(infile, outfile, token))
-        {
-            errorReporting(outfile, "Identifier", get<0>(token));
-        }
-    }
-}
-
 //R10. <Qualifier> ::= int     |    boolean    |  real
 bool Qualifier(ifstream &infile, ostream &outfile, tuple<string, string> &token)
 {
@@ -269,6 +243,33 @@ bool Qualifier(ifstream &infile, ostream &outfile, tuple<string, string> &token)
         return false;
     }
     return true;
+}
+
+//R11. <Body>  ::= {  < Statement List>  }
+void Body(ifstream &infile, ostream &outfile, tuple<string, string> &token)
+{
+    
+    if (printSwitch)
+    {
+        outfile << "\tR11. <Body>  ::= {  < Statement List>  }" << endl;
+    }
+    
+    if(get<1>(token) != "{")
+    {
+        errorReporting(outfile, "{", get<1>(token));
+    }
+    
+    token = lexer(infile, outfile);
+    if(!StatementList(infile, outfile, token))
+    {
+        errorReporting(outfile, "{ | identifier | if | return | put | get | while", get<1>(token));
+    }
+    
+    if(get<1>(token) != "}")
+    {
+        errorReporting(outfile, "}", get<1>(token));
+    }
+    token = lexer(infile, outfile);
 }
 
 //R12. <Opt Declaration List> ::= <Declaration List>   |    <Empty>
@@ -301,6 +302,16 @@ void DeclarationList(ifstream &infile, ostream &outfile, tuple<string, string> &
     }
 }
 
+//R14. <Declaration List End> ::= <Declaration List> | ε
+void DeclarationListEnd(ifstream &infile, ostream &outfile, tuple<string, string> &token)
+{
+    if (printSwitch)
+    {
+        outfile << "\tR14. <Declaration List End> ::= <Declaration List> | ε" << endl;
+    }
+    DeclarationList(infile, outfile, token);
+}
+
 //R15. <Declaration> ::=   <Qualifier > <IDs>
 bool Declaration(ifstream &infile, ostream &outfile, tuple<string, string> &token)
 {
@@ -321,41 +332,37 @@ bool Declaration(ifstream &infile, ostream &outfile, tuple<string, string> &toke
     return false;
 }
 
-//R14. <Declaration List End> ::= <Declaration List> | ε
-void DeclarationListEnd(ifstream &infile, ostream &outfile, tuple<string, string> &token)
+//R16. <IDs> ::=     <Identifier>  <IDs End>
+bool IDs(ifstream &infile, ostream &outfile, tuple<string, string> &token)
 {
     if (printSwitch)
     {
-        outfile << "\tR14. <Declaration List End> ::= <Declaration List> | ε" << endl;
+        outfile << "\tR16. <IDs> ::=     <Identifier>  <IDs End>" << endl;
     }
-    DeclarationList(infile, outfile, token);
+    if(Identifier(outfile, token))
+    {
+        token = lexer(infile, outfile);
+        IDsEnd(infile, outfile, token);
+        return true;
+    }
+    return false;
 }
 
-//R11. <Body>  ::= {  < Statement List>  }
-void Body(ifstream &infile, ostream &outfile, tuple<string, string> &token)
+//R17. <IDs End> ::= , <IDs> | ε
+void IDsEnd(ifstream &infile, ostream &outfile, tuple<string, string> &token)
 {
-    
     if (printSwitch)
     {
-        outfile << "\tR11. <Body>  ::= {  < Statement List>  }" << endl;
+        outfile << "\tR17. <IDs End> ::= , <IDs> | ε" << endl;
     }
-    
-    if(get<1>(token) != "{")
+    if(get<1>(token) == ",")
     {
-        errorReporting(outfile, "{", get<1>(token));
+        token = lexer(infile, outfile);
+        if(!IDs(infile, outfile, token))
+        {
+            errorReporting(outfile, "Identifier", get<0>(token));
+        }
     }
-    
-    token = lexer(infile, outfile);
-    if(!StatementList(infile, outfile, token))
-    {
-        errorReporting(outfile, "{ | identifier | if | return | put | get | while", get<1>(token));
-    }
-    
-    if(get<1>(token) != "}")
-    {
-        errorReporting(outfile, "}", get<1>(token));
-    }
-    token = lexer(infile, outfile);
 }
 
 //R18. <Statement List> ::=   <Statement>  <Statement List End>
@@ -833,7 +840,7 @@ bool Primary(ifstream &infile, ostream &outfile, tuple<string, string> &token)
             token = lexer(infile, outfile);
             return true;
         }
-        errorReporting(outfile, expected, get<0>(token));
+        errorReporting(outfile, expected, get<1>(token));
         return false;
     }
     else if (Identifier(outfile, token))
@@ -843,7 +850,7 @@ bool Primary(ifstream &infile, ostream &outfile, tuple<string, string> &token)
         return true;
     }
     
-    errorReporting(outfile, expected, get<0>(token));
+    errorReporting(outfile, expected, get<1>(token));
     
     return false;
 }
