@@ -4,25 +4,19 @@
      
      CPSC 323 - Section 1
      
-     Assignment 2
+     Assignment 3
  */
 
 
-//Rewrite using try and catch blocks. if done correctly this should solve all the problems.
-// not sure if this is the most elegand way of writing it.
-
-
-#include <iostream>
-#include "LexicalAnalyzer.h"
-#include <string>
-#include <fstream>
-#include <iomanip>
-#include <tuple>
 #include "SyntaxAnalyzer.h"
 
 using namespace std;
 
-bool printSwitch = true;
+bool printSwitch = false, declaring = false;
+string type = "";
+string instr_table[500][3];
+stack<int> jumpstack;
+int instr_address = 1;
 
 //R1. <Rat18F>  ::=   <Opt Function Definitions>   $$  <Opt Declaration List>  <Statement List>  $$
 void Rat18F(ifstream &infile, ostream &outfile)
@@ -64,10 +58,11 @@ void Rat18F(ifstream &infile, ostream &outfile)
         token = lexer(infile, outfile);
         errorReporting(outfile, "End of File", get<1>(token));
     }
-    
-    outfile << "\nSyntax Analyzer is completes.\n";
-    cout << "\nSyntax Analyzer is complete.\n";
-    
+    if (printSwitch)
+    {
+        outfile << "\nSyntax Analyzer is complete.\n";
+        cout << "\nSyntax Analyzer is complete.\n";
+    }
 }
 
 //R2. <Opt Function Definitions> ::= <Function Definitions>  |  <Empty>
@@ -155,7 +150,10 @@ bool Identifier(ostream &outfile, const tuple<string, string> &token)
     {
         return false;
     }
-    outfile << "Identifier found." << endl;
+    if (printSwitch)
+    {
+        outfile << "Identifier found." << endl;
+    }
     return true;
 }
 
@@ -188,6 +186,24 @@ bool ParameterList(ifstream &infile, ostream &outfile, tuple<string, string> &to
     return false;
 }
 
+//R8. <Parameter List End> ::= , <Parameter List> | ε
+void ParameterListEnd(ifstream &infile, ostream &outfile, tuple<string, string> &token)
+{
+    if (printSwitch)
+    {
+        outfile << "\tR8. <Parameter List End> ::= , <Parameter List> | ε" << endl;
+    }
+    if(get<1>(token) == ",")
+    {
+        token = lexer(infile, outfile);
+        if(!ParameterList(infile, outfile, token))
+        {
+            errorReporting(outfile, "<ParameterList>", get<1>(token));
+        }
+    }
+}
+
+
 //R9. <Parameter> ::=  <IDs > : <Qualifier>
 bool Parameter(ifstream &infile, ostream &outfile, tuple<string, string> &token)
 {
@@ -213,22 +229,6 @@ bool Parameter(ifstream &infile, ostream &outfile, tuple<string, string> &token)
     return false;
 }
 
-//R8. <Parameter List End> ::= , <Parameter List> | ε
-void ParameterListEnd(ifstream &infile, ostream &outfile, tuple<string, string> &token)
-{
-    if (printSwitch)
-    {
-        outfile << "\tR8. <Parameter List End> ::= , <Parameter List> | ε" << endl;
-    }
-    if(get<1>(token) == ",")
-    {
-        token = lexer(infile, outfile);
-        if(!ParameterList(infile, outfile, token))
-        {
-            errorReporting(outfile, "<ParameterList>", get<1>(token));
-        }
-    }
-}
 
 //R10. <Qualifier> ::= int     |    boolean    |  real
 bool Qualifier(ifstream &infile, ostream &outfile, tuple<string, string> &token)
@@ -242,6 +242,7 @@ bool Qualifier(ifstream &infile, ostream &outfile, tuple<string, string> &token)
     {
         return false;
     }
+    type = get<1>(token);
     return true;
 }
 
@@ -322,6 +323,7 @@ bool Declaration(ifstream &infile, ostream &outfile, tuple<string, string> &toke
     
     if(Qualifier(infile, outfile, token))
     {
+        declaring = true;
         token = lexer(infile, outfile);
         if(!IDs(infile, outfile, token))
         {
@@ -341,6 +343,10 @@ bool IDs(ifstream &infile, ostream &outfile, tuple<string, string> &token)
     }
     if(Identifier(outfile, token))
     {
+        if (declaring)
+        {
+            insertItem(type, get<1>(token));
+        }
         token = lexer(infile, outfile);
         IDsEnd(infile, outfile, token);
         return true;
@@ -363,6 +369,7 @@ void IDsEnd(ifstream &infile, ostream &outfile, tuple<string, string> &token)
             errorReporting(outfile, "Identifier", get<0>(token));
         }
     }
+    declaring = false;
 }
 
 //R18. <Statement List> ::=   <Statement>  <Statement List End>
@@ -465,6 +472,7 @@ bool Assign(ifstream &infile, ostream &outfile, tuple<string, string> &token)
     
     if(Identifier(outfile, token))
     {
+        string save = get<1>(token);
         token = lexer(infile, outfile);
         if(get<1>(token) != "=")
         {
@@ -473,6 +481,7 @@ bool Assign(ifstream &infile, ostream &outfile, tuple<string, string> &token)
     
         token = lexer(infile, outfile);
         Expression(infile, outfile, token);
+        gen_instr("POPM", to_string(get_address(save)));
         
         if(get<1>(token) != ";")
         {
@@ -494,13 +503,13 @@ bool If(ifstream &infile, ostream &outfile, tuple<string, string> &token)
     
     if(get<1>(token) == "if")
     {
+        int addr = instr_address;
+        
         token = lexer(infile, outfile);
         if(get<1>(token) != "(")
         {
             errorReporting(outfile, "(", get<1>(token));
         }
-        outfile << "\tMatched (\n";
-        
         token = lexer(infile, outfile);
         Condition(infile, outfile, token);
         
@@ -508,18 +517,52 @@ bool If(ifstream &infile, ostream &outfile, tuple<string, string> &token)
         {
             errorReporting(outfile, ")", get<1>(token));
         }
-        outfile << "\tMatched )\n";
-        
         token = lexer(infile, outfile);
         if(!Statement(infile, outfile, token))
         {
             errorReporting(outfile, "<Statement>", get<1>(token));
         }
+        back_patch(addr);
         IfEnd(infile, outfile, token);
         
         return true;
     }
     return false;
+}
+
+//R24. <if End> ::= ifend | else <Statement> ifend
+void IfEnd(ifstream &infile, ostream &outfile, tuple<string, string> &token)
+{
+    if (printSwitch)
+    {
+        outfile << "\tR24. <if End> ::= ifend | else <Statement> ifend" << endl;
+    }
+    
+    if(get<1>(token) == "else")
+    {
+        int addr = instr_address;
+        token = lexer(infile, outfile);
+        if(!Statement(infile, outfile, token))
+        {
+            errorReporting(outfile, "{ | identifier | if | return | put | get | while", get<1>(token));
+        }
+        
+        back_patch(addr);
+        
+        if(get<1>(token) != "ifend" && get<1>(token) != "ifEnd")
+        {
+            errorReporting(outfile, "ifEnd", get<1>(token));
+        }
+        token = lexer(infile, outfile);
+    }
+    else if(get<1>(token) == "ifend" || get<1>(token) == "ifEnd")
+    {
+        token  = lexer(infile, outfile);
+    }
+    else
+    {
+        errorReporting(outfile, "ifEnd | else", get<1>(token));
+    }
 }
 
 //R25. <Return> ::=  return <Return End>
@@ -548,7 +591,6 @@ bool ReturnEnd(ifstream &infile, ostream &outfile, tuple<string, string> &token)
     }
     if (get<1>(token) == ";")
     {
-        outfile << "Matched ;\n";
         token = lexer(infile, outfile);
         return true;
     }
@@ -559,7 +601,6 @@ bool ReturnEnd(ifstream &infile, ostream &outfile, tuple<string, string> &token)
     {
         errorReporting(outfile, ";", get<1>(token));
     }
-    outfile << "Matched ;\n";
     token = lexer(infile, outfile);
     return true;
 }
@@ -573,7 +614,6 @@ bool Print(ifstream &infile, ostream &outfile, tuple<string, string> &token)
     }
     if (get<1>(token) == "put")
     {
-        outfile << "\tMatched put\n";
     
         token = lexer(infile, outfile);
         if (get<1>(token) != "(")
@@ -588,6 +628,9 @@ bool Print(ifstream &infile, ostream &outfile, tuple<string, string> &token)
         {
             errorReporting(outfile, ")", get<1>(token));
         }
+        
+        gen_instr("STDOUT", "nil");
+        
         token = lexer(infile, outfile);
         
         if (get<1>(token) != ";")
@@ -600,6 +643,8 @@ bool Print(ifstream &infile, ostream &outfile, tuple<string, string> &token)
     return false;
 }
 
+
+//object code is not working correctly for this.
 //R28. <Scan> ::=    get ( <IDs> );
 bool Scan(ifstream &infile, ostream &outfile, tuple<string, string> &token)
 {
@@ -610,7 +655,6 @@ bool Scan(ifstream &infile, ostream &outfile, tuple<string, string> &token)
     
     if (get<1>(token) == "get")
     {
-        outfile << "\tMatched get\n";
         
         token = lexer(infile, outfile);
         if (get<1>(token) != "(")
@@ -619,7 +663,12 @@ bool Scan(ifstream &infile, ostream &outfile, tuple<string, string> &token)
         }
         
         token = lexer(infile, outfile);
+        
+        gen_instr("STDIN", "nil");
+        
         IDs(infile, outfile, token);
+        
+        //gen_instr("POPM", "")
         
         if (get<1>(token) != ")")
         {
@@ -647,8 +696,8 @@ bool While(ifstream &infile, ostream &outfile, tuple<string, string> &token)
     
     if (get<1>(token) == "while")
     {
-        outfile << "Matched while\n";
-        
+        int addr = instr_address;
+        gen_instr("label", "nil");
         token = lexer(infile, outfile);
         if (get<1>(token) != "(")
         {
@@ -668,7 +717,8 @@ bool While(ifstream &infile, ostream &outfile, tuple<string, string> &token)
         {
             errorReporting(outfile, "{ | identifier | if | return | put | get | while", get<1>(token));
         }
-        
+        gen_instr("JUMP", to_string(addr));
+        back_patch(instr_address);
         if (get<1>(token) != "whileend")
         {
             errorReporting(outfile, "whileend", get<1>(token));
@@ -689,41 +739,48 @@ void Condition(ifstream &infile, ostream &outfile, tuple<string, string> &token)
     }
     Expression(infile, outfile, token);
     
+    string op = get<1>(token);
+    
     Relop(infile, outfile, token);
     
     Expression(infile, outfile, token);
     
-}
-
-//R24. <if End> ::= ifend | else <Statement> ifend
-void IfEnd(ifstream &infile, ostream &outfile, tuple<string, string> &token)
-{
-    if (printSwitch)
+    //jumps for all conditional operators (not sure it is in the correct place).
+    if (op == "<")
     {
-        outfile << "\tR24. <if End> ::= ifend | else <Statement> ifend" << endl;
+        gen_instr("LES", "nil");
+        jumpstack.push(instr_address);
+        gen_instr("JUMPZ", "nil");
     }
-    
-    if(get<1>(token) == "else")
+    else if(op == ">")
     {
-        token = lexer(infile, outfile);
-        if(!Statement(infile, outfile, token))
-        {
-            errorReporting(outfile, "{ | identifier | if | return | put | get | while", get<1>(token));
-        }
-
-        if(get<1>(token) != "ifend" && get<1>(token) != "ifEnd")
-        {
-            errorReporting(outfile, "ifEnd", get<1>(token));
-        }
-        token = lexer(infile, outfile);
+        gen_instr("GRT", "nil");
+        jumpstack.push(instr_address);
+        gen_instr("JUMPZ", "nil");
     }
-    else if(get<1>(token) == "ifend" || get<1>(token) == "ifEnd")
+    else if (op == "=>")
     {
-        token  = lexer(infile, outfile);
+        gen_instr("GEQ", "nil");
+        jumpstack.push(instr_address);
+        gen_instr("JUMPZ", "nil");
     }
-    else
+    else if (op == "=<")
     {
-        errorReporting(outfile, "ifEnd | else", get<1>(token));
+        gen_instr("LEQ", "nil");
+        jumpstack.push(instr_address);
+        gen_instr("JUMPZ", "nil");
+    }
+    else if (op == "==")
+    {
+        gen_instr("EQU", "nil");
+        jumpstack.push(instr_address);
+        gen_instr("JUMPZ", "nil");
+    }
+    else if (op == "^=")
+    {
+        gen_instr("NEQ", "nil");
+        jumpstack.push(instr_address);
+        gen_instr("JUMPZ", "nil");
     }
 }
 
@@ -755,6 +812,33 @@ void Expression(ifstream &infile, ostream &outfile, tuple<string, string> &token
     ExpressionPrime(infile, outfile, token);
 }
 
+//R33. <Expression’> ::= + <Term> <Expression’>   |  - <Term>  <Expression’>   | ε
+bool ExpressionPrime(ifstream &infile, ostream &outfile, tuple<string, string> &token)
+{
+    if (printSwitch)
+    {
+        outfile << "\tR33. <Expression’> ::= + <Term> <Expression’>   |  - <Term>  <Expression’>   | ε" << endl;
+    }
+    
+    if (get<1>(token) == "+")
+    {
+        token = lexer(infile, outfile);
+        Term(infile, outfile, token);
+        gen_instr("ADD", "nil");
+        ExpressionPrime(infile, outfile, token);
+        return true;
+    }
+    else if (get<1>(token) == "-")
+    {
+        token = lexer(infile, outfile);
+        Term(infile, outfile, token);
+        gen_instr("SUB", "nil");
+        ExpressionPrime(infile, outfile, token);
+        return true;
+    }
+    return false;
+}
+
 //R34. <Term>    ::=    <Factor>  <Term’>
 void Term(ifstream &infile, ostream &outfile, tuple<string, string> &token)
 {
@@ -764,6 +848,33 @@ void Term(ifstream &infile, ostream &outfile, tuple<string, string> &token)
     }
     Factor(infile, outfile, token);
     TermPrime(infile, outfile, token);
+}
+
+//R35.<Term’> ::= * <Factor> <Term’>  | / <Factor> <Term’> | ε
+bool TermPrime(ifstream &infile, ostream &outfile, tuple<string, string> &token)
+{
+    if (printSwitch)
+    {
+        outfile << "\tR35.<Term’> ::= * <Factor> <Term’>  | / <Factor> <Term’> | ε" << endl;
+    }
+    
+    if (get<1>(token) == "*")
+    {
+        token = lexer(infile, outfile);
+        Factor(infile, outfile, token);
+        gen_instr("MUL", "nil");
+        TermPrime(infile, outfile, token);
+        return true;
+    }
+    else if (get<1>(token) == "/")
+    {
+        token = lexer(infile, outfile);
+        Factor(infile, outfile, token);
+        gen_instr("MUL", "nil");
+        TermPrime(infile, outfile, token);
+        return true;
+    }
+    return false;
 }
 
 //R36. <Factor> ::=  -  <Primary>  |  <Primary>
@@ -796,14 +907,20 @@ bool Primary(ifstream &infile, ostream &outfile, tuple<string, string> &token)
     string expected ="<Identifier> | <Integer> | ( | <Real> | true | false";
     if(get<0>(token) == "Integer")
     {
+        if (printSwitch)
+        {
         outfile << "\tR. <Integer>\n";
+        }
+        gen_instr("PUSHI", get<1>(token));
         token = lexer(infile, outfile);
         return true;
     }
     else if (get<1>(token) == "(")
     {
+        if (printSwitch)
+        {
         outfile << "Used: (" << endl;
-        
+        }
         token = lexer(infile, outfile);
         Expression(infile, outfile, token);
         
@@ -816,7 +933,10 @@ bool Primary(ifstream &infile, ostream &outfile, tuple<string, string> &token)
     }
     else if (get<0>(token) == "Real")
     {
+        if (printSwitch)
+        {
         outfile << "used R. <Real>\n";
+        }
         token = lexer(infile, outfile);
         return true;
     }
@@ -830,13 +950,19 @@ bool Primary(ifstream &infile, ostream &outfile, tuple<string, string> &token)
         }
         if (temp == "true")
         {
+            if (printSwitch)
+            {
             outfile << "\tR. true\n";
+            }
             token = lexer(infile, outfile);
             return true;
         }
         else if (temp == "false")
         {
-            outfile << "\tR. false\n";
+            if (printSwitch)
+            {
+                outfile << "\tR. false\n";
+            }
             token = lexer(infile, outfile);
             return true;
         }
@@ -845,6 +971,7 @@ bool Primary(ifstream &infile, ostream &outfile, tuple<string, string> &token)
     }
     else if (Identifier(outfile, token))
     {
+        gen_instr("PUSHM", to_string(get_address(get<1>(token))));
         token = lexer(infile, outfile);
         PrimaryEnd(infile, outfile, token);
         return true;
@@ -879,62 +1006,6 @@ void PrimaryEnd(ifstream &infile, ostream &outfile, tuple<string, string> &token
     }
 }
 
-//R35.<Term’> ::= * <Factor> <Term’>  | / <Factor> <Term’> | ε
-bool TermPrime(ifstream &infile, ostream &outfile, tuple<string, string> &token)
-{
-    if (printSwitch)
-    {
-        outfile << "\tR35.<Term’> ::= * <Factor> <Term’>  | / <Factor> <Term’> | ε" << endl;
-    }
-    
-    if (get<1>(token) == "*")
-    {
-        token = lexer(infile, outfile);
-        Factor(infile, outfile, token);
-        TermPrime(infile, outfile, token);
-        return true;
-    }
-    else if (get<1>(token) == "/")
-    {
-        token = lexer(infile, outfile);
-        Factor(infile, outfile, token);
-        TermPrime(infile, outfile, token);
-        return true;
-    }
-    return false;
-}
-
-//R33. <Expression’> ::= + <Term> <Expression’>   |  - <Term>  <Expression’>   | ε
-bool ExpressionPrime(ifstream &infile, ostream &outfile, tuple<string, string> &token)
-{
-    if (printSwitch)
-    {
-        outfile << "\tR33. <Expression’> ::= + <Term> <Expression’>   |  - <Term>  <Expression’>   | ε" << endl;
-    }
-
-    if (get<1>(token) == "+")
-    {
-        token = lexer(infile, outfile);
-        Term(infile, outfile, token);
-        ExpressionPrime(infile, outfile, token);
-        return true;
-    }
-    else if (get<1>(token) == "-")
-    {
-        token = lexer(infile, outfile);
-        Term(infile, outfile, token);
-        ExpressionPrime(infile, outfile, token);
-        return true;
-    }
-    return false;
-}
-
-//R38. <Primary End> ::= ( <IDs> ) | ε
-void empty(ifstream &infile, ostream &outfile, tuple<string, string> &token)
-{
-    outfile << "R39. <Empty>   ::= ε";
-}
-
 void errorReporting(ostream &outfile, string expected, string received)
 {
     if(printSwitch)
@@ -947,14 +1018,31 @@ void errorReporting(ostream &outfile, string expected, string received)
     exit(1);
 }
 
-// fix compound function
+void gen_instr(const string &op, const string &operand)
+{
+    instr_table [instr_address][0] = to_string(instr_address);
+    instr_table [instr_address][1] = op;
+    instr_table [instr_address][2] = operand;
+    instr_address++;
 
-// make an error function that takes in expected output and actually received and prints to the screen an error message. example is in code
+}
 
-// maybe clean up code if needed. kinda messy and a lot can obviously be reduced. currently coded based on simple logic.
+void back_patch(int instr_addr)
+{
+    int addr = jumpstack.top();
+    jumpstack.pop();
+    instr_table[addr][2] = to_string(instr_address);
+}
 
-// do we even need this?
-//R39. <Empty>   ::= ε
-
-
-//errorReporting(outfile, "{ | identifier | if | return | put | get | while", get<1>(token));
+void print_instructions(ostream &outfile)
+{
+    for (int i = 0; i < instr_address; i++)
+    {
+        outfile << instr_table[i][0] << "." << left << setw(10) << instr_table[i][1];
+        if (instr_table[i][2] != "nil")
+        {
+            outfile << instr_table[i][2];
+        }
+        outfile << endl;
+    }
+}

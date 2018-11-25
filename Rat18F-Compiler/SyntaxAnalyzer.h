@@ -10,6 +10,16 @@
 #ifndef SyntaxAnalyzer_h
 #define SyntaxAnalyzer_h
 
+
+#include "SymbolTable.h"
+#include <iostream>
+#include "LexicalAnalyzer.h"
+#include <string>
+#include <fstream>
+#include <iomanip>
+#include <tuple>
+#include <stack>
+
 using namespace std;
 
 void Rat18F(ifstream &infile, ostream &outfile);
@@ -91,5 +101,11 @@ bool TermPrime(ifstream &infile, ostream &outfile, tuple<string, string> &token)
 bool ExpressionPrime(ifstream &infile, ostream &outfile, tuple<string, string> &token);
 
 void errorReporting(ostream &outfile, string expected, string received);
+
+void gen_instr(const string &op, const string &operand);
+
+void back_patch(int instr_addr);
+
+void print_instructions(ostream &outfile);
 
 #endif /* SyntaxAnalyzer_h */

@@ -1,23 +1,12 @@
-[* this is comment for this sample code which
-converts Fahrenheit into Celcius *]
-function convert1x (fahrtest : int , test:real)
-{
-a=1;
-b=1+2;
-c=1+2-(-3);
-d=1+2-(-3)*4;
-e=1+2-(-3)*4/5;
-if (starting  == 3.543) e = true;
-else a = b;
-ifend
-}
-function secondFunction (paramOne : int)
-{
-if(A > B)
-C = D; ifend
-return
-}
 $$
-test = 1;
+int i, max, sum;   [* declarations *]
+
+sum = 0;
+i = 1;
+get ( max);
+while (i <  max)  {
+sum = sum + i;
+i  = i + 1;
+} whileend
+put (sum + max);
 $$
-crash

@@ -9,7 +9,7 @@
 
 #include "LexicalAnalyzer.h"
 
-bool printswitch = true;
+bool printswitch = false;
 int lineNumber = 1;
 
 

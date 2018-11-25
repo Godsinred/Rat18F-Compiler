@@ -14,6 +14,7 @@
 #include <string>
 #include "SyntaxAnalyzer.h"
 #include "LexicalAnalyzer.h"
+#include "SymbolTable.h"
 
 using namespace std;
 
@@ -70,13 +71,6 @@ int main()
         exit(0);
     }
 
-    outfile << left << setw(20) << "Token" <<setw(20) << "Lexeme" << endl;
-    for (int i = 0; i < 40; ++i)
-    {
-        outfile << '-';
-    }
-    outfile << endl;
-
     // reads one character at a time till end of file and outputs token with lexeme
     if (inFile.is_open())
     {
@@ -85,7 +79,6 @@ int main()
         //starts building lexemes
 //        while (inFile)
 //        {
-//            
 //            
 //            tuple<string, string> token = lexer(inFile);
 //            if(get<0>(token) != "")
@@ -102,6 +95,9 @@ int main()
     {
         cerr << endl <<  "Unable to open specified file." << endl;
     }
+    
+    print_instructions(outfile);
+    printTable(outfile);
     
     // closes files
     inFile.close();

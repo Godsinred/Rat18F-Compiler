@@ -1,9 +1,5 @@
 [* this is comment for this sample code which
 converts Fahrenheit into Celcius *]
-function convert1x (fahr : int)
-{
-return 5 * (fahr -32) / 9;
-}
 $$
 int low, high, step; [* declarations *]
 get (low, high, step);

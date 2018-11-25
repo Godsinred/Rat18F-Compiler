@@ -1,28 +1,11 @@
 [* this is comment for this sample code which
 converts Fahrenheit into Celcius *]
-function convert1x (fahrtest : int, test : real, antoher : boolean)
-{
-a=1;
-b=1+2;
-c=1+2-(-3);
-d=1+2-(-3)*4;
-e=1+2-(-3)*4/5;
 
-return 5 * (fahr - 32) / 9;
-}
-function function2a (fahrtest : int, test : real, antoher : boolean)
-{
-a=1;
-b=1+2;
-c=1+2-(-3);
-d=1+2-(-3)*4;
-e=1+2-(-3)*4/5;
-}
 $$
 int low, med, high;
 [* Multiple declaration list doesn't work *]
-boolean pos, neg;
-real decimal, fraction;
+real decimal,
+fraction;
 
 [* Compound testing *]
 {
