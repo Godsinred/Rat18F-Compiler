@@ -1,7 +1,1 @@
 
-identifier          Memory Location     Type                
-------------------------------------------------------------
-
-high                5001                int                 
-low                 5000                int                 
-step                5002                int                 

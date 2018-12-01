@@ -9,19 +9,18 @@
 
 /*
  after Endwhile add label also after ifend;
- assignment - check type match
- exprssion and expression' check not boolean
+ check for undeclared vars.
  */
 
 #include "SyntaxAnalyzer.h"
 
 using namespace std;
 
-bool printSwitch = false, declaring = false, scanning = false;
+bool printSwitch = false, declaring = false, scanning = false, assigning = false;
 string type = "";
-string instr_table[500][3];
+string instr_table[1005][3];
 stack<int> jumpstack;
-int instr_address = 1;
+int instr_address = 0;
 
 //R1. <Rat18F>  ::=   <Opt Function Definitions>   $$  <Opt Declaration List>  <Statement List>  $$
 void Rat18F(ifstream &infile, ostream &outfile)
@@ -351,6 +350,15 @@ bool IDs(ifstream &infile, ostream &outfile, tuple<string, string> &token)
         {
             insertItem(type, get<1>(token));
         }
+        else
+        {
+            if (!inTable(get<1>(token)))
+            {
+                cerr << "\nERROR: NOT VALID SYNTAX. On line: " << getLineNumber() << "\n";
+                cerr << "SYMBOL UNDEFINED. symbol: " << get<1>(token) << endl;
+                exit(1);
+            }
+        }
         if (scanning)
         {
             gen_instr("STDIN", "nil");
@@ -481,6 +489,7 @@ bool Assign(ifstream &infile, ostream &outfile, tuple<string, string> &token)
     
     if(Identifier(outfile, token))
     {
+        assigning = true;
         string save = get<1>(token);
         
         type = get_type(save); //LHS type
@@ -493,8 +502,6 @@ bool Assign(ifstream &infile, ostream &outfile, tuple<string, string> &token)
     
         token = lexer(infile, outfile);
         
-        
-        
         Expression(infile, outfile, token);
         gen_instr("POPM", to_string(get_address(save)));
         
@@ -502,6 +509,7 @@ bool Assign(ifstream &infile, ostream &outfile, tuple<string, string> &token)
         {
             errorReporting(outfile, ";", get<1>(token));
         }
+        assigning = false;
         token = lexer(infile, outfile);
         return true;
     }
@@ -518,7 +526,7 @@ bool If(ifstream &infile, ostream &outfile, tuple<string, string> &token)
     
     if(get<1>(token) == "if")
     {
-        int addr = instr_address;
+        //int addr = instr_address;
         
         token = lexer(infile, outfile);
         if(get<1>(token) != "(")
@@ -537,8 +545,11 @@ bool If(ifstream &infile, ostream &outfile, tuple<string, string> &token)
         {
             errorReporting(outfile, "<Statement>", get<1>(token));
         }
-        back_patch(addr);
+        
         IfEnd(infile, outfile, token);
+        
+        gen_instr("LABEL", "nil");
+        back_patch(instr_address);
         
         return true;
     }
@@ -555,7 +566,10 @@ void IfEnd(ifstream &infile, ostream &outfile, tuple<string, string> &token)
     
     if(get<1>(token) == "else")
     {
-        int addr = instr_address;
+        gen_instr("JUMP", "nil");
+        back_patch(instr_address);
+        jumpstack.push(instr_address);
+        
         token = lexer(infile, outfile);
         if(!Statement(infile, outfile, token))
         {
@@ -564,14 +578,20 @@ void IfEnd(ifstream &infile, ostream &outfile, tuple<string, string> &token)
         
         back_patch(addr);
         
+        
+        
+        gen_instr("LABEL", "nil");
+        back_patch(instr_address);
         if(get<1>(token) != "ifend" && get<1>(token) != "ifEnd")
         {
             errorReporting(outfile, "ifEnd", get<1>(token));
         }
         token = lexer(infile, outfile);
     }
+    
     else if(get<1>(token) == "ifend" || get<1>(token) == "ifEnd")
     {
+      
         token  = lexer(infile, outfile);
     }
     else
@@ -731,6 +751,7 @@ bool While(ifstream &infile, ostream &outfile, tuple<string, string> &token)
             errorReporting(outfile, "{ | identifier | if | return | put | get | while", get<1>(token));
         }
         gen_instr("JUMP", to_string(addr));
+        gen_instr("LABEL", "nil");
         back_patch(instr_address);
         if (get<1>(token) != "whileend")
         {
@@ -931,6 +952,14 @@ bool Primary(ifstream &infile, ostream &outfile, tuple<string, string> &token)
         outfile << "\tR. <Integer>\n";
         }
         
+        if (type == "boolean")
+        {
+            if (!(get<1>(token) == "1" || get<1>(token) == "0"))
+            {
+                errorReporting(outfile, "Boolean", "Integer");
+            }
+        }
+        
         gen_instr("PUSHI", get<1>(token));
         
         token = lexer(infile, outfile);
@@ -977,7 +1006,7 @@ bool Primary(ifstream &infile, ostream &outfile, tuple<string, string> &token)
             }
             if (type != "boolean")
             {
-                errorReporting(outfile, "Boolean", temp);
+                errorReporting(outfile, type, "boolean");
             }
             gen_instr("PUSHI", "1");
             token = lexer(infile, outfile);
@@ -991,7 +1020,7 @@ bool Primary(ifstream &infile, ostream &outfile, tuple<string, string> &token)
             }
             if (type != "boolean")
             {
-                errorReporting(outfile, "Boolean", temp);
+                errorReporting(outfile, type, "boolean");
             }
             gen_instr("PUSHI", "0");
             token = lexer(infile, outfile);
@@ -1002,6 +1031,16 @@ bool Primary(ifstream &infile, ostream &outfile, tuple<string, string> &token)
     }
     else if (Identifier(outfile, token))
     {
+        if (!inTable(get<1>(token)))
+        {
+            cerr << "\nERROR: NOT VALID SYNTAX. On line: " << getLineNumber() << "\n";
+            cerr << "SYMBOL UNDEFINED. symbol: " << get<1>(token) << endl;
+            exit(1);
+        }
+        if (get_type(get<1>(token)) != type && assigning)
+        {
+            errorReporting(outfile, type, get<0>(token));
+        }
         gen_instr("PUSHM", to_string(get_address(get<1>(token))));
         token = lexer(infile, outfile);
         PrimaryEnd(infile, outfile, token);
@@ -1058,18 +1097,18 @@ void gen_instr(const string &op, const string &operand)
 
 }
 
-void back_patch(int instr_addr)
+void back_patch(int jumpAddress)
 {
     int addr = jumpstack.top();
     jumpstack.pop();
-    instr_table[addr][2] = to_string(instr_address);
+    instr_table[addr][2] = to_string(jumpAddress);
 }
 
 void print_instructions(ostream &outfile)
 {
     for (int i = 0; i < instr_address; i++)
     {
-        outfile << instr_table[i][0] << "." << left << setw(10) << instr_table[i][1];
+        outfile << right << setw(4) << i + 1 << ". " << left << setw(10) << instr_table[i][1];
         if (instr_table[i][2] != "nil")
         {
             outfile << instr_table[i][2];

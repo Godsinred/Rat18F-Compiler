@@ -3,12 +3,12 @@ int i, max, sum;   [* declarations *]
 boolean test;
 
 sum = 0;
-i = 1;
-test = i;
-get ( max);
-while (i <  max)  {
+i = sum;
+test = 1;
+get (max);
+if (i <  max)  {
 sum = sum + i;
 i  = i + 1;
-} whileend
+} ifend
 put (sum + max);
 $$

@@ -1,31 +1,29 @@
 
-.          
-1.PUSHI     0
-2.POPM      5002
-3.PUSHI     1
-4.POPM      5000
-5.PUSHM     5000
-6.POPM      5003
-7.STDIN     
-8.POPM      5001
-9.label     
-10.PUSHM     5000
-11.PUSHM     5001
-12.LES       
-13.JUMPZ     23
-14.PUSHM     5002
-15.PUSHM     5000
-16.ADD       
-17.POPM      5002
-18.PUSHM     5000
-19.PUSHI     1
-20.ADD       
-21.POPM      5000
-22.JUMP      9
-23.PUSHM     5002
-24.PUSHM     5001
-25.ADD       
-26.STDOUT    
+   1. PUSHI     0
+   2. POPM      5002
+   3. PUSHM     5002
+   4. POPM      5000
+   5. PUSHI     1
+   6. POPM      5003
+   7. STDIN     
+   8. POPM      5001
+   9. PUSHM     5000
+  10. PUSHM     5001
+  11. LES       
+  12. JUMPZ     21
+  13. PUSHM     5002
+  14. PUSHM     5000
+  15. ADD       
+  16. POPM      5002
+  17. PUSHM     5000
+  18. PUSHI     1
+  19. ADD       
+  20. POPM      5000
+  21. LABEL     
+  22. PUSHM     5002
+  23. PUSHM     5001
+  24. ADD       
+  25. STDOUT    
 
 
 identifier          Memory Location     Type                

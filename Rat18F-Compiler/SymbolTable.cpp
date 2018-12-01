@@ -34,7 +34,7 @@ void insertItem(string &type, string &lexeme)
     {
         cerr << "Error line number: " << getLineNumber() << endl;
         cerr << lexeme << " has been defined before.";
-        exit(0);
+        exit(1);
     }
     Symbol current = {lexeme, type, memoryAddr};
     symbolTable[lexeme] = current;

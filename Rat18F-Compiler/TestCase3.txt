@@ -1,38 +1,7 @@
-[* this is comment for this sample code which
-converts Fahrenheit into Celcius *]
 
 $$
 int low, med, high;
-[* Multiple declaration list doesn't work *]
-real decimal,
-fraction;
 
-[* Compound testing *]
-{
-low  = 1;
-low = low + 1;
-}
-
-[* Assign Testing  is above in functions *]
-
-[* If testing *]
-if ( low < high ) low = 1; ifend
 if ( low =< high ) low = 1; else low = 2; ifend
-if ( low + 1 - high ^= high - 2 * 3 / decimal)
-{
-if ( low =< high ) low = 1; else low = 2; ifend
-
-} else { if ( low < high ) return med + 1; ifend } ifend
-
-[* Return testing integrated above *]
-
-[* Print testing *]
-put(x);
-
-[* Scan testing *]
-get(low, med, high);
-
-[* While testing *]
-while(low == high) return true; whileend
 
 $$
