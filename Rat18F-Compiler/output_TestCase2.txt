@@ -4,28 +4,34 @@
 2.POPM      5002
 3.PUSHI     1
 4.POPM      5000
-5.STDIN     
-6.label     
-7.PUSHM     5000
-8.PUSHM     5001
-9.LES       
-10.JUMPZ     20
-11.PUSHM     5002
-12.PUSHM     5000
-13.ADD       
-14.POPM      5002
+5.PUSHM     5000
+6.POPM      5003
+7.STDIN     
+8.POPM      5001
+9.label     
+10.PUSHM     5000
+11.PUSHM     5001
+12.LES       
+13.JUMPZ     23
+14.PUSHM     5002
 15.PUSHM     5000
-16.PUSHI     1
-17.ADD       
-18.POPM      5000
-19.JUMP      6
-20.PUSHM     5002
-21.PUSHM     5001
-22.ADD       
-23.STDOUT    
+16.ADD       
+17.POPM      5002
+18.PUSHM     5000
+19.PUSHI     1
+20.ADD       
+21.POPM      5000
+22.JUMP      9
+23.PUSHM     5002
+24.PUSHM     5001
+25.ADD       
+26.STDOUT    
+
+
 identifier          Memory Location     Type                
 ------------------------------------------------------------
 
 i                   5000                int                 
 max                 5001                int                 
 sum                 5002                int                 
+test                5003                boolean             

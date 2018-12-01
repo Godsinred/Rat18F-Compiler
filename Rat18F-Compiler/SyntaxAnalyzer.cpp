@@ -7,12 +7,17 @@
      Assignment 3
  */
 
+/*
+ after Endwhile add label also after ifend;
+ assignment - check type match
+ exprssion and expression' check not boolean
+ */
 
 #include "SyntaxAnalyzer.h"
 
 using namespace std;
 
-bool printSwitch = false, declaring = false;
+bool printSwitch = false, declaring = false, scanning = false;
 string type = "";
 string instr_table[500][3];
 stack<int> jumpstack;
@@ -29,7 +34,6 @@ void Rat18F(ifstream &infile, ostream &outfile)
     }
     
     OptFunctionDefinitions(infile, outfile, token);
-    
     
     if(get<1>(token) != "$$")
     {
@@ -347,6 +351,11 @@ bool IDs(ifstream &infile, ostream &outfile, tuple<string, string> &token)
         {
             insertItem(type, get<1>(token));
         }
+        if (scanning)
+        {
+            gen_instr("STDIN", "nil");
+            gen_instr("POPM", to_string(get_address(get<1>(token))));
+        }
         token = lexer(infile, outfile);
         IDsEnd(infile, outfile, token);
         return true;
@@ -473,6 +482,9 @@ bool Assign(ifstream &infile, ostream &outfile, tuple<string, string> &token)
     if(Identifier(outfile, token))
     {
         string save = get<1>(token);
+        
+        type = get_type(save); //LHS type
+        
         token = lexer(infile, outfile);
         if(get<1>(token) != "=")
         {
@@ -480,6 +492,9 @@ bool Assign(ifstream &infile, ostream &outfile, tuple<string, string> &token)
         }
     
         token = lexer(infile, outfile);
+        
+        
+        
         Expression(infile, outfile, token);
         gen_instr("POPM", to_string(get_address(save)));
         
@@ -643,8 +658,6 @@ bool Print(ifstream &infile, ostream &outfile, tuple<string, string> &token)
     return false;
 }
 
-
-//object code is not working correctly for this.
 //R28. <Scan> ::=    get ( <IDs> );
 bool Scan(ifstream &infile, ostream &outfile, tuple<string, string> &token)
 {
@@ -664,11 +677,11 @@ bool Scan(ifstream &infile, ostream &outfile, tuple<string, string> &token)
         
         token = lexer(infile, outfile);
         
-        gen_instr("STDIN", "nil");
+        scanning = true;
         
         IDs(infile, outfile, token);
         
-        //gen_instr("POPM", "")
+        scanning = false;
         
         if (get<1>(token) != ")")
         {
@@ -822,6 +835,7 @@ bool ExpressionPrime(ifstream &infile, ostream &outfile, tuple<string, string> &
     
     if (get<1>(token) == "+")
     {
+        if (type == "boolean") errorReporting(outfile, "<integer>", type);
         token = lexer(infile, outfile);
         Term(infile, outfile, token);
         gen_instr("ADD", "nil");
@@ -830,6 +844,7 @@ bool ExpressionPrime(ifstream &infile, ostream &outfile, tuple<string, string> &
     }
     else if (get<1>(token) == "-")
     {
+        if (type == "boolean") errorReporting(outfile, "<integer>", type);
         token = lexer(infile, outfile);
         Term(infile, outfile, token);
         gen_instr("SUB", "nil");
@@ -860,6 +875,7 @@ bool TermPrime(ifstream &infile, ostream &outfile, tuple<string, string> &token)
     
     if (get<1>(token) == "*")
     {
+        if (type == "boolean") errorReporting(outfile, "<integer>", type);
         token = lexer(infile, outfile);
         Factor(infile, outfile, token);
         gen_instr("MUL", "nil");
@@ -868,6 +884,7 @@ bool TermPrime(ifstream &infile, ostream &outfile, tuple<string, string> &token)
     }
     else if (get<1>(token) == "/")
     {
+        if (type == "boolean") errorReporting(outfile, "<integer>", type);
         token = lexer(infile, outfile);
         Factor(infile, outfile, token);
         gen_instr("MUL", "nil");
@@ -897,6 +914,8 @@ void Factor(ifstream &infile, ostream &outfile, tuple<string, string> &token)
     
 }
 
+
+//checking types for assignment here.
 //R37. <Primary> ::= <Identifier> <Primary End> | <Integer> | ( <Expression> ) | <Real> | true | false
 bool Primary(ifstream &infile, ostream &outfile, tuple<string, string> &token)
 {
@@ -911,7 +930,9 @@ bool Primary(ifstream &infile, ostream &outfile, tuple<string, string> &token)
         {
         outfile << "\tR. <Integer>\n";
         }
+        
         gen_instr("PUSHI", get<1>(token));
+        
         token = lexer(infile, outfile);
         return true;
     }
@@ -954,6 +975,11 @@ bool Primary(ifstream &infile, ostream &outfile, tuple<string, string> &token)
             {
             outfile << "\tR. true\n";
             }
+            if (type != "boolean")
+            {
+                errorReporting(outfile, "Boolean", temp);
+            }
+            gen_instr("PUSHI", "1");
             token = lexer(infile, outfile);
             return true;
         }
@@ -963,6 +989,11 @@ bool Primary(ifstream &infile, ostream &outfile, tuple<string, string> &token)
             {
                 outfile << "\tR. false\n";
             }
+            if (type != "boolean")
+            {
+                errorReporting(outfile, "Boolean", temp);
+            }
+            gen_instr("PUSHI", "0");
             token = lexer(infile, outfile);
             return true;
         }

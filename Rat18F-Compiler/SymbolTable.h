@@ -21,6 +21,7 @@ void printTable(ostream &outfile);
 void insertItem(string &type, string &lexeme);
 bool inTable(string &lexeme);
 int get_address(const string &lexeme);
+string get_type(string &lexeme);
 
 struct Symbol
 {

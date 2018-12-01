@@ -1,8 +1,10 @@
 $$
 int i, max, sum;   [* declarations *]
+boolean test;
 
 sum = 0;
 i = 1;
+test = i;
 get ( max);
 while (i <  max)  {
 sum = sum + i;

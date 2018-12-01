@@ -16,6 +16,7 @@ void printTable(ostream &outfile)
 {
     auto ittr = symbolTable.begin();
     auto ittrEnd = symbolTable.end();
+    outfile << endl << endl;
     outfile << left << setw(20) << "identifier" << setw(20) << "Memory Location" << setw(20) << "Type" << endl;
     for (int i = 0; i < 60; i++) outfile << "-";
     outfile << endl << endl;
@@ -42,10 +43,15 @@ void insertItem(string &type, string &lexeme)
 
 bool inTable(string &lexeme)
 {
-    return !(symbolTable.find(lexeme) == symbolTable.end());
+    return symbolTable.find(lexeme) != symbolTable.end();
 }
 
 int get_address(const string &lexeme)
 {
     return symbolTable[lexeme].memoryLocation;
+}
+
+string get_type(string &lexeme)
+{
+    return symbolTable.find(lexeme)->second.type;
 }
