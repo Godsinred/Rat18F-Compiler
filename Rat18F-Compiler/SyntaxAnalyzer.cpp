@@ -566,9 +566,9 @@ void IfEnd(ifstream &infile, ostream &outfile, tuple<string, string> &token)
     
     if(get<1>(token) == "else")
     {
-        gen_instr("JUMP", "nil");
-        back_patch(instr_address);
-        jumpstack.push(instr_address);
+//        gen_instr("JUMP", "nil");
+//        back_patch(instr_address);
+//        jumpstack.push(instr_address);
         
         token = lexer(infile, outfile);
         if(!Statement(infile, outfile, token))
@@ -576,12 +576,8 @@ void IfEnd(ifstream &infile, ostream &outfile, tuple<string, string> &token)
             errorReporting(outfile, "{ | identifier | if | return | put | get | while", get<1>(token));
         }
         
-        back_patch(addr);
-        
-        
-        
-        gen_instr("LABEL", "nil");
-        back_patch(instr_address);
+//        gen_instr("LABEL", "nil");
+//        back_patch(instr_address);
         if(get<1>(token) != "ifend" && get<1>(token) != "ifEnd")
         {
             errorReporting(outfile, "ifEnd", get<1>(token));
