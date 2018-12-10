@@ -862,6 +862,7 @@ bool ExpressionPrime(ifstream &infile, ostream &outfile, tuple<string, string> &
     {
         if (type == "boolean") errorReporting(outfile, "<integer>", type);
         token = lexer(infile, outfile);
+        
         Term(infile, outfile, token);
         gen_instr("SUB", "nil");
         ExpressionPrime(infile, outfile, token);
@@ -921,6 +922,12 @@ void Factor(ifstream &infile, ostream &outfile, tuple<string, string> &token)
     if (get<1>(token) == "-")
     {
         token = lexer(infile, outfile);
+        
+        if (get<0>(token) == "Keyword" && (get<1>(token) == "true" || get<1>(token) == "false"))
+        {
+            errorReporting(outfile, "Cannot have a negative Boolean value.", type);
+        }
+        
         Primary(infile, outfile, token);
     }
     else
@@ -949,10 +956,10 @@ bool Primary(ifstream &infile, ostream &outfile, tuple<string, string> &token)
         
         if (type == "boolean")
         {
-            if (!(get<1>(token) == "1" || get<1>(token) == "0"))
-            {
+            //if (!(get<1>(token) == "1" || get<1>(token) == "0"))
+            //{
                 errorReporting(outfile, "Boolean", "Integer");
-            }
+            //}
         }
         
         gen_instr("PUSHI", get<1>(token));

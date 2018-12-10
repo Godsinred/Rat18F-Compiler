@@ -1,7 +1,24 @@
-
 $$
 int low, med, high;
+boolean alternate;
 
-if ( low =< high ) low = 1; else low = 2; ifend
+if ( low =< high )
+low = 1;
+else low = 2;
+ifend
 
+get(low);
+put(high - 1 /2 * 4 );
+
+while (low < high)
+{
+low = low + 1;
+high = high - 1;
+med = low + high / 2;
+}
+whileend
+
+[* This will break the program because you can't have a negative boolean value *]
+alternate = False;
+alternate = -true;
 $$
