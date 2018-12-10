@@ -1,1 +1,52 @@
 
+   1. PUSHM     5000
+   2. PUSHM     5002
+   3. LEQ       
+   4. JUMPZ     8
+   5. PUSHI     1
+   6. POPM      5000
+   7. JUMP      11
+   8. LABEL     
+   9. PUSHI     2
+  10. POPM      5000
+  11. LABEL     
+  12. STDIN     
+  13. POPM      5000
+  14. PUSHM     5002
+  15. PUSHI     1
+  16. PUSHI     2
+  17. MUL       
+  18. PUSHI     4
+  19. MUL       
+  20. SUB       
+  21. STDOUT    
+  22. label     
+  23. PUSHM     5000
+  24. PUSHM     5002
+  25. LES       
+  26. JUMPZ     42
+  27. PUSHM     5000
+  28. PUSHI     1
+  29. ADD       
+  30. POPM      5000
+  31. PUSHM     5002
+  32. PUSHI     1
+  33. SUB       
+  34. POPM      5002
+  35. PUSHM     5000
+  36. PUSHM     5002
+  37. PUSHI     2
+  38. MUL       
+  39. ADD       
+  40. POPM      5001
+  41. JUMP      21
+  42. LABEL     
+
+
+identifier          Memory Location     Type                
+------------------------------------------------------------
+
+alternate           5003                boolean             
+high                5002                int                 
+low                 5000                int                 
+med                 5001                int                 

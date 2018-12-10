@@ -956,10 +956,7 @@ bool Primary(ifstream &infile, ostream &outfile, tuple<string, string> &token)
         
         if (type == "boolean")
         {
-            //if (!(get<1>(token) == "1" || get<1>(token) == "0"))
-            //{
-                errorReporting(outfile, "Boolean", "Integer");
-            //}
+            errorReporting(outfile, "Boolean", "Integer");
         }
         
         gen_instr("PUSHI", get<1>(token));

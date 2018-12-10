@@ -99,6 +99,8 @@ int main()
     print_instructions(outfile);
     printTable(outfile);
     
+    cout << endl << "Object Code Created" << endl;
+    
     // closes files
     inFile.close();
     outfile.close();

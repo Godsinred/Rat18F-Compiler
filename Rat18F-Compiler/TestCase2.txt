@@ -4,7 +4,7 @@ boolean test;
 
 sum = 0;
 i = sum;
-test = 1;
+test = true;
 get (max);
 if (i <  max)  {
 sum = sum + i;

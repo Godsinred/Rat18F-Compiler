@@ -1,1 +1,35 @@
 
+   1. PUSHI     0
+   2. POPM      5002
+   3. PUSHM     5002
+   4. POPM      5000
+   5. PUSHI     1
+   6. POPM      5003
+   7. STDIN     
+   8. POPM      5001
+   9. PUSHM     5000
+  10. PUSHM     5001
+  11. LES       
+  12. JUMPZ     21
+  13. PUSHM     5002
+  14. PUSHM     5000
+  15. ADD       
+  16. POPM      5002
+  17. PUSHM     5000
+  18. PUSHI     1
+  19. ADD       
+  20. POPM      5000
+  21. LABEL     
+  22. PUSHM     5002
+  23. PUSHM     5001
+  24. ADD       
+  25. STDOUT    
+
+
+identifier          Memory Location     Type                
+------------------------------------------------------------
+
+i                   5000                int                 
+max                 5001                int                 
+sum                 5002                int                 
+test                5003                boolean             

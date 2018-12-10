@@ -18,7 +18,4 @@ med = low + high / 2;
 }
 whileend
 
-[* This will break the program because you can't have a negative boolean value *]
-alternate = False;
-alternate = -true;
 $$
